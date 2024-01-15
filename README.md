@@ -32,5 +32,15 @@ All the remaps configured for this setup are in the [remap.lua](./lua/therustify
 
 The most notorious one for me are:
 
-- `:<leader>pv`: Goes back to `Netrw` from the source origin `:so`
+- `<leader>pv`: Goes back to `Netrw` from the source origin `:so`
+- `<leader>pf`: Launches the project files navigator  
+- `<leader>ps`: Performns a search for the input text on the project files 
+- `<C-p>: Launches the project files navigator but only for files tracked by **git**
+
+PLUGINS
+
+- Vim/Neovim plugin manager [Packer](https://github.com/wbthomason/packer.nvim)
+- Project files navigation [Telescope](https://github.com/nvim-telescope/telescope.nvim)
+- Base Editor Theme: [Rose-Pine](https://github.com/rose-pine/neovim)
+
 
