@@ -29,6 +29,7 @@ For convenience, in my set up I like to have the [leader key](TODO link to docs)
 The spacebar is extremely fast and confortable, since I am able to reach it with both hands quickly and without having to make any extrange movements with any of my fingers.
 
 All the remaps configured for this setup are in the [remap.lua](./lua/therustifyer/remap.lua)
+or directly set up in the configuration files or each individual plugin
 
 The most notorious one for me are:
 
@@ -42,5 +43,5 @@ PLUGINS
 - Vim/Neovim plugin manager [Packer](https://github.com/wbthomason/packer.nvim)
 - Project files navigation [Telescope](https://github.com/nvim-telescope/telescope.nvim)
 - Base Editor Theme: [Rose-Pine](https://github.com/rose-pine/neovim)
-
+- The Neovim abstraction layer for `tree-sitter`, the parser generator tool and incremental parsing library: [Tree Siter Nvim](https://github.com/nvim-treesitter/nvim-treesitter)
 
