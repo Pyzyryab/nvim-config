@@ -11,10 +11,10 @@ Also, this allows me to have a reference point whenever I got into a new compute
 
 ## References (WIP)
 
-The primagean videos
-The guy on medium
+- The primagean videos
+- The guy on medium
 
-## DIFFERENT OS
+## Config and Set Up across different OS
 
 I mostly do my coding personal job on `Linux` and `Windows` (like 70% - 30%) and my professional paid job the other way around, `Windows` and `Linux` (like 85% - 15%), and I use `Linux` mostly though `WSL`.
 
@@ -25,7 +25,7 @@ But `Windows` is a different kind of thing. You'll need to do some job to get yo
 
 ## REMAPS and **leader** key
 
-For convenience, in my set up I like to have the [leader key](TODO link to docs) mapped to the `spacebar` key.
+For convenience, in my set up I like to have the `<leader >` key mapped to the `spacebar` key.
 The spacebar is extremely fast and confortable, since I am able to reach it with both hands quickly and without having to make any extrange movements with any of my fingers.
 
 All the remaps configured for this setup are in the [remap.lua](./lua/therustifyer/remap.lua)
@@ -42,7 +42,7 @@ The most notorious one for me are:
 - `<C-h>`: `Harpoon` select (1)
 ### TODO remaining `Harpoon` pickers, but I am not confortable with the ThePrimagean ones
 
-## PLUGINS
+## Plugins 
 
 - Vim/Neovim plugin manager [Packer](https://github.com/wbthomason/packer.nvim)
 - Project files navigation [Telescope](https://github.com/nvim-telescope/telescope.nvim)
