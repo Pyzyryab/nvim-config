@@ -36,7 +36,11 @@ The most notorious one for me are:
 - `<leader>pv`: Goes back to `Netrw` from the source origin `:so`
 - `<leader>pf`: Launches the project files navigator  
 - `<leader>ps`: Performns a search for the input text on the project files 
-- `<C-p>: Launches the project files navigator but only for files tracked by **git**
+- `<C-p>`: Launches the project files navigator but only for files tracked by **git**
+- `<leader>a`: Adds a new entry to `Harpoon`
+- `<C-e>`: Opens `Harpoon` selector
+- `<C-h>`: `Harpoon` select (1)
+# TODO remaining `Harpoon` pickers, but I am not confortable with the ThePrimagean ones
 
 PLUGINS
 
@@ -45,3 +49,6 @@ PLUGINS
 - Base Editor Theme: [Rose-Pine](https://github.com/rose-pine/neovim)
 - The Neovim abstraction layer for `tree-sitter`, the parser generator tool and incremental parsing library: [Tree Siter Nvim](https://github.com/nvim-treesitter/nvim-treesitter)
  - Faster files switcher and picker [Harpoon 2](https://github.com/ThePrimeagen/harpoon/tree/harpoon2)
+ - Track all the changes made on the current project [UndoTree](https://github.com/mbbill/undotree)
+ - Manage the git local repository of the project within Nvim [vim fugitive](https://github.com/tpope/vim-fugitive)
+
