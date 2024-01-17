@@ -48,9 +48,9 @@ Even tho, the most notorious one for me are:
 - Project files navigation [Telescope](https://github.com/nvim-telescope/telescope.nvim)
 - Base Editor Theme: [Rose-Pine](https://github.com/rose-pine/neovim)
 - The Neovim abstraction layer for `tree-sitter`, the parser generator tool and incremental parsing library: [Tree Siter Nvim](https://github.com/nvim-treesitter/nvim-treesitter)
- - Faster files switcher and picker [Harpoon 2](https://github.com/ThePrimeagen/harpoon/tree/harpoon2)
- - Track all the changes made on the current project [UndoTree](https://github.com/mbbill/undotree)
- - Manage the git local repository of the project within Nvim [vim fugitive](https://github.com/tpope/vim-fugitive)
+- Faster files switcher and picker [Harpoon 2](https://github.com/ThePrimeagen/harpoon/tree/harpoon2)
+- Track all the changes made on the current project [UndoTree](https://github.com/mbbill/undotree)
+- Manage the git local repository of the project within Nvim [vim fugitive](https://github.com/tpope/vim-fugitive)
 
  - Lsp with lsp-zero configuration:
 
@@ -72,4 +72,5 @@ Even tho, the most notorious one for me are:
 		  {'L3MON4D3/LuaSnip'},
 		  {'rafamadriz/friendly-snippets'}
  ```
+
 
