@@ -52,3 +52,24 @@ Even tho, the most notorious one for me are:
  - Track all the changes made on the current project [UndoTree](https://github.com/mbbill/undotree)
  - Manage the git local repository of the project within Nvim [vim fugitive](https://github.com/tpope/vim-fugitive)
 
+ - Lsp with lsp-zero configuration:
+
+ ```lua
+ -- LSP Support
+		  {'neovim/nvim-lspconfig'},
+		  {'williamboman/mason.nvim'},
+		  {'williamboman/mason-lspconfig.nvim'},
+
+		  -- Autocompletion
+		  {'hrsh7th/nvim-cmp'},
+		  {'hrsh7th/cmp-buffer'},
+		  {'hrsh7th/cmp-path'},
+		  {'saadparwaiz1/cmp_luasnip'},
+		  {'hrsh7th/cmp-nvim-lsp'},
+		  {'hrsh7th/cmp-nvim-lua'},
+
+		  -- Snippets
+		  {'L3MON4D3/LuaSnip'},
+		  {'rafamadriz/friendly-snippets'}
+ ```
+
