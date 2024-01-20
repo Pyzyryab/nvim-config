@@ -3,7 +3,7 @@
 -- Here is where are defined the most important configuration steps
 
 -- First of all, we bring the most inner and important remaps
-require('remap')
+require('the-rustifyer.remap')
 
 -- Getting lazy.nvim as the package manager
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
