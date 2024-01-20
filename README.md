@@ -45,7 +45,7 @@ So if you aren’t quite sure about a given mapping, you can start by typing the
 
 ![which key example](./assets/which-key-ex.png)
 
-### Telescope keymaps picker
+## Telescope keymaps picker
 
 For a more detailed view of the available keymaps and remaps, you can use the `:Telescope keymaps` picker, also available through `<leader>sk` for “Search Keys”
 
@@ -61,8 +61,11 @@ For a more detailed view of the available keymaps and remaps, you can use the `:
 
 ![Create file or directory](./assets/nt-create-file-dir.png)
 
+## [Mini Animate](https://github.com/echasnovski/mini.animate)
 
+Plugin for animate common `Neovim` actions
 
-## Skipping disturbing notifications
+## Skipping disturbing notification
+s
 
 **LazyVim** notifications can be a bit annoying at times, specially when they hide source code. You can type `<leader>un` to delete all notifications
