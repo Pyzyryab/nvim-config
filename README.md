@@ -1,18 +1,13 @@
-# My personal NVIM configuration and set up
+# My personal `Neovim` configuration and set up
 
-Hello everyone.
+Hello everyone!
 
-This repo is made just to track the progress of the **from O IDE** creating and configuring from scratch
-my own `vim/nvim` set up.
+This repo is made just to track the progress of the **from O to IDE** creating and configuring from scratch
+my own `neovim` set up.
 
-This allows me to keep tracked the changes I introduce over the time, see how my personal configuration evolves over the time and share it with anyone instested while I am able to make some sort of tutorial while I am writing it.
+This allows me to keep tracked the changes I introduce over the time, see how my personal configuration evolves over the time and share it with anyone instead while I am able to make some sort of tutorial while I am writing it.
 
-Also, this allows me to have a reference point whenever I got into a new computer or set up, so I can quickly just `git clone` this repository and start to work inmmediatly.
-
-## References (WIP)
-
-- The primagean videos
-- The guy on medium
+Also, this allows me to have a reference point whenever I got into a new computer or set up, so I can quickly just `git clone` this repository and start to work immediately.
 
 ## Config and Set Up across different OS
 
@@ -21,56 +16,53 @@ I mostly do my coding personal job on `Linux` and `Windows` (like 70% - 30%) and
 So you won't find any interesting here about `Mac`
 
 For `Unix` users, vim already comes by default on most of the modern distros. And `nvim` is an easy to get one.
-But `Windows` is a different kind of thing. You'll need to do some job to get your `nvim` working fine or it, so I'll let you [here](TODO link to the medium guide) a nice guide of how to get and install it on `Windows`.
+But `Windows` is a different kind of thing. You'll need to do some job to get your `nvim` working fine or it, so I'll let you [here](https://medium.com/nerd-for-tech/neovim-but-its-in-windows-f39f181afaf9) a nice guide of how to get and install it on `Windows`.
 
-## The **<leader>** key and custom Remaps 
+## Package manager
 
-For convenience, in my set up I like to have the `<leader >` key mapped to the `spacebar` key.
-The spacebar is extremely fast and confortable, since I am able to reach it with both hands quickly and without having to make any extrange movements with any of my fingers.
+When I first started with `Neovim`, I liked to use `packer` as my package manage. But it went unmaintained, and several candidates raised up as alternatives.
 
-All the remaps configured for this setup are in the [remap.lua](./lua/therustifyer/remap.lua)
+Finally, I decided to go with [lazy.vim](https://github.com/folke/lazy.nvim), since the set of features brings a lot of power to my daily development workflow and also comes
+with a lot of predefined niceties that makes it wonderful.
+
+## The **<leader>** key and custom Remaps
+
+I like to have the `<leader>` key mapped to the `spacebar` key.
+The space bar is extremely fast and comfortable, since I am able to reach it with both hands quickly and without having to make any estrange movements with any of my fingers.
+
+My `<localleader>` is the `\` key.
+
+All the keymaps and custom remaps configured for this setup are in the [keymaps file](./lua/config/keymaps.lua)
 or directly set up in the configuration files or each individual plugin whenever it makes sense.
 
-Even tho, the most notorious one for me are:
+## Plugins
 
-- `<leader>pv`: Goes back to `Netrw` from the source origin `:so`
-- `<leader>pf`: Launches the project files navigator  
-- `<leader>ps`: Performns a search for the input text on the project files 
-- `<C-p>`: Launches the project files navigator but only for files tracked by **git**
-- `<leader>a`: Adds a new entry to `Harpoon`
-- `<C-e>`: Opens `Harpoon` selector
-- `<C-h>`: `Harpoon` select (1)
-### TODO remaining `Harpoon` pickers, but I am not confortable with the ThePrimagean ones
+### [which-key](https://github.com/folke/which-key.nvim)
 
-## Plugins 
+`which-key` is a **Neovim** plugin that displays a popup with possible key bindings for the command that you have started typing.
 
-- Vim/Neovim plugin manager [Packer](https://github.com/wbthomason/packer.nvim)
-- Project files navigation [Telescope](https://github.com/nvim-telescope/telescope.nvim)
-- Base Editor Theme: [Rose-Pine](https://github.com/rose-pine/neovim)
-- The Neovim abstraction layer for `tree-sitter`, the parser generator tool and incremental parsing library: [Tree Siter Nvim](https://github.com/nvim-treesitter/nvim-treesitter)
-- Faster files switcher and picker [Harpoon 2](https://github.com/ThePrimeagen/harpoon/tree/harpoon2)
-- Track all the changes made on the current project [UndoTree](https://github.com/mbbill/undotree)
-- Manage the git local repository of the project within Nvim [vim fugitive](https://github.com/tpope/vim-fugitive)
+So if you aren’t quite sure about a given mapping, you can start by typing the `<leader>` key and then see the popup with suggestions for new keys you can type.
 
- - Lsp with lsp-zero configuration:
+![which key example](./assets/which-key-ex.png)
 
- ```lua
- -- LSP Support
-		  {'neovim/nvim-lspconfig'},
-		  {'williamboman/mason.nvim'},
-		  {'williamboman/mason-lspconfig.nvim'},
+### Telescope keymaps picker
 
-		  -- Autocompletion
-		  {'hrsh7th/nvim-cmp'},
-		  {'hrsh7th/cmp-buffer'},
-		  {'hrsh7th/cmp-path'},
-		  {'saadparwaiz1/cmp_luasnip'},
-		  {'hrsh7th/cmp-nvim-lsp'},
-		  {'hrsh7th/cmp-nvim-lua'},
+For a more detailed view of the available keymaps and remaps, you can use the `:Telescope keymaps` picker, also available through `<leader>sk` for “Search Keys”
 
-		  -- Snippets
-		  {'L3MON4D3/LuaSnip'},
-		  {'rafamadriz/friendly-snippets'}
- ```
+![Telescope keymaps finder example](./assets/telescope-keymaps.png)
+
+## [Neo-tree](https://github.com/nvim-neo-tree/neo-tree.nvim)
+
+**Neo-tree** is a Neovim plugin to browse the file system and other tree like structures in whatever style suits you, including sidebars, floating windows, `netrw` split style, or all of them at once!
+
+### Best **Neo-tree** keymaps and/or actions
+
+- Create a *new file* or *directory* just by typing the key `a` when `Neo-tree` is active
+
+![Create file or directory](./assets/nt-create-file-dir.png)
 
 
+
+## Skipping disturbing notifications
+
+**LazyVim** notifications can be a bit annoying at times, specially when they hide source code. You can type `<leader>un` to delete all notifications
