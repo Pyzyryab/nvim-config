@@ -37,6 +37,13 @@ or directly set up in the configuration files or each individual plugin whenever
 
 ## Plugins
 
+### [alpha](https://github.com/goolord/alpha-nvim)
+
+`alpha` is a fast and fully programmable greeter for **Neovim**
+
+I am using the [dashboard-nvim theme](https://github.com/goolord/alpha-nvim#dashboard-nvim-theme) and a set of custom randomized
+**ASCII art** logos shown above the dashboard options. Find them [here](./ascii_art/). 
+
 ### [which-key](https://github.com/folke/which-key.nvim)
 
 `which-key` is a **Neovim** plugin that displays a popup with possible key bindings for the command that you have started typing.
@@ -66,6 +73,5 @@ For a more detailed view of the available keymaps and remaps, you can use the `:
 Plugin for animate common `Neovim` actions
 
 ## Skipping disturbing notification
-s
 
 **LazyVim** notifications can be a bit annoying at times, specially when they hide source code. You can type `<leader>un` to delete all notifications
