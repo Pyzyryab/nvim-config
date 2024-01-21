@@ -1,5 +1,7 @@
 -- Using the `Alpha` plugin as the greeter for my `Neovim` setup 
 
+local logos = require('the-rustifyer.config.logos')
+
 return {
 	{
     "goolord/alpha-nvim",
@@ -9,7 +11,7 @@ return {
     opts = function()
       local dashboard = require("alpha.themes.dashboard")
 
-      dashboard.section.header.val = require('the-rustifyer.config.logos')['random']
+      dashboard.section.header.val = vim.split(logos(), '\n')
       -- stylua: ignore
       dashboard.section.buttons.val = {
         dashboard.button("f", " " .. " Find file",       "<cmd> Telescope find_files <cr>"),
