@@ -11,3 +11,7 @@ require('the-rustifyer.config.lazy')
 
 -- Loading the custom remaps after loading the package manager
 require('the-rustifyer.config.remaps')
+
+-- Loading the additional configuration to the plugins after discover them
+require('the-rustifyer.config.setups')
+

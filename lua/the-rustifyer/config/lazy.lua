@@ -1,4 +1,3 @@
-
 -- Getting lazy.nvim as the package manager for the set up
 -- Lazy only will be fetched and cloned if isn't already on the system
 

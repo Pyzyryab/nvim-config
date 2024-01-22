@@ -9,9 +9,11 @@ vim.keymap.set('n', '<leader>pv', vim.cmd.Ex)
 
 -- Telescope remaps
 local builtin = require('telescope.builtin')
-vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
-vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
-vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
-vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
-vim.keymap.set('n', '<leader>cs', builtin.colorscheme, noremap_silent)
+vim.keymap.set('n', '<leader>ff', builtin.find_files, noremap_silent)
+vim.keymap.set('n', '<leader>fg', builtin.live_grep, noremap_silent)
+vim.keymap.set('n', '<leader>fb', builtin.buffers, noremap_silent)
+vim.keymap.set('n', '<leader>fh', builtin.help_tags, noremap_silent)
+
+local colorscheme = builtin.colorscheme
+vim.keymap.set('n', '<leader>cs', colorscheme, noremap_silent)
 

@@ -3,4 +3,3 @@
 --
 require('the-rustifyer')
 
-require('the-rustifyer.config.lazy')
