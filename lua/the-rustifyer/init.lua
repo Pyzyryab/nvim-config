@@ -5,6 +5,9 @@
 -- Before all, let's assign our <leader> key
 vim.g.mapleader = " "
 
+-- Bring the editor's (Neovim) custom configuration
+require('the-rustifyer.config.editor')
+
 -- Initialize the plugin manager and the plugins under <root_path>/.config/nvim/lua/plugins
 -- All of the plugins declared in such folder will be automatically detected and loaded by lazy
 require('the-rustifyer.config.lazy')
