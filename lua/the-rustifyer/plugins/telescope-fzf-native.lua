@@ -1,0 +1,13 @@
+-- Telescope's native fzf
+--
+-- Caution!: My setup is built with Cmake and Clang via the predefined
+-- options described in the plugin's documentation.
+--
+-- In my case:
+--	Linux: 	 Clang will be invoked natively, since I have a full LLVM
+--		 configured setup in any of my Unix like distros always.
+--
+-- 	Windows: Clang will be invoked via the configured
+-- 		 PATH to the `clang64` Msys2 environment.
+--	 
+return { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' }

@@ -13,5 +13,5 @@ require('the-rustifyer.config.lazy')
 require('the-rustifyer.config.remaps')
 
 -- Loading the additional configuration to the plugins after discover them
-require('the-rustifyer.config.setups')
+require('the-rustifyer.config.plugins')
 
