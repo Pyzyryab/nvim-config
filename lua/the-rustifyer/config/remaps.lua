@@ -7,6 +7,27 @@ local noremap_silent = { noremap = true, silent = true };
 -- Opens `Newtr` file explorer 
 vim.keymap.set('n', '<leader>pv', vim.cmd.Ex)
 
+----------------- General custom remaps -----------------
+--
+-- Moves the selected lines in Visual mode one down (J) or one up (K)
+vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv")
+vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv")
+
+vim.keymap.set('n', 'J', 'mzJ`z')
+
+-- Mantains the cursor of the middle of the screen moving up/down
+vim.keymap.set('n', '<C-d>', '<C-d>zz')
+vim.keymap.set('n', '<C-d>', '<C-d>zz')
+
+-- Search terms stays in the middle
+vim.keymap.set('n', 'n', 'nzzzv')
+vim.keymap.set('n', 'N', 'Nzzzv')
+
+-- Greatest remap ever. Thank you, theprimagean!
+
+
+----------------- Plugin's remaps  -----------------
+--
 -- Telescope remaps
 local builtin = require('telescope.builtin')
 vim.keymap.set('n', '<leader>ff', builtin.find_files, noremap_silent)
