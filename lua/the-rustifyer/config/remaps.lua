@@ -15,6 +15,18 @@ vim.keymap.set('n', '<leader>pv', vim.cmd.Ex)
 -- are confortable?
 -- 
 --
+-- Move to window using the <ctrl> + hjkl keys
+vim.keymap.set("n", "<C-h>", "<C-w>h", { desc = "Go to left window", remap = true })
+vim.keymap.set("n", "<C-j>", "<C-w>j", { desc = "Go to lower window", remap = true })
+vim.keymap.set("n", "<C-k>", "<C-w>k", { desc = "Go to upper window", remap = true })
+vim.keymap.set("n", "<C-l>", "<C-w>l", { desc = "Go to right window", remap = true })
+
+-- Resize the current windows size with <ctr> + arrow keys
+vim.keymap.set("n", "<C-Up>", "<cmd>resize -2<cr>", { desc = "Increase window height" })
+vim.keymap.set("n", "<C-Down>", "<cmd>resize +2<cr>", { desc = "Decrease window height" })
+vim.keymap.set("n", "<C-Left>", "<cmd>vertical resize -2<cr>", { desc = "Decrease window width" })
+vim.keymap.set("n", "<C-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase window width" })
+
 -- Moves the selected lines in Visual mode one down (J) or one up (K)
 -- TODO in 'n' and 'v' with Alt - J/K
 vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv")
@@ -50,7 +62,7 @@ vim.keymap.set({'n', 'v'}, '<leader>d', [["_d]])
 -- Telescope remaps
 local builtin = require('telescope.builtin')
 vim.keymap.set('n', '<leader>ff', builtin.find_files, noremap_silent)
-vim.keymap.set('n', '<leader>fg', builtin.live_grep, noremap_silent)
+vim.keymap.set('n', '<leader>lg', builtin.live_grep, noremap_silent)
 vim.keymap.set('n', '<leader>fb', builtin.buffers, noremap_silent)
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, noremap_silent)
 
