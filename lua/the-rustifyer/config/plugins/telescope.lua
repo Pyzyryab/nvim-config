@@ -2,7 +2,7 @@
 
 -- Telescope
 require('telescope').setup({
-    lazy = false,	
+    lazy = true,	
     pickers = {
         colorscheme = {
           enable_preview = true
@@ -11,8 +11,8 @@ require('telescope').setup({
     defaults = {
     	layout_config = {
       	    horizontal = {
-        	preview_cutoff = 10,
-      	    },
+        	    preview_cutoff = 10,
+            },
     	},
     },
     extensions = {
@@ -25,4 +25,7 @@ require('telescope').setup({
     }
   }
 })
+
+-- Loading or handling Telescope plugins
+require('telescope').load_extension('fzf')
 
