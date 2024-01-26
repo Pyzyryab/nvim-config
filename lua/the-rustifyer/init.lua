@@ -19,5 +19,5 @@ require('the-rustifyer.config.remaps')
 require('the-rustifyer.config.plugins')
 
 -- Manually handling required system-wide installations
-require('the-rustifyer.config.system-wide')
+-- require('the-rustifyer.config.system-wide')
 
