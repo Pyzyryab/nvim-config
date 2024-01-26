@@ -59,7 +59,7 @@ vim.keymap.set({'n', 'v'}, '<leader>d', [["_d]])
 
 ----------------- Plugin's remaps  -----------------
 --
--- Telescope remaps
+-- Telescope
 local builtin = require('telescope.builtin')
 vim.keymap.set('n', '<leader>ff', builtin.find_files, noremap_silent)
 vim.keymap.set('n', '<leader>lg', builtin.live_grep, noremap_silent)
@@ -69,3 +69,5 @@ vim.keymap.set('n', '<leader>fh', builtin.help_tags, noremap_silent)
 local colorscheme = builtin.colorscheme
 vim.keymap.set('n', '<leader>cs', colorscheme, noremap_silent)
 
+-- Neotree
+vim.keymap.set({'n', 'v'}, '<leader>e', '<cmd>Neotree toggle<CR>', noremap_silent)

@@ -14,7 +14,8 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-require('lazy').setup(
+local lazy = require('lazy')
+lazy.setup(
 	'the-rustifyer.plugins',
 	{
 	install = { colorscheme = { "tokyonight", "habamax" } },
@@ -36,3 +37,16 @@ require('lazy').setup(
   },
 	}	
 )
+
+-- Manual handling of system-wide dependencies
+--
+require('the-rustifyer.config.system-wide')
+lazy.plugins = {
+    -- Your other plugin configurations...
+    {
+        "cargo install ripgrep",
+        cmd = { "RipgrepInstall", "RipgrepUpdate" },
+        installer = install_ripgrep,
+        keys = { "<leader>rg" },
+    },
+}
