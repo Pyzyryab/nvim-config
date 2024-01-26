@@ -1,14 +1,14 @@
 -- Getting lazy.nvim as the package manager for the set up
 -- Lazy only will be fetched and cloned if isn't already on the system
 
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system({
-    "git",
-    "clone",
-    "--filter=blob:none",
-    "https://github.com/folke/lazy.nvim.git",
-    "--branch=stable", -- latest stable release
+    'git',
+    'clone',
+    '--filter=blob:none',
+    'https://github.com/folke/lazy.nvim.git',
+    '--branch=stable', -- latest stable release
     lazypath,
   })
 end
@@ -18,20 +18,20 @@ local lazy = require('lazy')
 lazy.setup(
 	'the-rustifyer.plugins',
 	{
-	install = { colorscheme = { "tokyonight", "habamax" } },
+	install = { colorscheme = { 'tokyonight', 'habamax' } },
   checker = { enabled = true }, -- automatically check for plugin updates
   performance = {
     rtp = {
       -- disable some rtp plugins
       disabled_plugins = {
-        "gzip",
-        -- "matchit",
-        -- "matchparen",
-        -- "netrwPlugin",
-        "tarPlugin",
-        "tohtml",
-        "tutor",
-        "zipPlugin",
+        'gzip',
+        -- 'matchit',
+        -- 'matchparen',
+        -- 'netrwPlugin',
+        'tarPlugin',
+        'tohtml',
+        'tutor',
+        'zipPlugin',
       },
     },
   },
@@ -40,13 +40,3 @@ lazy.setup(
 
 -- Manual handling of system-wide dependencies
 --
-require('the-rustifyer.config.system-wide')
-lazy.plugins = {
-    -- Your other plugin configurations...
-    {
-        "cargo install ripgrep",
-        cmd = { "RipgrepInstall", "RipgrepUpdate" },
-        installer = install_ripgrep,
-        keys = { "<leader>rg" },
-    },
-}
