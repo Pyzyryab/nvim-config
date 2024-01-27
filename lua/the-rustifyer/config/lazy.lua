@@ -18,7 +18,10 @@ local lazy = require('lazy')
 lazy.setup(
 	'the-rustifyer.plugins',
 	{
-	install = { colorscheme = { 'tokyonight', 'habamax' } },
+	install = { 
+        colorscheme = { 'tokyonight', 'habamax' },
+        editor = { 'indent-blankline', 'mini-identscope' }, -- Include subfolder plugins
+    },
   checker = { enabled = true }, -- automatically check for plugin updates
   performance = {
     rtp = {
