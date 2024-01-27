@@ -18,6 +18,10 @@ require('the-rustifyer.config.remaps')
 -- Loading the additional configuration to the plugins after discover them
 require('the-rustifyer.config.plugins')
 
+-- Setting the colorscheme of the set up
+--require('colors')
+vim.cmd.colorscheme 'catppuccin'
+
 -- Manually handling required system-wide installations
 -- require('the-rustifyer.config.system-wide')
 

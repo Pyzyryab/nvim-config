@@ -5,15 +5,16 @@ return {
   -- tokyonight
   {
       "folke/tokyonight.nvim",
-  lazy = false,
-  priority = 1000,
+  lazy = true,
+  -- priority = 1000,
   opts = {},
   },
 
   -- catppuccin
   {
     'catppuccin/nvim',
-    lazy = true,
+    lazy = false,
+    priority = 1000,
     name = 'catppuccin',
     opts = {
       integrations = {
