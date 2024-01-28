@@ -6,7 +6,7 @@
 vim.g.mapleader = " "
 
 -- Bring the editor's (Neovim) custom configuration
-require('the-rustifyer.config.editor')
+require('the-rustifyer.config.editor-config')
 
 -- Initialize the plugin manager and the plugins under <root_path>/.config/nvim/lua/plugins
 -- All of the plugins declared in such folder will be automatically detected and loaded by lazy
@@ -17,6 +17,9 @@ require('the-rustifyer.config.remaps')
 
 -- Loading the additional configuration to the plugins after discover them
 require('the-rustifyer.config.plugins')
+
+-- Loading the configuration details of the languages
+require('the-rustifyer.config.languages')
 
 -- Setting the colorscheme of the set up
 --require('colors')

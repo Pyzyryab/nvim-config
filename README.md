@@ -9,15 +9,21 @@ This allows me to keep tracked the changes I introduce over the time, see how my
 
 Also, this allows me to have a reference point whenever I got into a new computer or set up, so I can quickly just `git clone` this repository and start to work immediately.
 
-## Requirements
+> **Note:** Highlighted blue hyperlinks will lead you to the plugin's or tool author documentation or repository
 
-If you like to have `live grep`, you'll need to have [`ripgrep`](https://github.com/BurntSushi/ripgrep). The easiest way to install it is via cargo, just by:
+## Pre-requisites
+
+### Optional ones
+
+If you'd like to have `live grep`, you'll need to have [`ripgrep`](https://github.com/BurntSushi/ripgrep). The easiest way to install it is via cargo, just by:
 
 ```bash
 cargo install ripgrep
 ```
 
+If for some strange reason you don't have `The Rust programming language` in you computer, fix what's wrong with you and install it. Then, go read the book, start to code in `Rust`. Then, gain knowledge about its ecosystem, and figure out what you've being missing all this time.
 
+Anyway, you can go to the `ripgrep` link above and install it via any of the other ways listed in their documentation.
 
 ## Config and Set Up across different OS
 
@@ -35,24 +41,38 @@ When I first started with `Neovim`, I liked to use `packer` as my package manage
 Finally, I decided to go with [lazy.vim](https://github.com/folke/lazy.nvim), since the set of features brings a lot of power to my daily development workflow and also comes
 with a lot of predefined niceties that makes it wonderful.
 
-## The **<leader>** key and custom Remaps
+## The **`<leader>`** key and custom Remaps
 
 I like to have the `<leader>` key mapped to the `spacebar` key.
-The space bar is extremely fast and comfortable, since I am able to reach it with both hands quickly and without having to make any estrange movements with any of my fingers.
-
-My `<localleader>` is the `\` key.
+The space bar is extremely fast and comfortable, since I am able to reach it with both hands quickly and without having to make any estrange movements with any of my fingers. `<localleader>` is the `\` key.
 
 All the keymaps and custom remaps configured for this setup are in the [keymaps file](./lua/config/keymaps.lua)
-or directly set up in the configuration files or each individual plugin whenever it makes sense.
+or directly set up in the configuration files or each individual plugin whenever it makes sense, but here's a quick look at the most important ones.
+
+- `Telescope`
+  - **`<leader>ff`** ⇒ Lists files in your current working directory. `.git` directory is intentionally disabled from the fuzzy search
+  - **`<leader>fg`** ⇒ Fuzzy search through the output of git ls-files command, respects `.gitignore`
+  - **`<leader>lg`** ⇒ Search for a string in your current working directory and get results live as you type, respects `.gitignore`
+  - **`<leader>fb`** ⇒ Lists open buffers in current *Neovim* instance
+  - **`<leader>fc`** ⇒ Lists available plugin/user commands and runs them on `<cr>`
+  - **`<leader>fo`** ⇒ Lists previously open files
+  - **`<leader>fh`** ⇒ Open *help tags*. This gives you quick documentation about editor elements
+  - **`<leader>cs`** ⇒ Preview of locally installed colorschemes
+
+- `Neotree`
+  - **`<leader>nt`** ⇒ Starts `Neotree`
+  - **`<leader>e`** ⇒ Toggle ON/OFF `Neotree`
 
 ## Plugins
+
+Not all the installed plugins to make up this set up are listed here, but there's the most noticeable and kind of important ones
 
 ### [alpha](https://github.com/goolord/alpha-nvim)
 
 `alpha` is a fast and fully programmable greeter for **Neovim**
 
 I am using the [dashboard-nvim theme](https://github.com/goolord/alpha-nvim#dashboard-nvim-theme) and a set of custom randomized
-**ASCII art** logos shown above the dashboard options. Find them [here](./ascii_art/). 
+**ASCII art** logos shown above the dashboard options. Find them [here](./ascii_art/).
 
 ### [which-key](https://github.com/folke/which-key.nvim)
 
@@ -62,15 +82,19 @@ So if you aren’t quite sure about a given mapping, you can start by typing the
 
 ![which key example](./assets/which-key-ex.png)
 
+## [bufferline](https://github.com/akinsho/bufferline.nvim)
+
+A snazzy buffer line (with tabpage integration) for `Neovim``
+
 ## Telescope
 
 `Telescope` is a **fuzzy-finder** to quickly navigate over lists. This mean, that almost anything that can be stored on a list can be found with telescope, not only your project files!
 
 - `Live grep` - For having the ability of finding content in files directly, we'll need `ripgrep`. This allows us to find and filter text on the pickable files by `telescope`  
 
-## Telescope keymaps picker
+### Telescope keymaps picker
 
-For a more detailed view of the available keymaps and remaps, you can use the `:Telescope keymaps` picker, also available through `<leader>sk` for “Search Keys”
+For a more detailed view of the available keymaps and remaps, you can use the `:Telescope keymaps` picker. This acts as similarly as `which-key`
 
 ![Telescope keymaps finder example](./assets/telescope-keymaps.png)
 
@@ -80,14 +104,30 @@ For a more detailed view of the available keymaps and remaps, you can use the `:
 
 ### Best **Neo-tree** keymaps and/or actions
 
-- Create a *new file* or *directory* just by typing the key `a` when `Neo-tree` is active
+- Create a *new file* or *directory* just by typing the key `a` when `Neo-tree` is active. If the input name ends with a `/`, it will create a directory instead.
+
+- A `.` sets the current highlighted entry as the root directory. `<bs>` will navigate one above the *cwd*. `<CR>` will enter on selection.
 
 ![Create file or directory](./assets/nt-create-file-dir.png)
 
-## [Mini Animate](https://github.com/echasnovski/mini.animate)
+## Other niceties
+
+### [dressing](https://github.com/stevearc/dressing.nvim)
+
+Better `Neovim` UI
+
+### [mini-indentscope](https://github.com/echasnovski/mini.indentscope)
+
+Shows in the editor's UI the current level of indentation where the cursor is with a nice vertical guide
+
+### [indent-blankline](https://github.com/lukas-reineke/indent-blankline.nvim)
+
+Shows indentation guides
+
+### [Mini Animate](https://github.com/echasnovski/mini.animate)
 
 Plugin for animate common `Neovim` actions
 
 ## Skipping disturbing notification
 
-**LazyVim** notifications can be a bit annoying at times, specially when they hide source code. You can type `<leader>un` to delete all notifications
+UI notifications can be a bit annoying at times, specially when they hide source code. You can type `<leader>un` to delete all notifications

@@ -62,11 +62,17 @@ vim.keymap.set({'n', 'v'}, '<leader>d', [["_d]])
 -- Telescope
 local builtin = require('telescope.builtin')
 vim.keymap.set('n', '<leader>ff', builtin.find_files, noremap_silent)
+vim.keymap.set('n', '<leader>fg', builtin.git_files, noremap_silent)
 vim.keymap.set('n', '<leader>lg', builtin.live_grep, noremap_silent)
 vim.keymap.set('n', '<leader>fb', builtin.buffers, noremap_silent)
+vim.keymap.set('n', '<leader>fc', builtin.commands, noremap_silent)
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, noremap_silent)
 vim.keymap.set('n', '<leader>fo', builtin.oldfiles, noremap_silent)
 
+-- Telescope git picker
+
+
+-- Telescope colorscheme preview
 local colorscheme = builtin.colorscheme
 vim.keymap.set('n', '<leader>cs', colorscheme, noremap_silent)
 

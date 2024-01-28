@@ -1,6 +1,9 @@
 -- lsp/init.lua
 --
 return {
-    require('the-rustifyer.plugins.lsp.mason')
+    {
+        "williamboman/mason.nvim",
+        "williamboman/mason-lspconfig.nvim",
+        "neovim/nvim-lspconfig",
+    }
 }
-
