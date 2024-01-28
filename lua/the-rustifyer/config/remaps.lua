@@ -71,4 +71,5 @@ local colorscheme = builtin.colorscheme
 vim.keymap.set('n', '<leader>cs', colorscheme, noremap_silent)
 
 -- Neotree
+vim.keymap.set({'n', 'v'}, '<leader>nt', '<cmd>Neotree<CR>', noremap_silent)
 vim.keymap.set({'n', 'v'}, '<leader>e', '<cmd>Neotree toggle<CR>', noremap_silent)

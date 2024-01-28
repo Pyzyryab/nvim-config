@@ -2,7 +2,8 @@ return {
     "nvim-neo-tree/neo-tree.nvim",
     branch = "v3.x",
     lazy = true,
-    event = 'VeryLazy',
+    -- event = 'VeryLazy',
+    cmd = {'Neotree', 'Neotree toggle' },
     requires = { 
       "nvim-lua/plenary.nvim",
       "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
@@ -197,7 +198,7 @@ return {
           filtered_items = {
             visible = false, -- when true, they will just be displayed differently than normal items
             hide_dotfiles = true,
-            hide_gitignored = true,
+            hide_gitignored = false,
             hide_hidden = true, -- only works on Windows for hidden files/directories
             hide_by_name = {
               --"node_modules"
