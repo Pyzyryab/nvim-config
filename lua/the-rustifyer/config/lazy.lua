@@ -20,7 +20,8 @@ lazy.setup(
 	{
 	install = { 
         colorscheme = { 'tokyonight', 'habamax' },
-        editor = { 'indent-blankline', 'mini-identscope' }, -- Include subfolder plugins
+        editor = { 'indent-blankline', 'mini-identscope' },
+        lsp = { 'mason', }
     },
   checker = { enabled = true }, -- automatically check for plugin updates
   performance = {
