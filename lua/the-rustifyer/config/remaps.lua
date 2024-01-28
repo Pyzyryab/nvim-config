@@ -65,6 +65,7 @@ vim.keymap.set('n', '<leader>ff', builtin.find_files, noremap_silent)
 vim.keymap.set('n', '<leader>lg', builtin.live_grep, noremap_silent)
 vim.keymap.set('n', '<leader>fb', builtin.buffers, noremap_silent)
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, noremap_silent)
+vim.keymap.set('n', '<leader>fo', builtin.oldfiles, noremap_silent)
 
 local colorscheme = builtin.colorscheme
 vim.keymap.set('n', '<leader>cs', colorscheme, noremap_silent)

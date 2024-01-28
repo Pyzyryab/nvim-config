@@ -9,6 +9,16 @@ This allows me to keep tracked the changes I introduce over the time, see how my
 
 Also, this allows me to have a reference point whenever I got into a new computer or set up, so I can quickly just `git clone` this repository and start to work immediately.
 
+## Requirements
+
+If you like to have `live grep`, you'll need to have [`ripgrep`](https://github.com/BurntSushi/ripgrep). The easiest way to install it is via cargo, just by:
+
+```bash
+cargo install ripgrep
+```
+
+
+
 ## Config and Set Up across different OS
 
 I mostly do my coding personal job on `Linux` and `Windows` (like 70% - 30%) and my professional paid job the other way around, `Windows` and `Linux` (like 85% - 15%), and I use `Linux` mostly though `WSL`.
@@ -51,6 +61,12 @@ I am using the [dashboard-nvim theme](https://github.com/goolord/alpha-nvim#dash
 So if you aren’t quite sure about a given mapping, you can start by typing the `<leader>` key and then see the popup with suggestions for new keys you can type.
 
 ![which key example](./assets/which-key-ex.png)
+
+## Telescope
+
+`Telescope` is a **fuzzy-finder** to quickly navigate over lists. This mean, that almost anything that can be stored on a list can be found with telescope, not only your project files!
+
+- `Live grep` - For having the ability of finding content in files directly, we'll need `ripgrep`. This allows us to find and filter text on the pickable files by `telescope`  
 
 ## Telescope keymaps picker
 
