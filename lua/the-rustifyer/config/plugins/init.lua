@@ -2,4 +2,4 @@
 --
 
 require('the-rustifyer.config.plugins.telescope')
-require('the-rustifyer.config.plugins.mason')
+require('the-rustifyer.config.plugins.lsp')
