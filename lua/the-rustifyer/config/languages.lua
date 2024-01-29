@@ -50,9 +50,11 @@ M.languages = {
 
 function M.get_lsp_config()
     local lsp_configs = {}
-        if config.lsp then
+    for _, config in pairs(M.languages) do
+        if config.lsp ~= nil then
             lsp_configs[config.lsp] = true
         end
+    end
     return vim.tbl_keys(lsp_configs)
 end
 
