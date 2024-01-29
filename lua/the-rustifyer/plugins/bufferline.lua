@@ -11,11 +11,13 @@ return {
         { "<leader>bl", "<Cmd>BufferLineCloseLeft<CR>", desc = "Delete buffers to the left" },
         { "<S-h>", "<cmd>BufferLineCyclePrev<cr>", desc = "Prev buffer" },
         { "<S-l>", "<cmd>BufferLineCycleNext<cr>", desc = "Next buffer" },
-        { "[b", "<cmd>BufferLineCyclePrev<cr>", desc = "Prev buffer" },
-        { "]b", "<cmd>BufferLineCycleNext<cr>", desc = "Next buffer" },
     },
     opts = {
         options = {
+            indicator = {
+                icon = '▎', -- this should be omitted if indicator style is not 'icon'
+                style = 'underline',
+            },
             hover = {
                 enabled = true,
                 delay = 200,
