@@ -52,7 +52,7 @@ local cmp_action = lsp_zero.cmp_action()
 
 -- this is the function that loads the extra snippets
 -- from rafamadriz/friendly-snippets
---require('luasnip.loaders.from_vscode').lazy_load()
+require('luasnip.loaders.from_vscode').lazy_load()
 
 cmp.setup({
   -- if you don't know what is a "source" in nvim-cmp read this:

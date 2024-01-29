@@ -6,7 +6,7 @@ return {
   {'williamboman/mason.nvim', lazy = true, event = 'VeryLazy'},
   {'williamboman/mason-lspconfig.nvim', lazy = true, event = 'VeryLazy'},
   {'neovim/nvim-lspconfig', lazy = true, event = 'VeryLazy'},
---  {'L3MON4D3/LuaSnip', lazy = true, event = 'BufEnter',},
+  {'L3MON4D3/LuaSnip', lazy = true, event = 'BufEnter',},
   {'hrsh7th/nvim-cmp', lazy = true, event = 'BufEnter',},
   {'hrsh7th/cmp-nvim-lsp', lazy = true, event = 'BufEnter',},
   {'hrsh7th/cmp-buffer', lazy = true, event = 'BufEnter',},
