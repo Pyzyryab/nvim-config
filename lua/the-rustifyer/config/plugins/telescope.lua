@@ -32,5 +32,5 @@ require('telescope').setup({
 })
 
 -- Loading or handling Telescope plugins
-require('telescope').load_extension('fzf')
+-- require('telescope').load_extension('fzf')
 

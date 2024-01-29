@@ -4,6 +4,23 @@
 
 local noremap_silent = { noremap = true, silent = true };
 
+-- Toggle between absolute and relative line numbers
+vim.keymap.set(
+    {'n', 'v'},
+    '<leader>ln', 
+    function()
+        local enabled_rel_line_nums = vim.wo.relativenumber == true
+        if enabled_rel_line_nums then
+            vim.cmd('set number norelativenumber')
+        else
+            vim.cmd('set number relativenumber')
+        end
+    end,
+    {
+        desc = 'Toggle between absolute and relative line numbers'
+    }
+)
+
 -- Opens `Newtr` file explorer 
 vim.keymap.set('n', '<leader>pv', vim.cmd.Ex)
 
