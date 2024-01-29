@@ -1,18 +1,29 @@
-# My personal NVIM configuration and set up
+# My personal `Neovim` configuration and set up
 
-Hello everyone.
+Hello everyone!
 
-This repo is made just to track the progress of the **from O IDE** creating and configuring from scratch
-my own `vim/nvim` set up.
+This repo is made just to track the progress of the **from O to IDE** creating and configuring from scratch
+my own `neovim` set up.
 
-This allows me to keep tracked the changes I introduce over the time, see how my personal configuration evolves over the time and share it with anyone instested while I am able to make some sort of tutorial while I am writing it.
+This allows me to keep tracked the changes I introduce over the time, see how my personal configuration evolves over the time and share it with anyone instead while I am able to make some sort of tutorial while I am writing it.
 
-Also, this allows me to have a reference point whenever I got into a new computer or set up, so I can quickly just `git clone` this repository and start to work inmmediatly.
+Also, this allows me to have a reference point whenever I got into a new computer or set up, so I can quickly just `git clone` this repository and start to work immediately.
 
-## References (WIP)
+> **Note:** Highlighted blue hyperlinks will lead you to the plugin's or tool author documentation or repository
 
-- The primagean videos
-- The guy on medium
+## Pre-requisites
+
+### Optional ones
+
+If you'd like to have `live grep`, you'll need to have [`ripgrep`](https://github.com/BurntSushi/ripgrep). The easiest way to install it is via cargo, just by:
+
+```bash
+cargo install ripgrep
+```
+
+If for some strange reason you don't have `The Rust programming language` in you computer, fix what's wrong with you and install it. Then, go read the book, start to code in `Rust`. Then, gain knowledge about its ecosystem, and figure out what you've being missing all this time.
+
+Anyway, you can go to the `ripgrep` link above and install it via any of the other ways listed in their documentation.
 
 ## Config and Set Up across different OS
 
@@ -21,56 +32,102 @@ I mostly do my coding personal job on `Linux` and `Windows` (like 70% - 30%) and
 So you won't find any interesting here about `Mac`
 
 For `Unix` users, vim already comes by default on most of the modern distros. And `nvim` is an easy to get one.
-But `Windows` is a different kind of thing. You'll need to do some job to get your `nvim` working fine or it, so I'll let you [here](TODO link to the medium guide) a nice guide of how to get and install it on `Windows`.
+But `Windows` is a different kind of thing. You'll need to do some job to get your `nvim` working fine or it, so I'll let you [here](https://medium.com/nerd-for-tech/neovim-but-its-in-windows-f39f181afaf9) a nice guide of how to get and install it on `Windows`.
 
-## The **<leader>** key and custom Remaps 
+## Package manager
 
-For convenience, in my set up I like to have the `<leader >` key mapped to the `spacebar` key.
-The spacebar is extremely fast and confortable, since I am able to reach it with both hands quickly and without having to make any extrange movements with any of my fingers.
+When I first started with `Neovim`, I liked to use `packer` as my package manage. But it went unmaintained, and several candidates raised up as alternatives.
 
-All the remaps configured for this setup are in the [remap.lua](./lua/therustifyer/remap.lua)
-or directly set up in the configuration files or each individual plugin whenever it makes sense.
+Finally, I decided to go with [lazy.vim](https://github.com/folke/lazy.nvim), since the set of features brings a lot of power to my daily development workflow and also comes
+with a lot of predefined niceties that makes it wonderful.
 
-Even tho, the most notorious one for me are:
+## The **`<leader>`** key and custom Remaps
 
-- `<leader>pv`: Goes back to `Netrw` from the source origin `:so`
-- `<leader>pf`: Launches the project files navigator  
-- `<leader>ps`: Performns a search for the input text on the project files 
-- `<C-p>`: Launches the project files navigator but only for files tracked by **git**
-- `<leader>a`: Adds a new entry to `Harpoon`
-- `<C-e>`: Opens `Harpoon` selector
-- `<C-h>`: `Harpoon` select (1)
-### TODO remaining `Harpoon` pickers, but I am not confortable with the ThePrimagean ones
+I like to have the `<leader>` key mapped to the `spacebar` key.
+The space bar is extremely fast and comfortable, since I am able to reach it with both hands quickly and without having to make any estrange movements with any of my fingers. `<localleader>` is the `\` key.
 
-## Plugins 
+All the keymaps and custom remaps configured for this setup are in the [keymaps file](./lua/config/keymaps.lua)
+or directly set up in the configuration files or each individual plugin whenever it makes sense, but here's a quick look at the most important ones.
 
-- Vim/Neovim plugin manager [Packer](https://github.com/wbthomason/packer.nvim)
-- Project files navigation [Telescope](https://github.com/nvim-telescope/telescope.nvim)
-- Base Editor Theme: [Rose-Pine](https://github.com/rose-pine/neovim)
-- The Neovim abstraction layer for `tree-sitter`, the parser generator tool and incremental parsing library: [Tree Siter Nvim](https://github.com/nvim-treesitter/nvim-treesitter)
-- Faster files switcher and picker [Harpoon 2](https://github.com/ThePrimeagen/harpoon/tree/harpoon2)
-- Track all the changes made on the current project [UndoTree](https://github.com/mbbill/undotree)
-- Manage the git local repository of the project within Nvim [vim fugitive](https://github.com/tpope/vim-fugitive)
+- `Telescope`
+  - **`<leader>ff`** ⇒ Lists files in your current working directory. `.git` directory is intentionally disabled from the fuzzy search
+  - **`<leader>fg`** ⇒ Fuzzy search through the output of git ls-files command, respects `.gitignore`
+  - **`<leader>lg`** ⇒ Search for a string in your current working directory and get results live as you type, respects `.gitignore`
+  - **`<leader>fb`** ⇒ Lists open buffers in current *Neovim* instance
+  - **`<leader>fc`** ⇒ Lists available plugin/user commands and runs them on `<cr>`
+  - **`<leader>fo`** ⇒ Lists previously open files
+  - **`<leader>fh`** ⇒ Open *help tags*. This gives you quick documentation about editor elements
+  - **`<leader>cs`** ⇒ Preview of locally installed colorschemes
 
- - Lsp with lsp-zero configuration:
+- `Neotree`
+  - **`<leader>nt`** ⇒ Starts `Neotree`
+  - **`<leader>e`** ⇒ Toggle ON/OFF `Neotree`
 
- ```lua
- -- LSP Support
-		  {'neovim/nvim-lspconfig'},
-		  {'williamboman/mason.nvim'},
-		  {'williamboman/mason-lspconfig.nvim'},
+## Plugins
 
-		  -- Autocompletion
-		  {'hrsh7th/nvim-cmp'},
-		  {'hrsh7th/cmp-buffer'},
-		  {'hrsh7th/cmp-path'},
-		  {'saadparwaiz1/cmp_luasnip'},
-		  {'hrsh7th/cmp-nvim-lsp'},
-		  {'hrsh7th/cmp-nvim-lua'},
+Not all the installed plugins to make up this set up are listed here, but there's the most noticeable and kind of important ones
 
-		  -- Snippets
-		  {'L3MON4D3/LuaSnip'},
-		  {'rafamadriz/friendly-snippets'}
- ```
+### [alpha](https://github.com/goolord/alpha-nvim)
 
+`alpha` is a fast and fully programmable greeter for **Neovim**
 
+I am using the [dashboard-nvim theme](https://github.com/goolord/alpha-nvim#dashboard-nvim-theme) and a set of custom randomized
+**ASCII art** logos shown above the dashboard options. Find them [here](./ascii_art/).
+
+### [which-key](https://github.com/folke/which-key.nvim)
+
+`which-key` is a **Neovim** plugin that displays a popup with possible key bindings for the command that you have started typing.
+
+So if you aren’t quite sure about a given mapping, you can start by typing the `<leader>` key and then see the popup with suggestions for new keys you can type.
+
+![which key example](./assets/which-key-ex.png)
+
+## [bufferline](https://github.com/akinsho/bufferline.nvim)
+
+A snazzy buffer line (with tabpage integration) for `Neovim``
+
+## Telescope
+
+`Telescope` is a **fuzzy-finder** to quickly navigate over lists. This mean, that almost anything that can be stored on a list can be found with telescope, not only your project files!
+
+- `Live grep` - For having the ability of finding content in files directly, we'll need `ripgrep`. This allows us to find and filter text on the pickable files by `telescope`  
+
+### Telescope keymaps picker
+
+For a more detailed view of the available keymaps and remaps, you can use the `:Telescope keymaps` picker. This acts as similarly as `which-key`
+
+![Telescope keymaps finder example](./assets/telescope-keymaps.png)
+
+## [Neo-tree](https://github.com/nvim-neo-tree/neo-tree.nvim)
+
+**Neo-tree** is a Neovim plugin to browse the file system and other tree like structures in whatever style suits you, including sidebars, floating windows, `netrw` split style, or all of them at once!
+
+### Best **Neo-tree** keymaps and/or actions
+
+- Create a *new file* or *directory* just by typing the key `a` when `Neo-tree` is active. If the input name ends with a `/`, it will create a directory instead.
+
+- A `.` sets the current highlighted entry as the root directory. `<bs>` will navigate one above the *cwd*. `<CR>` will enter on selection.
+
+![Create file or directory](./assets/nt-create-file-dir.png)
+
+## Other niceties
+
+### [dressing](https://github.com/stevearc/dressing.nvim)
+
+Better `Neovim` UI
+
+### [mini-indentscope](https://github.com/echasnovski/mini.indentscope)
+
+Shows in the editor's UI the current level of indentation where the cursor is with a nice vertical guide
+
+### [indent-blankline](https://github.com/lukas-reineke/indent-blankline.nvim)
+
+Shows indentation guides
+
+### [Mini Animate](https://github.com/echasnovski/mini.animate)
+
+Plugin for animate common `Neovim` actions
+
+## Skipping disturbing notification
+
+UI notifications can be a bit annoying at times, specially when they hide source code. You can type `<leader>un` to delete all notifications

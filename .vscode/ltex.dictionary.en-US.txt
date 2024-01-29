@@ -1,0 +1,5 @@
+keymaps
+neovim
+Neovim
+gitignore
+colorschemes
