@@ -2,7 +2,7 @@
 
 -- Telescope
 require('telescope').setup({
-    lazy = true,	
+    lazy = true,
     file_ignore_patterns = {'.git/'},
     borders = {},
     pickers = {

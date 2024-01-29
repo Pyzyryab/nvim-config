@@ -7,23 +7,26 @@ local M = {}
 M.languages = {
     rust = { lsp = 'rust_analyzer', treesitter = 'rust' },
     cpp = { lsp = 'clangd', treesitter = 'cpp' },
-    make = { lsp = 'cmake', treesitter = 'make' },
+    make = { treesitter = 'make' },
     cmake = { lsp = 'neocmake', treesitter = 'cmake' },
     doxygen = { treesitter = 'doxygen' },
     c = { lsp = 'clangd', treesitter = 'c' },
 
-    python = { lsp = 'pyright', treesitter = 'python' },
+    python = { lsp = 'jedi_language_server', treesitter = 'python' },
     java = { lsp = 'jdtls', treesitter = 'java' },
     kotlin = { lsp = 'kotlin_language_server', treesitter = 'kotlin' },
     zig = { lsp = 'zls', treesitter = 'zig' },
     dart = { treesitter = 'dart' },
-    go = { lsp = 'golangci_lint_ls', treesitter = 'go' },
-    ruby = { lsp = 'ruby_ls', treesitter = 'ruby' },
+    go = { lsp = 'gopls', treesitter = 'go' },
+    ruby = {
+        -- lsp = 'ruby_ls',
+        treesitter = 'ruby'
+    },
     lua = { lsp = 'lua_ls', treesitter = 'lua' },
 
     sql = { lsp = 'sqlls', treesitter = 'sql' },
 
-    javascript = { lsp = 'tsserver', treesitter = 'javascript' },
+    javascript = { lsp = 'eslint', treesitter = 'javascript' },
     typescript = { lsp = 'tsserver', treesitter = 'typescript' },
     yaml = { lsp = 'yamlls', treesitter = 'yaml' },
     xml = { lsp = 'clangd', treesitter = 'xml' },
@@ -36,7 +39,6 @@ M.languages = {
     latex = { lsp = 'texlab', treesitter = 'latex' },
     markdown = { lsp = 'golangci_lint_ls', treesitter = 'markdown' },
     toml = { lsp = 'taplo', treesitter = 'toml' },
-    matlab = { lsp = 'matlab_ls', treesitter = 'matlab' },
     regex = { treesitter = 'regex' },
     llvm = { lsp = 'clangd', treesitter = 'llvm' },
     godot_resource = { treesitter = 'gdscript' },
