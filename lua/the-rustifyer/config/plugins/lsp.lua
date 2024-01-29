@@ -6,7 +6,7 @@ local langs = require('the-rustifyer.config.languages')
 local lsp_zero = require('lsp-zero')
 lsp_zero.extend_lspconfig()
 
-lsp_zero.on_attach(function(client, bufnr)
+lsp_zero.on_attach(function(_client, bufnr)
   -- see :help lsp-zero-keybindings
   -- to learn the available actions
   lsp_zero.default_keymaps({buffer = bufnr})
@@ -27,7 +27,7 @@ require('mason-lspconfig').setup({
   -- Replace the language servers listed here 
   -- with the ones you want to install
   automatic_installation = true,
-  ensure_installed = langs.get_lsp_config(), 
+  ensure_installed = langs.get_lsp_config(),
   handlers = {
     lsp_zero.default_setup,
     lua_ls = function()
