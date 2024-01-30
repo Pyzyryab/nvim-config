@@ -19,6 +19,7 @@ return {
         priority = 1000,
         name = 'catppuccin',
         opts = {
+            trasparent_background = true,
             integrations = {
                 aerial = true,
                 alpha = true,

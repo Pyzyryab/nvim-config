@@ -24,18 +24,14 @@ M.languages = {
     },
     lua = { lsp = 'lua_ls', treesitter = 'lua' },
 
-    sql = { lsp = 'sqlls', treesitter = 'sql' },
+    xml = { treesitter = 'xml' },
+    html = { treesitter = 'html' },
+    css = { treesitter = 'css' },
+    scss = { treesitter = 'scss' },
+    json = { treesitter = 'json' },
+    json5 = { treesitter = 'json5' },
 
-    javascript = { lsp = 'eslint', treesitter = 'javascript' },
-    typescript = { lsp = 'tsserver', treesitter = 'typescript' },
-    yaml = { lsp = 'yamlls', treesitter = 'yaml' },
-    xml = { lsp = 'clangd', treesitter = 'xml' },
-    html = { lsp = 'html', treesitter = 'html' },
-    css = { lsp = 'cssls', treesitter = 'css' },
-    scss = { lsp = 'cssls', treesitter = 'scss' },
-    json = { lsp = 'jsonls', treesitter = 'json' },
-    json5 = { lsp = 'jsonls', treesitter = 'json5' },
-
+    sql = { treesitter = 'sql' },
     latex = { lsp = 'texlab', treesitter = 'latex' },
     markdown = { lsp = 'golangci_lint_ls', treesitter = 'markdown' },
     toml = { lsp = 'taplo', treesitter = 'toml' },
@@ -43,9 +39,20 @@ M.languages = {
     llvm = { lsp = 'clangd', treesitter = 'llvm' },
     godot_resource = { treesitter = 'gdscript' },
 
-    vim = { lsp = 'vimls', treesitter = 'vim' },
+    vim = { treesitter = 'vim' },
     vimdoc = { treesitter = 'vim' }
 }
+
+-- Those below requires node stuff to be installed on Windows, which
+-- is not acceptable for me
+if jit.os ~= 'Windows' then
+    M.languages.javascript.lsp = 'eslint'
+    M.languages.typescript.lsp = 'tsserver'
+    M.languages.yaml.lsp = 'yamlls'
+    M.languages.html.lsp = 'html'
+    M.languages.css.lsp = 'cssls'
+    M.languages.scss.lsp = 'cssls'
+end
 
 -- The next two functions will be used to retrieve the 'lsp' and 'treesitter'
 -- values that are unique keys
