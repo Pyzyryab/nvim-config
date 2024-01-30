@@ -2,5 +2,10 @@
 --
 return {{
     'nvim-lualine/lualine.nvim',
-    dependencies = { 'nvim-tree/nvim-web-devicons' }
+    lazy = true,
+    dependencies = {
+        'nvim-tree/nvim-web-devicons',
+        'JoshPorterDev/nvim-base16'
+    }
 }}
+

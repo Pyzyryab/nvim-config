@@ -17,7 +17,7 @@ vim.opt.rtp:prepend(lazypath)
 local lazy = require('lazy')
 lazy.setup('the-rustifyer.plugins', {
     install = {
-        colorscheme = { 'tokyonight', 'habamax' },
+        colorscheme = { 'tokyonight', 'habamax', },
         editor,
         lsp,
         git,

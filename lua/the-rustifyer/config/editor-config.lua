@@ -1,9 +1,13 @@
 -- This file holds my personal editor's configuration and settings
 --
--- Most of them are the oness under `vim.opt`
 
 vim.opt.guicursor = '' -- fat cursor enabled (even on insert mode)
 vim.opt.termguicolors = true
+
+-- Access colors present in 256 colorspace
+vim.g.base16_colorspace = 256
+-- Make vim background transparent to work alongside transparent terminal backgrounds
+vim.g.base16_background_transparent = 1
 
 vim.opt.nu = true
 vim.opt.relativenumber = true
@@ -30,7 +34,7 @@ vim.opt.isfname:append('@-@')
 
 vim.opt.updatetime = 50
 
-vim.opt.colorcolumn = '80' -- maybe a function per type of language in the opened current buffer?
+vim.opt.colorcolumn = '120' -- maybe a function per type of language in the opened current buffer?
 
 -- Enabling folding capabilities
 vim.o.foldcolumn = '1'

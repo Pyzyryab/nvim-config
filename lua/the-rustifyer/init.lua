@@ -22,7 +22,6 @@ require('the-rustifyer.config.plugins')
 require('the-rustifyer.config.languages')
 
 -- Setting the colorscheme of the set up
---require('colors')
 vim.cmd.colorscheme 'catppuccin'
 
 -- Manually handling required system-wide installations
