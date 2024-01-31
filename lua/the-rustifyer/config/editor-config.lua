@@ -17,6 +17,7 @@ vim.cmd [[ hi StatusLineNC guibg=NONE ctermbg=NONE ]]
 -- For a floating window (popup menu), set transparency
 vim.cmd [[ hi NormalNC guibg=NONE ctermbg=NONE ]]
 vim.cmd [[ hi NormalFloat guibg=NONE ctermbg=NONE ]]
+vim.cmd [[ hi Neotree guibg=NONE ctermbg=NONE ]]
 
 vim.opt.nu = true
 vim.opt.relativenumber = true
