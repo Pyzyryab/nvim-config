@@ -6,8 +6,17 @@ vim.opt.termguicolors = true
 
 -- Access colors present in 256 colorspace
 vim.g.base16_colorspace = 256
--- Make vim background transparent to work alongside transparent terminal backgrounds
-vim.g.base16_background_transparent = 1
+
+-- Set transparency (replace 0.9 with your desired transparency level)
+vim.cmd [[ hi Normal guibg=NONE ctermbg=NONE ]]
+vim.cmd [[ hi NonText guibg=NONE ctermbg=NONE ]]
+vim.cmd [[ hi VertSplit guibg=NONE ctermbg=NONE ]]
+vim.cmd [[ hi StatusLine guibg=NONE ctermbg=NONE ]]
+vim.cmd [[ hi StatusLineNC guibg=NONE ctermbg=NONE ]]
+
+-- For a floating window (popup menu), set transparency
+vim.cmd [[ hi NormalNC guibg=NONE ctermbg=NONE ]]
+vim.cmd [[ hi NormalFloat guibg=NONE ctermbg=NONE ]]
 
 vim.opt.nu = true
 vim.opt.relativenumber = true
