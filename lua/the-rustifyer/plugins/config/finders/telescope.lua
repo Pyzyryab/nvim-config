@@ -2,7 +2,7 @@
 
 -- Telescope
 return {
-    lazy = false,
+    lazy = true,
     event = 'VeryLazy',
     file_ignore_patterns = {'.git/'},
     borders = {},
