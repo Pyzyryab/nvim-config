@@ -37,12 +37,12 @@ for a, module_ in ipairs(detected_modules) do
         local allowed_type = type_val == 'table' or type_val == 'string'
 
     	if allowed_type then
-            lazy_plugins[#lazy_plugins + 1] = procs.load_plugin_extra_config(
-                category, key, type_val == 'string' and {value} or value
-            )
-	    else
-	        print('Error loading plugin: ', category .. '.' .. key .. '. Incorrect plugin declaration format. Declare it only as string or table.')
-	    end
+            local target = type_val == 'string' and {value} or value
+	    local opt_extra_conf = procs.load_plugin_extra_config(category, key, target)
+	    lazy_plugins[#lazy_plugins + 1] = (opt_extra_conf ~= nil) and opt_extra_conf or target
+	else
+            print('Error loading plugin: ', category .. '.' .. key .. '. Incorrect plugin declaration format. Declare it only as string or table.')
+        end
     end
 end
 

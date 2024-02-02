@@ -29,11 +29,12 @@ function M.load_plugin_extra_config(plug_category, plug_name, lazy_plug)
     local plug_config_path = M.generate_mod_require_path(
         'the-rustifyer.plugins.config', plug_category, plug_name
     )
-    local plug_config_mod = require(plug_config_path)
+    local success, plug_config_mod = pcall(function() return require(plug_config_path) end)
+    if not success then return nil end -- early guard for plugins that doesn't provide extra (or no) config at all
 
     -- Adding any extra keys loaded for the plugin definition
     for key, value in pairs(plug_config_mod) do
-        lazy_plug[key] = value -- todo add the mod name
+        lazy_plug[key] = value
     end
 
     return lazy_plug
