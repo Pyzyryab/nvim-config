@@ -3,10 +3,6 @@
 
 local ui = {}
 
-ui.alpha = {
-    'goolord/alpha-nvim',
-    lazy = false,
-    event = 'UIEnter'
-}
+ui.alpha = 'goolord/alpha-nvim'
 
 return ui

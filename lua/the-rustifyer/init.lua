@@ -7,7 +7,7 @@ vim.g.mapleader = " "
 
 -- Initialize the plugin manager and the plugins under <root_path>/.config/nvim/lua/plugins
 -- All of the plugins declared in such folder will be automatically detected and loaded by lazy
-require('the-rustifyer.core.lazy')
+require('the-rustifyer.core.package-manager')
 
 -- Loading the custom remaps after loading the package manager
 require('the-rustifyer.core.remaps')

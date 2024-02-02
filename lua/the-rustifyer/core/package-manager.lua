@@ -33,9 +33,16 @@ for a, module_ in ipairs(detected_modules) do
     local plugin = require(procs.generate_mod_require_path(consts.mods.specs, category))
 
     for key, value in pairs(plugin) do
-        if type(value) == 'table' then
-            lazy_plugins[#lazy_plugins + 1] = procs.load_plugin_extra_config(category, key, value)
-        end
+        local type_val = type(value)
+        local allowed_type = type_val == 'table' or type_val == 'string'
+
+    	if allowed_type then
+            lazy_plugins[#lazy_plugins + 1] = procs.load_plugin_extra_config(
+                category, key, type_val == 'string' and {value} or value
+            )
+	    else
+	        print('Error loading plugin: ', category .. '.' .. key .. '. Incorrect plugin declaration format. Declare it only as string or table.')
+	    end
     end
 end
 

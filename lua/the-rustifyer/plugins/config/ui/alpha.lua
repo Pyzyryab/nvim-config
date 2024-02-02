@@ -1,6 +1,8 @@
 -- Greeter plugin configuration
 --
 return {
+        lazy = false,
+        event = 'UIEnter',
         opts = function()
             local dashboard = require("alpha.themes.dashboard")
 
