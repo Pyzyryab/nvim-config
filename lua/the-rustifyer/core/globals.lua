@@ -1,4 +1,4 @@
--- Constant values across the set up
+-- Values or procedures to be used from everywhere inside the distro
 --
 
 -- Outer table
@@ -18,13 +18,11 @@ end
 
 
 function path:load_data()
-    -- Data
-    local dirs = {}
-    dirs.nvim_dir = vim.fn.stdpath('config')
-    dirs.nvim_data = vim.fn.stdpath('data')
     -- Utils
     self.sep = sys.is_windows and '\\' or '/'
-    self.join = function(inp, add) return inp .. self.sep .. add end
+    self.join = function(inp, add)
+        return (inp and inp or '') .. self.sep .. (add and add or '')
+    end
 end
 
 function utils:load_data()

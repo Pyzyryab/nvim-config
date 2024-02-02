@@ -5,7 +5,8 @@ local ui = {}
 
 ui.alpha = {
     'goolord/alpha-nvim',
-    event = 'BufWinEnter'
+    lazy = false,
+    event = 'UIEnter'
 }
 
 return ui
