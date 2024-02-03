@@ -1,6 +1,5 @@
--- Getting lazy.nvim as the package manager for the set up
--- Lazy only will be fetched and cloned if isn't already on the system
-
+-- `lazy.nvim` configuration, the set up plugin manager
+--
 local consts = require('the-rustifyer.core.constants')
 local utils = require('the-rustifyer.core.globals')
 local procs = require('the-rustifyer.utils.procedures')
@@ -24,25 +23,26 @@ local lazy_specs = vim.fn.glob(glob_pattern)
 
 -- Detect all the plugins under whatever..plugins/ and all the children folders
 local detected_modules = vim.split(lazy_specs, "\n", { trimempty = true })
-print(vim.inspect(detected_modules))
 
 local lazy_plugins = {}
+local setup_callbacks = {}
+
 for a, module_ in ipairs(detected_modules) do
     local module_path_split = vim.split(module_, utils.path.sep)
     local category = module_path_split[#module_path_split]:gsub(lua_ext, '')
     local plugin = require(procs.generate_mod_require_path(consts.mods.specs, category))
 
     for key, value in pairs(plugin) do
-        local type_val = type(value)
-        local allowed_type = type_val == 'table' or type_val == 'string'
+        local target = type(value) == 'string' and {value} or value
+        
+        -- early guards
+        local opt_extra_conf = nil
+        if target.no_extra_config ~= nil then goto continue end 
+        opt_extra_conf = procs.load_plugin_extra_config(category, key, target, setup_callbacks) -- skip if declared for performance
+        ::continue::
 
-    	if allowed_type then
-            local target = type_val == 'string' and {value} or value
-	    local opt_extra_conf = procs.load_plugin_extra_config(category, key, target)
-	    lazy_plugins[#lazy_plugins + 1] = (opt_extra_conf ~= nil) and opt_extra_conf or target
-	else
-            print('Error loading plugin: ', category .. '.' .. key .. '. Incorrect plugin declaration format. Declare it only as string or table.')
-        end
+        -- effectively loading the plugin to the table that will be passed to lazy.nvim
+        lazy_plugins[#lazy_plugins + 1] = (opt_extra_conf ~= nil) and opt_extra_conf or target
     end
 end
 
@@ -79,3 +79,7 @@ lazy.setup(lazy_plugins, {
     },
 })
 
+-- Loading the plugins that has a setup callback to make them alive
+for _, callback in pairs(setup_callbacks) do
+    callback()
+end

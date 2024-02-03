@@ -1,4 +1,4 @@
--- The core of my Neovim personal setup
+--'the-rustifyer.plugins.config' The core of my Neovim personal setup
 --
 -- Here is where are defined the most important configuration steps
 

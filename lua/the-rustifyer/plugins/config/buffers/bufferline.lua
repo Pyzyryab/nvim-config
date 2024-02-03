@@ -12,7 +12,7 @@ return {
         { "<S-h>", "<cmd>BufferLineCyclePrev<cr>", desc = "Prev buffer" },
         { "<S-l>", "<cmd>BufferLineCycleNext<cr>", desc = "Next buffer" },
     },
-    opts = {
+    opts = { 
         options = {
             indicator = {
                 icon = '▎', -- this should be omitted if indicator style is not 'icon'
@@ -23,7 +23,7 @@ return {
                 delay = 200,
                 reveal = {'close'}
             },
-            separator_style = 'slant',
+            separator_style = 'padded_slant',
             -- stylua: ignore
             close_command = function(n) require("mini.bufremove").delete(n, false) end,
             -- stylua: ignore
@@ -37,7 +37,7 @@ return {
             offsets = {
                 {
                     filetype = "neo-tree",
-                    text = "Neo-tree",
+                    text = "Project Explorer",
                     highlight = "Directory",
                     text_align = "left",
                 },
