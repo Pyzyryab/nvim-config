@@ -48,6 +48,7 @@ end
 
 local lazy = require('lazy')
 lazy.setup(lazy_plugins, {
+--    specs = lazy_plugins,
     defaults = {
         lazy = true,
     },
