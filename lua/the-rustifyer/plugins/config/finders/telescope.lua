@@ -17,8 +17,7 @@ return {
     defaults = {
     	layout_config = {
       	    horizontal = {
-        	    preview_cutoff = 10,
-            },
+        	    preview_cutoff = 10,:q
     	},
     },
     extensions = {

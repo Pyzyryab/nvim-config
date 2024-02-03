@@ -19,7 +19,7 @@ require('the-rustifyer.core.remaps')
 --require('the-rustifyer.config.languages')
 
 -- Setting the colorscheme of the set up
---vim.cmd.colorscheme 'catppuccin'
+vim.cmd.colorscheme 'catppuccin'
 
 -- Manually handling required system-wide installations
 -- require('the-rustifyer.config.system-wide')
