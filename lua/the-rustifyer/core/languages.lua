@@ -1,6 +1,7 @@
 -- returns a table with all the languages for which I will like to have
 -- support between the different tools, specially LSP, formatters...
 --
+local sys = require('the-rustifyer.core.globals').sys
 
 local M = {}
 
@@ -25,6 +26,8 @@ M.languages = {
     lua = { lsp = 'lua_ls', treesitter = 'lua' },
 
     xml = { treesitter = 'xml' },
+    javascript = { treesitter = 'javascript' },
+    typescript = { treesitter = 'typescript' },
     html = { treesitter = 'html' },
     css = { treesitter = 'css' },
     scss = { treesitter = 'scss' },
@@ -35,6 +38,7 @@ M.languages = {
     latex = { lsp = 'texlab', treesitter = 'latex' },
     markdown = { lsp = 'golangci_lint_ls', treesitter = 'markdown' },
     toml = { lsp = 'taplo', treesitter = 'toml' },
+    yaml = { treesitter = 'yaml' },
     regex = { treesitter = 'regex' },
     llvm = { lsp = 'clangd', treesitter = 'llvm' },
     godot_resource = { treesitter = 'gdscript' },
@@ -45,7 +49,7 @@ M.languages = {
 
 -- Those below requires node stuff to be installed on Windows, which
 -- is not acceptable for me
-if jit.os ~= 'Windows' then
+if not sys.is_windows then
     M.languages.javascript.lsp = 'eslint'
     M.languages.typescript.lsp = 'tsserver'
     M.languages.yaml.lsp = 'yamlls'

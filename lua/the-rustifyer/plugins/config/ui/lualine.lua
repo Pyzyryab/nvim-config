@@ -1,7 +1,7 @@
 -- Configuration for the statusline shown on the bottom of the editor
 --
 return function()
-    return {
+    require('lualine').setup({
         dependencies = { 'nvim-tree/nvim-web-devicons' },
         options = {
             icons_enabled = true,
@@ -41,6 +41,6 @@ return function()
         winbar = {},
         inactive_winbar = {},
         extensions = {}
-    }
+    })
 end
 

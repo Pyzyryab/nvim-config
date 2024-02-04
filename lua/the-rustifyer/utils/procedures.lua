@@ -39,8 +39,8 @@ function M.load_plugin_extra_config(plug_category, plug_name, lazy_plug, setup_c
             if type(config) == 'table' then
                 return config
             elseif type(config) == 'function' then
-                setup_callbacks[#setup_callbacks + 1] = function() require(plug_name).setup(config()) end
-                return nil
+                setup_callbacks[#setup_callbacks + 1] = config
+		return nil
             end
         end
     )
