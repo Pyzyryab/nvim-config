@@ -25,8 +25,6 @@ local lazy_specs = vim.fn.glob(glob_pattern)
 local detected_modules = vim.split(lazy_specs, "\n", { trimempty = true })
 
 local lazy_plugins = {}
-local setup_callbacks = {}
-
 for a, module_ in ipairs(detected_modules) do
     local module_path_split = vim.split(module_, utils.path.sep)
     local category = module_path_split[#module_path_split]:gsub(lua_ext, '')
@@ -38,7 +36,7 @@ for a, module_ in ipairs(detected_modules) do
         -- early guards
         local opt_extra_conf = nil
         if target.no_extra_config ~= nil then goto continue end 
-        opt_extra_conf = procs.load_plugin_extra_config(category, key, target, setup_callbacks) -- skip if declared for performance
+        opt_extra_conf = procs.load_plugin_extra_config(category, key, target) -- skip if declared for performance
         ::continue::
 
         -- effectively loading the plugin to the table that will be passed to lazy.nvim
@@ -48,7 +46,6 @@ end
 
 local lazy = require('lazy')
 lazy.setup(lazy_plugins, {
---    specs = lazy_plugins,
     defaults = {
         lazy = true,
     },
@@ -79,7 +76,3 @@ lazy.setup(lazy_plugins, {
     },
 })
 
--- Loading the plugins that has a setup callback to make them alive
-for _, callback in pairs(setup_callbacks) do
-    callback()
-end

@@ -23,25 +23,16 @@ end
 --        configuration lives
 -- @param plug_name The name of the Lazy plugin.
 -- @param lazy_plug The existing Lazy plugin configuration table.
--- @param setup_callbacks The table that holds the require-setup needed calls
---                        after configuring the plugins
 -- @return The modified Lazy plugin configuration table with additional settings.
 --
-function M.load_plugin_extra_config(plug_category, plug_name, lazy_plug, setup_callbacks)
+function M.load_plugin_extra_config(plug_category, plug_name, lazy_plug)
     local plug_config_path = M.generate_mod_require_path(
         'the-rustifyer.plugins.config', plug_category, plug_name
     )
 
     local success, plug_config_mod = pcall(
         function()
-            local config = require(plug_config_path)
-            
-            if type(config) == 'table' then
-                return config
-            elseif type(config) == 'function' then
-                setup_callbacks[#setup_callbacks + 1] = config
-		return nil
-            end
+            return require(plug_config_path)
         end
     )
 
