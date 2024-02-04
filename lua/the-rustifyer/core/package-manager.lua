@@ -18,7 +18,7 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 local lua_ext = '.lua'
-local glob_pattern = utils.path.join(consts.dirs.lua, consts.dirs.specs) .. "\\*" .. lua_ext
+local glob_pattern = utils.path.join(consts.dirs.lua, consts.dirs.specs) .. utils.path.sep .. '*' .. lua_ext
 local lazy_specs = vim.fn.glob(glob_pattern)
 
 -- Detect all the plugins under whatever..plugins/ and all the children folders
