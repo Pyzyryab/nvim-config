@@ -1,4 +1,4 @@
--- Buffers utitilies
+-- Buffers handlers and utitilies
 --
 return {
     bufferline = 'akinsho/bufferline.nvim',

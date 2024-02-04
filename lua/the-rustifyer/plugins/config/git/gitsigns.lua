@@ -1,7 +1,7 @@
 -- Configuration for the `gitsigns` plugin
 --
 return {
-    event = "BufEnter",
+    event = { 'BufRead', 'BufNewFile' },
     opts = {
         signs = {
             add = { text = "▎" },
