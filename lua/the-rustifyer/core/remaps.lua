@@ -75,7 +75,7 @@ vim.keymap.set('n', '<leader>Y', [["+Y]])
 vim.keymap.set({'n', 'v'}, '<leader>d', [["_d]])
 
 ----------------- Plugin's remaps  -----------------
---
+-- TODO move this remapss to their specific configuration files
 -- Telescope
 local builtin = require('telescope.builtin')
 vim.keymap.set('n', '<leader>ff', builtin.find_files, noremap_silent)

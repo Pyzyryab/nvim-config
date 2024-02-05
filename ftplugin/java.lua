@@ -1,6 +1,6 @@
 -- See `:help vim.lsp.start_client` for an overview of the supported `config` options.
 --
-
+-- TODO use the own precalculations for those vars
 local OS = jit.os
 local p_sep = (OS == 'Windows') and '\\' or '/'
 local nvim_data = vim.fn.stdpath('data')

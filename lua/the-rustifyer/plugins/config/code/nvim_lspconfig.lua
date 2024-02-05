@@ -30,6 +30,8 @@ return {
             }
         })
 
+        print('Mason required at startup')
+
         local langs = require('the-rustifyer.core.languages')
         require('mason-lspconfig').setup({
             ensure_installed = langs.get_lsp_config(),
