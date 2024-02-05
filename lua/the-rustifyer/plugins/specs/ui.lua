@@ -13,4 +13,8 @@ ui.lualine = {
     event = 'VeryLazy',
 }
 
+-- Handling transparency
+ui.transparency = {'xiyaowong/transparent.nvim', event = {'UIEnter'}, lazy = false, no_extra_config = true}
+
 return ui
+

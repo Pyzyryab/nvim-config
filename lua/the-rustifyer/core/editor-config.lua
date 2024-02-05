@@ -8,16 +8,16 @@ vim.opt.termguicolors = true
 vim.g.base16_colorspace = 256
 
 -- Set transparency (replace 0.9 with your desired transparency level)
-vim.cmd [[ hi Normal guibg=NONE ctermbg=NONE ]]
-vim.cmd [[ hi NonText guibg=NONE ctermbg=NONE ]]
-vim.cmd [[ hi VertSplit guibg=NONE ctermbg=NONE ]]
-vim.cmd [[ hi StatusLine guibg=NONE ctermbg=NONE ]]
-vim.cmd [[ hi StatusLineNC guibg=NONE ctermbg=NONE ]]
+-- vim.cmd [[ hi Normal guibg=NONE ctermbg=NONE ]]
+-- vim.cmd [[ hi NonText guibg=NONE ctermbg=NONE ]]
+-- vim.cmd [[ hi VertSplit guibg=NONE ctermbg=NONE ]]
+-- vim.cmd [[ hi StatusLine guibg=NONE ctermbg=NONE ]]
+-- vim.cmd [[ hi StatusLineNC guibg=NONE ctermbg=NONE ]]
 
 -- For a floating window (popup menu), set transparency
-vim.cmd [[ hi NormalNC guibg=NONE ctermbg=NONE ]]
-vim.cmd [[ hi NormalFloat guibg=NONE ctermbg=NONE ]]
-vim.cmd [[ hi Neotree guibg=NONE ctermbg=NONE ]]
+-- vim.cmd [[ hi NormalNC guibg=NONE ctermbg=NONE ]]
+-- vim.cmd [[ hi NormalFloat guibg=NONE ctermbg=NONE ]]
+-- vim.cmd [[ hi Neotree guibg=NONE ctermbg=NONE ]]
 
 vim.opt.nu = true
 vim.opt.relativenumber = true

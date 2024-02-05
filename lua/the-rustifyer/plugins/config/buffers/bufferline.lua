@@ -3,15 +3,15 @@
 return {
     event = { 'BufRead', 'BufNewFile' },
     keys = {
-        { "<leader>bp", "<Cmd>BufferLineTogglePin<CR>", desc = "Toggle pin" },
+        { "<leader>bp", "<Cmd>BufferLineTogglePin<CR>",            desc = "Toggle pin" },
         { "<leader>bP", "<Cmd>BufferLineGroupClose ungrouped<CR>", desc = "Delete non-pinned buffers" },
-        { "<leader>bo", "<Cmd>BufferLineCloseOthers<CR>", desc = "Delete other buffers" },
-        { "<leader>br", "<Cmd>BufferLineCloseRight<CR>", desc = "Delete buffers to the right" },
-        { "<leader>bl", "<Cmd>BufferLineCloseLeft<CR>", desc = "Delete buffers to the left" },
-        { "<S-h>", "<cmd>BufferLineCyclePrev<cr>", desc = "Prev buffer" },
-        { "<S-l>", "<cmd>BufferLineCycleNext<cr>", desc = "Next buffer" },
+        { "<leader>bo", "<Cmd>BufferLineCloseOthers<CR>",          desc = "Delete other buffers" },
+        { "<leader>br", "<Cmd>BufferLineCloseRight<CR>",           desc = "Delete buffers to the right" },
+        { "<leader>bl", "<Cmd>BufferLineCloseLeft<CR>",            desc = "Delete buffers to the left" },
+        { "<S-h>",      "<cmd>BufferLineCyclePrev<cr>",            desc = "Prev buffer" },
+        { "<S-l>",      "<cmd>BufferLineCycleNext<cr>",            desc = "Next buffer" },
     },
-    opts = { 
+    opts = {
         options = {
             indicator = {
                 icon = '▎', -- this should be omitted if indicator style is not 'icon'
@@ -20,9 +20,9 @@ return {
             hover = {
                 enabled = true,
                 delay = 200,
-                reveal = {'close'}
+                reveal = { 'close' }
             },
-            separator_style = 'padded_slant',
+            separator_style = 'slant',
             -- stylua: ignore
             close_command = function(n) require("mini.bufremove").delete(n, false) end,
             -- stylua: ignore
@@ -53,5 +53,12 @@ return {
                 end)
             end,
         })
+        -- Handling the transparency settings
+        vim.g.transparent_groups = vim.list_extend(
+            vim.g.transparent_groups or {},
+            vim.tbl_map(function(v)
+                return v.hl_group
+            end, vim.tbl_values(require('bufferline.config').highlights))
+        )
     end,
 }

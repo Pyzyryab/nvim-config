@@ -11,7 +11,7 @@ local jdtls_path = consts.dirs.nvim_data .. p_sep .. 'mason' .. p_sep .. 'packag
 
 local root_dir = require('jdtls.setup').find_root({ '.git', 'mvnw', 'pom.xml', '.mvn', 'gradlew' })
 
-local on_attach = function(client, bufnr)
+local on_attach = function(_client, bufnr)
     local bufopts = { noremap = true, silent = true, buffer = bufnr }
 
     -- Java extensions provided by jdtls
