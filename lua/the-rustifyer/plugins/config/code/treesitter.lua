@@ -1,5 +1,7 @@
 -- Treesitter plugin configuration via a custom callback
 return {
+    highlight = { enabled = true },
+    indent = { enable = true },
 	config = function()
 		local langs = require('the-rustifyer.core.languages')
 
@@ -29,3 +31,4 @@ return {
 		}
 	end
 }
+

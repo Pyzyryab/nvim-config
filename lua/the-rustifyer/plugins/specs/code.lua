@@ -25,8 +25,11 @@ code.treesitter = {
     event = { 'BufRead', 'BufNewFile' },
 }
 
+code.treesitter_textobjects = 'nvim-treesitter/nvim-treesitter-textobjects'
+code.treesitter_context = 'nvim-treesitter/nvim-treesitter-context'
+
 -- Indentation guides
-code.indent_blankline = 'lukas-reineke/indent-blankline.nvim' 
+code.indent_blankline = 'lukas-reineke/indent-blankline.nvim'
 code.mini_identscope = 'echasnovski/mini.indentscope'
 
 return code

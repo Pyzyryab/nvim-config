@@ -34,7 +34,7 @@ for _, module_ in ipairs(detected_modules) do
         local target = type(value) == 'string' and {value} or value
         -- early guards
         local opt_extra_conf = nil
-        if target.no_extra_config ~= nil then goto continue end 
+        if target.no_extra_config ~= nil then goto continue end
         opt_extra_conf = procs.load_plugin_extra_config(category, key, target) -- skip if declared for performance
         ::continue::
 
