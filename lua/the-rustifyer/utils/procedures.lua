@@ -15,6 +15,20 @@ function M.generate_mod_require_path(...)
 end
 
 ---
+-- Helper function for creating keymaps in normal mode
+function M.nnoremap(rhs, lhs, bufopts, desc)
+  bufopts.desc = desc
+  vim.keymap.set("n", rhs, lhs, bufopts)
+end
+
+---
+-- Helper function for creating keymaps in visual mode
+function M.vnoremap(rhs, lhs, bufopts, desc)
+  bufopts.desc = desc
+  vim.keymap.set("n", rhs, lhs, bufopts)
+end
+
+---
 -- Load extra configuration for a Lazy plugin.
 -- This function loads additional configuration for a Lazy plugin from a separate
 -- module and merges it into the provided `lazy_plug` table.

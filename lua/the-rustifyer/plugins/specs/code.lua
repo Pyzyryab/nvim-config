@@ -30,3 +30,4 @@ code.indent_blankline = 'lukas-reineke/indent-blankline.nvim'
 code.mini_identscope = 'echasnovski/mini.indentscope'
 
 return code
+

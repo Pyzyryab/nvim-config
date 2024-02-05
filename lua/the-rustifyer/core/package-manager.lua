@@ -25,14 +25,13 @@ local lazy_specs = vim.fn.glob(glob_pattern)
 local detected_modules = vim.split(lazy_specs, "\n", { trimempty = true })
 
 local lazy_plugins = {}
-for a, module_ in ipairs(detected_modules) do
+for _, module_ in ipairs(detected_modules) do
     local module_path_split = vim.split(module_, utils.path.sep)
     local category = module_path_split[#module_path_split]:gsub(lua_ext, '')
     local plugin = require(procs.generate_mod_require_path(consts.mods.specs, category))
 
     for key, value in pairs(plugin) do
         local target = type(value) == 'string' and {value} or value
-        
         -- early guards
         local opt_extra_conf = nil
         if target.no_extra_config ~= nil then goto continue end 
