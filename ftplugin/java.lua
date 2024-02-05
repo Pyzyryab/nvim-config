@@ -13,7 +13,7 @@ local config = {
   -- 💀
   -- This is the default if not provided, you can remove it. Or adjust as needed.
   -- One dedicated LSP server & client will be started per unique root_dir
-  root_dir = require('jdtls.setup').find_root({'.git', 'mvnw', 'gradlew'}),
+  root_dir = require('jdtls.setup').find_root({'.git', 'mvnw', 'pom.xml', '.mvn', 'gradlew'}),
   cmd = {
 
     -- 💀
@@ -30,7 +30,7 @@ local config = {
     '--add-opens', 'java.base/java.util=ALL-UNNAMED',
     '--add-opens', 'java.base/java.lang=ALL-UNNAMED',
     -- 💀
-    '-jar', vim.fn.glob(jdtls_path .. '/plugins/org.eclipse.equinox.launcher.win*.jar'),
+    '-jar', vim.fn.glob(jdtls_path .. '/plugins/org.eclipse.equinox.launcher.win*.jar'), -- TODO per OS
          -- ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^                                       ^^^^^^^^^^^^^^
          -- Must point to the                                                     Change this to
          -- eclipse.jdt.ls installation                                           the actual version

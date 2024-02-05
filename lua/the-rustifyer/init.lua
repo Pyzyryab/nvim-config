@@ -27,3 +27,14 @@ vim.cmd.colorscheme 'catppuccin'
 -- Bring the editor's (Neovim) custom configuration
 require('the-rustifyer.core.editor-config')
 
+-- Initializing the lsp machinery
+require('mason').setup({
+    ui = {
+        icons = {
+            package_installed = '✓',
+            package_pending = '➜',
+            package_uninstalled = '✗'
+        }
+    }
+})
+

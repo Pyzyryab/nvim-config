@@ -20,18 +20,6 @@ return {
             lsp_zero.default_keymaps({buffer = bufnr})
         end)
 
-        require('mason').setup({
-            ui = {
-                icons = {
-                    package_installed = '✓',
-                    package_pending = '➜',
-                    package_uninstalled = '✗'
-                }
-            }
-        })
-
-        print('Mason required at startup')
-
         local langs = require('the-rustifyer.core.languages')
         require('mason-lspconfig').setup({
             ensure_installed = langs.get_lsp_config(),
@@ -54,7 +42,7 @@ return {
             hint = '⚑',
             info = '»'
         })
-    end
+    end,
     opts = {
         setup = {
             clangd = function(_, opts)
