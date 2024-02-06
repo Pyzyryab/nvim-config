@@ -8,8 +8,8 @@ local consts = require('the-rustifyer.core.constants')
 
 local p_sep = globals.path.sep
 local jdtls_path = consts.dirs.nvim_data .. p_sep .. 'mason' .. p_sep .. 'packages' .. p_sep .. 'jdtls'
-
-local root_dir = require('jdtls.setup').find_root({ '.git', 'mvnw', 'pom.xml', '.mvn', 'gradlew' })
+local jdtls_jar_path = vim.fn.glob(jdtls_path .. '/plugins/org.eclipse.equinox.launcher_*.jar')
+local root_dir = require('jdtls.setup').find_root({ '.gitignore', 'code/', '.gitattributtes', 'README.md' })
 
 local on_attach = function(_client, bufnr)
     local bufopts = { noremap = true, silent = true, buffer = bufnr }
@@ -53,16 +53,16 @@ local config = {
         '--add-modules=ALL-SYSTEM',
         '--add-opens', 'java.base/java.util=ALL-UNNAMED',
         '--add-opens', 'java.base/java.lang=ALL-UNNAMED',
+        '-javaagent:' .. jdtls_path .. '/lombok.jar',
         -- 💀
-        '-jar', vim.fn.glob(jdtls_path .. '/plugins/org.eclipse.equinox.launcher.win*.jar'), -- TODO per OS
+        '-jar', jdtls_jar_path,
         -- ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^                                       ^^^^^^^^^^^^^^
         -- Must point to the                                                     Change this to
         -- eclipse.jdt.ls installation                                           the actual version
 
 
-        -- 💀
-        --'-configuration', jdtls_path .. 'config_' .. (OS == 'Windows') and 'win' or 'linux',
-        '-configuration', jdtls_path .. '/config_' .. 'win',
+        -- 💀 I only work with Java on Windows or Linux, no need to check anything else
+        '-configuration', jdtls_path .. '/config_' .. (globals.sys.is_windows and 'win' or 'linux'),
         -- ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^        ^^^^^^
         -- Must point to the                      Change to one of `linux`, `win` or `mac`
         -- eclipse.jdt.ls installation            Depending on your system.
@@ -70,7 +70,7 @@ local config = {
 
         -- 💀
         -- See `data directory configuration` section in the README
-        '-data', vim.fn.getcwd()
+        '-data', vim.fn.getcwd() -- TODO change this when it's ready the neoconf plugin for a custom java project root
     },
 
     -- Here you can configure eclipse.jdt.ls specific settings
@@ -134,3 +134,4 @@ local config = {
 -- This starts a new client & server,
 -- or attaches to an existing client & server depending on the `root_dir`.
 require('jdtls').start_or_attach(config)
+
