@@ -19,7 +19,7 @@ local on_attach = function(_client, bufnr)
     procs.nnoremap("<space>ev", jdtls.extract_variable, bufopts, "Extract variable")
     procs.nnoremap("<space>ec", jdtls.extract_constant, bufopts, "Extract constant")
     vim.keymap.set('v', "<space>em", [[<ESC><CMD>lua require('jdtls').extract_method(true)<CR>]],
-        { noremap = true, silent = true, buffer = bufnr, desc = "Extract method" })
+    { noremap = true, silent = true, buffer = bufnr, desc = "Extract method" })
 end
 
 local config = {
@@ -40,7 +40,6 @@ local config = {
     -- This is the default if not provided, you can remove it. Or adjust as needed.
     -- One dedicated LSP server & client will be started per unique root_dir
     cmd = {
-
         -- 💀
         'java', -- or '/path/to/java17_or_newer/bin/java'
         -- depends on if `java` is in your $PATH env variable and if it points to the right version.
@@ -79,6 +78,44 @@ local config = {
     -- for a list of options
     settings = {
         java = {
+            signatureHelp = { enabled = true },
+            contentProvider = { preferred = 'fernflower' },  -- Use fernflower to decompile library code
+            -- Specify any completion options
+            completion = {
+                favoriteStaticMembers = {
+                    "org.hamcrest.MatcherAssert.assertThat",
+                    "org.hamcrest.Matchers.*",
+                    "org.hamcrest.CoreMatchers.*",
+                    "org.junit.jupiter.api.Assertions.*",
+                    "java.util.Objects.requireNonNull",
+                    "java.util.Objects.requireNonNullElse",
+                    "org.mockito.Mockito.*"
+                },
+                filteredTypes = {
+                    "com.sun.*",
+                    "io.micrometer.shaded.*",
+                    "java.awt.*",
+                    "jdk.*", "sun.*",
+                },
+            },
+            -- Specify any options for organizing imports
+            sources = {
+                organizeImports = {
+                    starThreshold = 9999;
+                    staticStarThreshold = 9999;
+                },
+            },
+            -- How code generation should act
+            codeGeneration = {
+                toString = {
+                    template = "${object.className}{${member.name()}=${member.value}, ${otherMembers}}"
+                },
+                hashCodeEquals = {
+                    useJava7Objects = true,
+                },
+                useBlocks = true,
+            },
+
         }
     },
 

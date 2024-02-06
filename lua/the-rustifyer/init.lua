@@ -5,18 +5,11 @@
 -- Before all, let's assign our <leader> key
 vim.g.mapleader = " "
 
--- Initialize the plugin manager and the plugins under <root_path>/.config/nvim/lua/plugins
--- All of the plugins declared in such folder will be automatically detected and loaded by lazy
+-- Initialize the plugin manager to handle the plugins under '~/.config/nvim/lua/the-rustifyer/plugins/<whatever>...'
 require('the-rustifyer.core.package-manager')
 
 -- Loading the custom remaps after loading the package manager
 require('the-rustifyer.core.remaps')
-
--- Loading the additional configuration to the plugins after discover them
---require('the-rustifyer.config.plugins')
-
--- Loading the configuration details of the languages
---require('the-rustifyer.config.languages')
 
 -- Setting the colorscheme of the set up
 vim.cmd.colorscheme 'catppuccin'
@@ -28,6 +21,8 @@ vim.cmd.colorscheme 'catppuccin'
 require('the-rustifyer.core.editor-config')
 
 -- Manually making `mason` available at start up time
+--
+--local langs = require('the-rustifyer.core.languages')
 require('mason').setup({
     ui = {
         icons = {

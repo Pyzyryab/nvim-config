@@ -7,7 +7,7 @@ vim.opt.termguicolors = true
 -- Access colors present in 256 colorspace
 vim.g.base16_colorspace = 256
 
--- Set transparency (replace 0.9 with your desired transparency level)
+-- Set transparency
 -- vim.cmd [[ hi Normal guibg=NONE ctermbg=NONE ]]
 -- vim.cmd [[ hi NonText guibg=NONE ctermbg=NONE ]]
 -- vim.cmd [[ hi VertSplit guibg=NONE ctermbg=NONE ]]

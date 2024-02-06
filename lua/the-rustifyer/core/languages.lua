@@ -10,36 +10,36 @@ M.languages = {
     cpp = { lsp = 'clangd', treesitter = 'cpp' },
     make = { treesitter = 'make' },
     cmake = { lsp = 'neocmake', treesitter = 'cmake' },
-    doxygen = { treesitter = 'doxygen' },
+--    doxygen = { treesitter = 'doxygen' },
     c = { lsp = 'clangd', treesitter = 'c' },
 
     python = { lsp = 'jedi_language_server', treesitter = 'python' },
     java = { lsp = 'jdtls', treesitter = 'java' },
-    kotlin = { lsp = 'kotlin_language_server', treesitter = 'kotlin' },
-    zig = { lsp = 'zls', treesitter = 'zig' },
-    dart = { treesitter = 'dart' },
+ --   kotlin = { lsp = 'kotlin_language_server', treesitter = 'kotlin' },
+ --   zig = { lsp = 'zls', treesitter = 'zig' },
+--    dart = { treesitter = 'dart' },
     go = { lsp = 'gopls', treesitter = 'go' },
-    ruby = {
+  --  ruby = {
         -- lsp = 'ruby_ls',
-        treesitter = 'ruby'
-    },
+--        treesitter = 'ruby'
+--    },
     lua = { lsp = 'lua_ls', treesitter = 'lua' },
 
-    xml = { treesitter = 'xml' },
-    javascript = { treesitter = 'javascript' },
-    typescript = { treesitter = 'typescript' },
-    html = { treesitter = 'html' },
-    css = { treesitter = 'css' },
-    scss = { treesitter = 'scss' },
-    json = { treesitter = 'json' },
-    json5 = { treesitter = 'json5' },
+--    xml = { treesitter = 'xml' },
+--    javascript = { treesitter = 'javascript' },
+--    typescript = { treesitter = 'typescript' },
+--    html = { treesitter = 'html' },
+--    css = { treesitter = 'css' },
+--    scss = { treesitter = 'scss' },
+--    json = { treesitter = 'json' },
+--    json5 = { treesitter = 'json5' },
 
     sql = { treesitter = 'sql' },
-    latex = { lsp = 'texlab', treesitter = 'latex' },
+--    latex = { lsp = 'texlab', treesitter = 'latex' },
     markdown = { lsp = 'golangci_lint_ls', treesitter = 'markdown' },
     toml = { lsp = 'taplo', treesitter = 'toml' },
     yaml = { treesitter = 'yaml' },
-    regex = { treesitter = 'regex' },
+--    regex = { treesitter = 'regex' },
     llvm = { lsp = 'clangd', treesitter = 'llvm' },
     godot_resource = { treesitter = 'gdscript' },
 
@@ -49,14 +49,14 @@ M.languages = {
 
 -- Those below requires node stuff to be installed on Windows, which
 -- is not acceptable for me
-if not sys.is_windows then
-    M.languages.javascript.lsp = 'eslint'
-    M.languages.typescript.lsp = 'tsserver'
-    M.languages.yaml.lsp = 'yamlls'
-    M.languages.html.lsp = 'html'
-    M.languages.css.lsp = 'cssls'
-    M.languages.scss.lsp = 'cssls'
-end
+--if not sys.is_windows then
+--    M.languages.javascript.lsp = 'eslint'
+--    M.languages.typescript.lsp = 'tsserver'
+--    M.languages.yaml.lsp = 'yamlls'
+--    M.languages.html.lsp = 'html'
+--    M.languages.css.lsp = 'cssls'
+--    M.languages.scss.lsp = 'cssls'
+--end
 
 -- The next two functions will be used to retrieve the 'lsp' and 'treesitter'
 -- values that are unique keys

@@ -5,23 +5,24 @@ return {
     tag = '0.1.5',
     dependencies = { 'nvim-lua/plenary.nvim' },
     keys = function ()
-        
--- Telescope
-local builtin = require('telescope.builtin')
-vim.keymap.set('n', '<leader>ff', builtin.find_files, noremap_silent)
-vim.keymap.set('n', '<leader>fg', builtin.git_files, noremap_silent)
-vim.keymap.set('n', '<leader>lg', builtin.live_grep, noremap_silent)
-vim.keymap.set('n', '<leader>fb', builtin.buffers, noremap_silent)
-vim.keymap.set('n', '<leader>fc', builtin.commands, noremap_silent)
-vim.keymap.set('n', '<leader>fh', builtin.help_tags, noremap_silent)
-vim.keymap.set('n', '<leader>fo', builtin.oldfiles, noremap_silent)
+        local noremap_silent = { noremap = true, silent = true };
 
--- Telescope git picker
+        -- Telescope
+        local builtin = require('telescope.builtin')
+        vim.keymap.set('n', '<leader>ff', builtin.find_files, noremap_silent)
+        vim.keymap.set('n', '<leader>fg', builtin.git_files, noremap_silent)
+        vim.keymap.set('n', '<leader>lg', builtin.live_grep, noremap_silent)
+        vim.keymap.set('n', '<leader>fb', builtin.buffers, noremap_silent)
+        vim.keymap.set('n', '<leader>fc', builtin.commands, noremap_silent)
+        vim.keymap.set('n', '<leader>fh', builtin.help_tags, noremap_silent)
+        vim.keymap.set('n', '<leader>fo', builtin.oldfiles, noremap_silent)
+
+        -- Telescope git picker
 
 
--- Telescope colorscheme preview
-local colorscheme = builtin.colorscheme
-vim.keymap.set('n', '<leader>cs', colorscheme, noremap_silent)
+        -- Telescope colorscheme preview
+        local colorscheme = builtin.colorscheme
+        vim.keymap.set('n', '<leader>cs', colorscheme, noremap_silent)
     end,
     file_ignore_patterns = {'.git/'},
     borders = {},
@@ -30,7 +31,7 @@ vim.keymap.set('n', '<leader>cs', colorscheme, noremap_silent)
             enable_preview = true,
             theme = 'dropdown',
             prompt_title = 'Colorschemes',
-        --    cwd = '~/.config/nvim/colors/',
+            --    cwd = '~/.config/nvim/colors/',
         }
     },
     defaults = {
