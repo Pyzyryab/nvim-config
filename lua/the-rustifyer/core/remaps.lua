@@ -1,9 +1,6 @@
 -- This file holds my personal keymaps and remaps, along as the configuration for the leader key
 --
 -- Not all remaps may be configured here, as they could be directly configured in the plugins
-
-local noremap_silent = { noremap = true, silent = true };
-
 -- Toggle between absolute and relative line numbers
 vim.keymap.set(
     {'n', 'v'},

@@ -6,22 +6,17 @@ local langs = require('the-rustifyer.core.languages')
 
 return {
     lazy = false,
-    event = 'VeryLazy',
+--    event = 'VeryLazy',
     --event = "User CustomMasonLspSetup", -- custom event that gets triggered at a very late instance
     cmd = { "MasonToolsInstall", "MasonToolsUpdate", "MasonToolsClean" },
     opts = {
-
-        ensure_installed = {
-            -- LSP servers
-            langs.get_lsp_config(),
-
-            -- Formatters
-
-            -- Linters
-
-            -- Others
-        },
-        auto_update = false,
+        -- LSP servers
+        ensure_installed = langs.get_lsp_config(),
+        -- If we choose to add more, concat other tables to this one
+        -- Formatters
+        -- Linters
+        -- Others
+--        auto_update = true,
         run_on_start = true,
         start_delay = 3000, -- 3 second delay
         debounce_hours = 5, -- at least 5 hours between attempts to install/update

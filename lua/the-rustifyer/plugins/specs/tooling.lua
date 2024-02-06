@@ -2,7 +2,7 @@
 --
 local managers = {}
 
-managers.mason = {'williamboman/mason.nvim', no_extra_config = true }
+managers.mason = {'williamboman/mason.nvim', no_extra_config = true}
 managers.mason_tool_installer = {'WhoIsSethDaniel/mason-tool-installer.nvim'}
 
 return managers
