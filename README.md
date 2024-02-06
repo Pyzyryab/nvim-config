@@ -100,18 +100,6 @@ or directly set up in the configuration files or each individual plugin whenever
   - **`<leader>nt`** ⇒ Starts `Neotree`
   - **`<leader>e`** ⇒ Toggle ON/OFF `Neotree`
 
-## Configuration
-
-### document it propertly
-
-```lua
-    -- name of the local settings files
-    local_settings = ".neoconf.json",
-
-    -- name of the global settings file in your Neovim config directory
-    global_settings = "neoconf.json"
-```
-
 ## Plugins
 
 Not all the installed plugins to make up this set up are listed here, but there's the most noticeable and kind of important ones

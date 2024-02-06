@@ -21,8 +21,6 @@ vim.cmd.colorscheme 'catppuccin'
 require('the-rustifyer.core.editor-config')
 
 -- Manually making `mason` available at start up time
---
---local langs = require('the-rustifyer.core.languages')
 require('mason').setup({
     ui = {
         icons = {

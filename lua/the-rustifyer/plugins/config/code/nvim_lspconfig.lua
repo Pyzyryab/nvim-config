@@ -11,13 +11,6 @@ return {
         { 'williamboman/mason-lspconfig.nvim' },
     },
     config = function()
-        -- Loading the neoconf plugin BEFORE loading the lsp servers
-        require("neoconf").setup({
-            -- name of the local settings files
-            local_settings = ".nvim-conf.json",
-            -- name of the global settings file in your Neovim config directory
-            global_settings = "nvim-conf.json",
-        })
         -- This is where all the LSP shenanigans will live
         local lsp_zero = require('lsp-zero')
         lsp_zero.extend_lspconfig()
