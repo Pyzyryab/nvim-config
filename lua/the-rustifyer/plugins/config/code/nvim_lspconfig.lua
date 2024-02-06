@@ -42,13 +42,10 @@ return {
             procs.nnoremap('<leader>f', function() vim.lsp.buf.format { async = true } end, bufopts, "Format file")
         end)
 
-        local langs = require('the-rustifyer.core.languages')
         require('mason-lspconfig').setup({
-            ensure_installed = langs.get_lsp_config(),
             handlers = {
                 lsp_zero.default_setup,
                 lua_ls = function()
-                    -- (Optional) Configure lua language server for neovim
                     local lua_opts = lsp_zero.nvim_lua_ls()
                     require('lspconfig').lua_ls.setup(lua_opts)
                 end,
