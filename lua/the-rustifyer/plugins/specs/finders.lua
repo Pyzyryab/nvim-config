@@ -3,10 +3,7 @@
 
 local plugins = {}
 
-plugins.telescope = {
-    'nvim-telescope/telescope.nvim',
-}
-
+plugins.telescope = 'nvim-telescope/telescope.nvim'
 plugins.fzf_native = 'nvim-telescope/telescope-fzf-native.nvim'
 
 return plugins

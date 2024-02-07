@@ -4,6 +4,9 @@
 vim.opt.guicursor = '' -- fat cursor enabled (even on insert mode)
 vim.opt.termguicolors = true
 
+-- Save localoptions to session file
+vim.opt.sessionoptions:append("localoptions")
+
 -- Access colors present in 256 colorspace
 vim.g.base16_colorspace = 256
 

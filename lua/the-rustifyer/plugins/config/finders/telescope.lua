@@ -4,7 +4,10 @@ return {
     event = 'VeryLazy',
     tag = '0.1.5',
     dependencies = { 'nvim-lua/plenary.nvim' },
-    keys = function ()
+    config = function()
+        require('telescope').load_extension('fzf')
+    end,
+    keys = function()
         local noremap_silent = { noremap = true, silent = true };
 
         -- Telescope
@@ -19,12 +22,11 @@ return {
 
         -- Telescope git picker
 
-
         -- Telescope colorscheme preview
         local colorscheme = builtin.colorscheme
         vim.keymap.set('n', '<leader>cs', colorscheme, noremap_silent)
     end,
-    file_ignore_patterns = {'.git/'},
+    file_ignore_patterns = { '.git/' },
     borders = {},
     pickers = {
         colorscheme = {
@@ -58,14 +60,10 @@ return {
     },
     extensions = {
         fzf = {
-            fuzzy = true,                    -- false will only do exact matching
-            override_generic_sorter = true,  -- override the generic sorter
-            override_file_sorter = true,     -- override the file sorter
-            case_mode = "smart_case",        -- or "ignore_case" or "respect_case"
+            fuzzy = true,                   -- false will only do exact matching
+            override_generic_sorter = true, -- override the generic sorter
+            override_file_sorter = true,    -- override the file sorter
+            case_mode = "smart_case",       -- or "ignore_case" or "respect_case"
         }
     }
 }
-
--- Loading or handling Telescope plugins
--- require('telescope').load_extension('fzf')
-
