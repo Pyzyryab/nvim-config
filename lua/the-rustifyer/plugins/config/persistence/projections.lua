@@ -1,10 +1,11 @@
 return {
     event = 'VeryLazy',
-    branch = 'pre_release',
+    branch = 'dev',
     config = function()
-        local projections = require('projections')
+        -- Save localoptions to session file
+        vim.opt.sessionoptions:append("localoptions")
 
-        projections.setup({
+        require('projections').setup({
             workspaces = {
                 -- { path = "~/repos", patterns = {} }      , -- An empty pattern list indicates that all subdirectories are projects
                 -- i.e patterns are not considered
@@ -35,8 +36,25 @@ return {
         -- Autostore session on VimExit
         local Session = require("projections.session")
         vim.api.nvim_create_autocmd({ 'VimLeavePre' }, {
-            callback = function() Session.store(vim.loop.cwd()) end,
+            callback = function()
+                local nt = require('neo-tree')
+                vim.cmd('Neotree action=close')
+                print('Neotree close on pre store hooks: ', succ)
+                Session.store(vim.loop.cwd())
+            end,
         })
+
+        vim.api.nvim_create_autocmd("User", {
+    pattern = "ProjectionsPreStoreSession",
+    callback = function()
+        -- nvim-tree
+        local nvim_tree_present, api = pcall(require, "nvim-tree.api")
+        if nvim_tree_present then api.tree.close() end
+
+        -- neo-tree
+        if pcall(require, "neo-tree") then vim.cmd [[Neotree action=close]] end
+    end
+})
 
         -- Switch to project if vim was started in a project dir
         local switcher = require("projections.switcher")
@@ -62,5 +80,16 @@ return {
         vim.api.nvim_create_user_command("AddWorkspace", function()
             Workspace.add(vim.loop.cwd())
         end, {})
+
+
+        -- Set the neo-tree correct CWD when switching projectss
+        vim.api.nvim_create_autocmd("User", {
+            pattern = "ProjectionsPostRestoreSession",
+            callback = function()
+                local succ, res = pcall(require, "neo-tree")
+                --if succ then vim.cmd [[Neotree dir=vim.loop.cwd()]] end
+                print('Setting neo-tree dir to: ', vim.loop.cwd() .. ' with success: ' .. vim.inspect(succ))
+            end
+        })
     end
 }
