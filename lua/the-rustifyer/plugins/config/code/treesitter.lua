@@ -1,5 +1,6 @@
 -- Treesitter plugin configuration via a custom callback
 return {
+    event = {'BufReadPre', 'BufNewFile'},
     highlight = { enabled = true },
     indent = { enable = true },
 	config = function()

@@ -2,9 +2,7 @@
 --
 -- Not all remaps may be configured here, as they could be directly configured in the plugins
 -- Toggle between absolute and relative line numbers
-vim.keymap.set(
-    {'n', 'v'},
-    '<leader>ln', 
+vim.keymap.set({'n', 'v'}, '<leader>ln',
     function()
         local enabled_rel_line_nums = vim.wo.relativenumber == true
         if enabled_rel_line_nums then
@@ -12,22 +10,13 @@ vim.keymap.set(
         else
             vim.cmd('set number relativenumber')
         end
-    end,
-    {
-        desc = 'Toggle between absolute and relative line numbers'
-    }
+    end, { desc = 'Toggle between absolute and relative line numbers' }
 )
 
 -- Opens `Newtr` file explorer 
 vim.keymap.set('n', '<leader>pv', vim.cmd.Ex)
 
 ----------------- General custom remaps -----------------
---
--- TODO's
--- Line start/end
--- File start/end instead of gg/G? Or isn't worth, since these two
--- are confortable?
--- 
 --
 -- Move to window using the <ctrl> + hjkl keys
 vim.keymap.set("n", "<C-h>", "<C-w>h", { desc = "Go to left window", remap = true })
@@ -71,9 +60,3 @@ vim.keymap.set('n', '<leader>Y', [["+Y]])
 -- the selected text and place it into the black hole register,
 vim.keymap.set({'n', 'v'}, '<leader>d', [["_d]])
 
------------------ Plugin's remaps  -----------------
--- TODO move this remapss to their specific configuration files
-
--- Neotree
-vim.keymap.set({'n', 'v'}, '<leader>nt', '<cmd>Neotree<CR>', noremap_silent)
-vim.keymap.set({'n', 'v'}, '<leader>e', '<cmd>Neotree toggle<CR>', noremap_silent)
