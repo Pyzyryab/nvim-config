@@ -28,10 +28,6 @@ return {
             end,
         },
     },
-    keys = {
-        {'<leader>nt', '<cmd>Neotree<CR>', desc = 'Opens Neotree' },
-        {'<leader>e', '<cmd>Neotree toggle<CR>',  desc = 'Toggles Neotree depending on its current status' }
-    },
     config = function()
         -- If you want icons for diagnostic errors, you'll need to define them somewhere:
         vim.fn.sign_define("DiagnosticSignError",

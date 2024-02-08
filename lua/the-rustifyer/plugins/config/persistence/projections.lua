@@ -1,9 +1,6 @@
 return {
-    lazy = false,
-    keys = {
-        { "<leader>fp", '<cmd>:Telescope projections<cr>', desc = 'Open Project Manager' },
-        { "<leader>aw", '<cmd>:<cr>AddWorkspace',          desc = 'Adds the CWD to the projects manager' },
-    },
+    event = 'VeryLazy',
+    branch = 'pre_release',
     config = function()
         local projections = require('projections')
 
@@ -34,7 +31,7 @@ return {
             -- Directory where sessions are stored
             sessions_directory = vim.fn.stdpath("cache") .. "\\projections_sessions/",
         })
-        
+
         -- Autostore session on VimExit
         local Session = require("projections.session")
         vim.api.nvim_create_autocmd({ 'VimLeavePre' }, {

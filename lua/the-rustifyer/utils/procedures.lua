@@ -17,15 +17,46 @@ end
 ---
 -- Helper function for creating keymaps in normal mode
 function M.nnoremap(rhs, lhs, bufopts, desc)
-  bufopts.desc = desc
-  vim.keymap.set("n", rhs, lhs, bufopts)
+    bufopts.desc = desc
+    vim.keymap.set("n", rhs, lhs, bufopts)
 end
 
 ---
 -- Helper function for creating keymaps in visual mode
 function M.vnoremap(rhs, lhs, bufopts, desc)
-  bufopts.desc = desc
-  vim.keymap.set("n", rhs, lhs, bufopts)
+    bufopts.desc = desc
+    vim.keymap.set("n", rhs, lhs, bufopts)
+end
+
+---
+-- Helper to encapsulate the logic of delete a buffer with `minibufremove`
+function M.minibufremove()
+    print('Attempting to delete current buffer')
+    local bd = require("mini.bufremove").delete
+    if vim.bo.modified then
+        local choice = vim.fn.confirm(("Save changes to %q?"):format(vim.fn.bufname()), "&Yes\n&No\n&Cancel")
+        if choice == 1 then             -- Yes
+            vim.cmd.write()
+            bd(0)
+        elseif choice == 2 then             -- No
+            bd(0, true)
+        end
+    else
+        print('Deleting saved buffer')
+        bd(0)
+    end
+    print('Buffer successfully delete')
+end
+
+---
+-- Helper to create a remaps that toggles between relative and absolute numbers
+function M.toggle_line_numbers()
+    local enabled_rel_line_nums = vim.wo.relativenumber == true
+    if enabled_rel_line_nums then
+        vim.cmd('set number norelativenumber')
+    else
+        vim.cmd('set number relativenumber')
+    end
 end
 
 ---
