@@ -45,6 +45,7 @@ wk.register({
             h = { "<cmd>Telescope help_tags<cr>", "Show help tags" },
             p = { "<cmd>Telescope projections<cr>", "Search projects" },
             k = { "<cmd>Telescope colorscheme<cr>", "Show and preview colorschemes" },
+            t = { "<cmd>TodoTelescope<cr>", "Open a TODOs preview" },
         },
         g = {
             name = '+git',

@@ -45,16 +45,11 @@ return {
         })
 
         vim.api.nvim_create_autocmd("User", {
-    pattern = "ProjectionsPreStoreSession",
-    callback = function()
-        -- nvim-tree
-        local nvim_tree_present, api = pcall(require, "nvim-tree.api")
-        if nvim_tree_present then api.tree.close() end
-
-        -- neo-tree
-        if pcall(require, "neo-tree") then vim.cmd [[Neotree action=close]] end
-    end
-})
+            pattern = "ProjectionsPreStoreSession",
+            callback = function()
+                if pcall(require, "neo-tree") then vim.cmd [[Neotree action=close]] end
+            end
+        })
 
         -- Switch to project if vim was started in a project dir
         local switcher = require("projections.switcher")

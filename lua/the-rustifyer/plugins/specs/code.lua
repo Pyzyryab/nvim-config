@@ -30,6 +30,9 @@ code.treesitter_context = 'nvim-treesitter/nvim-treesitter-context'
 -- Diagnostics
 code.trouble = 'folke/trouble.nvim'
 
+-- todo's
+code.todo_comments = 'folke/todo-comments.nvim'
+
 -- Autocomplete pairs of code symbols like '(', '{'...
 code.autopairs = 'windwp/nvim-autopairs'
 
