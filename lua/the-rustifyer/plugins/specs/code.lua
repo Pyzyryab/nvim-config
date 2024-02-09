@@ -30,6 +30,9 @@ code.treesitter_context = 'nvim-treesitter/nvim-treesitter-context'
 -- Diagnostics
 code.trouble = 'folke/trouble.nvim'
 
+-- Autocomplete pairs of code symbols like '(', '{'...
+code.autopairs = 'windwp/nvim-autopairs'
+
 -- Indentation guides
 code.indent_blankline = 'lukas-reineke/indent-blankline.nvim'
 code.mini_identscope = 'echasnovski/mini.indentscope'

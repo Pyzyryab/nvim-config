@@ -2,7 +2,7 @@
 --
 return {
     dependencies = {
-        {'L3MON4D3/LuaSnip'},
+        { 'L3MON4D3/LuaSnip' },
     },
     config = function()
         -- Here is where you configure the autocompletion settings.
@@ -17,14 +17,18 @@ return {
         -- from rafamadriz/friendly-snippets
         require('luasnip.loaders.from_vscode').lazy_load()
 
+        -- Mapping <CR> via autopairs
+        local cmp_autopairs = require('nvim-autopairs.completion.cmp')
+        cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
+
         cmp.setup({
             -- if you don't know what is a "source" in nvim-cmp read this:
             -- https://github.com/VonHeikemen/lsp-zero.nvim/blob/v3.x/doc/md/autocomplete.md#adding-a-source
             sources = {
-                {name = 'path'},
-                {name = 'nvim_lsp'},
-                {name = 'luasnip', keyword_length = 2},
-                {name = 'buffer', keyword_length = 3},
+                { name = 'path' },
+                { name = 'nvim_lsp' },
+                { name = 'luasnip', keyword_length = 2 },
+                { name = 'buffer',  keyword_length = 3 },
             },
             window = {
                 completion = cmp.config.window.bordered(),
@@ -54,4 +58,3 @@ return {
         })
     end,
 }
-
