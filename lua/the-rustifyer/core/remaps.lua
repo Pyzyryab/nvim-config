@@ -46,6 +46,21 @@ wk.register({
             p = { "<cmd>Telescope projections<cr>", "Search projects" },
             k = { "<cmd>Telescope colorscheme<cr>", "Show and preview colorschemes" },
         },
+        g = {
+            name = '+git',
+            -- gitsigns maps are just labels, since they need to be attached per buffer (ideally)
+            nh = { "Next Hunk" },
+            ph = { "Prev Hunk" },
+            hs = { "Stage Hunk" },
+            hr = { "Reset Hunk" },
+            sb = { "Stage Buffer" },
+            us = { "Undo Stage Hunk" },
+            rb = { "Reset Buffer" },
+            hp = { "Preview Hunk Inline" },
+            bl = { "Blame Line" },
+            hd = { "Diff This" },
+            hD = { "Diff This ~" },
+        },
         l = {
             name = '+line/live',
             n = { procs.toggle_line_numbers, 'Toggle between absolute and relative line numbers' },
