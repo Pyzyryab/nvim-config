@@ -1,10 +1,12 @@
 -- Plugins for enhace find/pick Neovim's capabilities
 --
 
-local plugins = {}
+local finders = {}
 
-plugins.telescope = 'nvim-telescope/telescope.nvim'
-plugins.fzf_native = 'nvim-telescope/telescope-fzf-native.nvim'
+finders.telescope = 'nvim-telescope/telescope.nvim'
+finders.fzf_native = 'nvim-telescope/telescope-fzf-native.nvim'
 
-return plugins
+finders.flash = 'folke/flash.nvim'
+
+return finders
 
