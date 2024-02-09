@@ -39,7 +39,7 @@ return {
             callback = function()
                 local nt = require('neo-tree')
                 vim.cmd('Neotree action=close')
-                print('Neotree close on pre store hooks: ', succ)
+                -- print('Neotree close on pre store hooks: ', succ)
                 Session.store(vim.loop.cwd())
             end,
         })

@@ -13,9 +13,6 @@ return {
     pickers = {
         colorscheme = {
             enable_preview = true,
-            theme = 'dropdown',
-            prompt_title = 'Colorschemes',
-            --    cwd = '~/.config/nvim/colors/',
         }
     },
     defaults = {
