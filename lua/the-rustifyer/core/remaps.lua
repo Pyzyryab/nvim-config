@@ -4,6 +4,7 @@
 
 local procs = require('the-rustifyer.utils.procedures')
 local wk = require('which-key')
+local trouble = require('trouble')
 
 wk.register({
     ["<S-h>"] = { "<cmd>BufferLineCyclePrev<cr>", "Prev buffer" },
@@ -25,6 +26,15 @@ wk.register({
             d = { procs.minibufremove, "Delete Buffer" },
             D = { function() require("mini.bufremove").delete(0, true) end, "Delete Buffer (Force)" },
         },
+        d = {
+            name = '+diagnostics/trouble',
+            t = { function() trouble.toggle() end, "Trouble toogle" },
+            w = { function() trouble.toggle("workspace_diagnostics") end, "Workspace diagnostics" },
+            d = { function() trouble.toggle("document_diagnostics") end, "Document diagnostics" },
+            q = { function() trouble.toggle("quickfix") end, "Diagnostics quickfix" },
+            l = { function() trouble.toggle("loclist") end, "Diagnostics loclist" },
+            r = { function() trouble.toggle("lsp_references") end, "Lsp References" },
+        },
         f = {
             name = "+file",
             f = { "<cmd>Telescope find_files<cr>", "Find Files" },
@@ -34,7 +44,7 @@ wk.register({
             c = { "<cmd>Telescope commands<cr>", "Show commands" },
             h = { "<cmd>Telescope help_tags<cr>", "Show help tags" },
             p = { "<cmd>Telescope projections<cr>", "Search projects" },
-            cs = { "<cmd>Telescope colorscheme<cr>", "Show and preview colorschemes" },
+            k = { "<cmd>Telescope colorscheme<cr>", "Show and preview colorschemes" },
         },
         l = {
             name = '+line/live',
