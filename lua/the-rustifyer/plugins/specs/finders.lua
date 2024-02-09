@@ -7,6 +7,7 @@ finders.telescope = 'nvim-telescope/telescope.nvim'
 finders.fzf_native = 'nvim-telescope/telescope-fzf-native.nvim'
 
 finders.flash = 'folke/flash.nvim'
+finders.spectre = 'nvim-pack/nvim-spectre'
 
 return finders
 

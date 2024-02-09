@@ -12,6 +12,7 @@ wk.register({
 }, { mode = "n" })
 
 wk.register({
+    { mode = "n" },
     ["<leader>"] = {
         a = {
             w = { '<cmd>AddWorkspace<cr>', 'Add the CWD to the projects of the workspace' },
@@ -35,8 +36,15 @@ wk.register({
             l = { function() trouble.toggle("loclist") end, "Diagnostics loclist" },
             r = { function() trouble.toggle("lsp_references") end, "Lsp References" },
         },
+        e = {
+            name = 'editor',
+            t = { '<cmd>Neotree toggle<CR>', 'Toggles Neotree depending on its current status' },
+            o = { '<cmd>Neotree<CR>', 'Opens Neotree' },
+            b = { '<cmd>Neotree toggle show buffers right<cr>', 'Neotree toggle show buffers right' },
+            g = { '<cmd>Neotree float git status<cr>', 'Neotree show git status' },
+        },
         f = {
-            name = "+file",
+            name = "+find/file",
             f = { "<cmd>Telescope find_files<cr>", "Find Files" },
             o = { "<cmd>Telescope oldfiles<cr>", "Open Recent Files" },
             g = { "<cmd>Telescope git_files<cr>", "Find files on git repository" },
@@ -67,18 +75,17 @@ wk.register({
             n = { procs.toggle_line_numbers, 'Toggle between absolute and relative line numbers' },
             g = { "<cmd>Telescope live_grep<cr>", "Find text in files" },
         },
-        e = {
-            name = 'editor',
-            t = { '<cmd>Neotree toggle<CR>', 'Toggles Neotree depending on its current status' },
-            o = { '<cmd>Neotree<CR>', 'Opens Neotree' },
-            b = { '<cmd>Neotree toggle show buffers right<cr>', 'Neotree toggle show buffers right' },
-            g = { '<cmd>Neotree float git status<cr>', 'Neotree show git status' },
-        },
         p = {
             name = '+persistence',
             s = { function() require("persistence").load() end, "Restore Session" },
             l = { function() require("persistence").load({ last = true }) end, "Restore Last Session" },
             d = { function() require("persistence").stop() end, "Don't Save Current Session" },
+        },
+        s = {
+            name = '+search',
+            s = { '<cmd>lua require("spectre").toggle()<CR>', 'Toggle Spectre' },
+            w = { '<cmd>lua require("spectre").open_visual({select_word=true})<CR>', 'Search current word' },
+            p = { '<cmd>lua require("spectre").open_file_search({select_word=true})<CR>', 'Search on current file' }
         },
         t = {
             name = '+treessitter',
@@ -91,7 +98,7 @@ wk.register({
             },
         }
     },
-}, { mode = "n" })
+})
 
 
 local noremapsilent = { noremap = true, silent = true }

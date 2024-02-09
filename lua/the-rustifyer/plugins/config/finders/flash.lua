@@ -3,7 +3,6 @@
 --
 return {
     event = { 'BufReadPre', 'BufNewFile' },
-    ---@type Flash.Config
     opts = {},
     -- stylua: ignore
     keys = {
