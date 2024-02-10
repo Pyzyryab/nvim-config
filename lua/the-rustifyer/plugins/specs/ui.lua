@@ -19,5 +19,8 @@ ui.notify = 'rcarriga/nvim-notify'
 -- Handling transparency
 ui.transparency = {'xiyaowong/transparent.nvim', event = {'UIEnter'}, lazy = false, no_extra_config = true}
 
+-- Better vim.ui
+ui.dressing = 'stevearc/dressing.nvim'
+
 return ui
 
