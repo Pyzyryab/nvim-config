@@ -6,5 +6,7 @@ return {
     -- Indentation guides
     indent_blankline = 'lukas-reineke/indent-blankline.nvim',
     mini_identscope = 'echasnovski/mini.indentscope',
+
+    ufo = 'kevinhwang91/nvim-ufo',
 }
 
