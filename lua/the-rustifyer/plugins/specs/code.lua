@@ -30,6 +30,9 @@ code.treesitter_context = 'nvim-treesitter/nvim-treesitter-context'
 -- Diagnostics
 code.trouble = 'folke/trouble.nvim'
 
+-- highlighting
+code.illuminate = 'RRethy/vim-illuminate'
+
 -- todo's
 code.todo_comments = 'folke/todo-comments.nvim'
 
