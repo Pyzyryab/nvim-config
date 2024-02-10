@@ -2,6 +2,7 @@
 --
 
 return {
-    plenary = 'nvim-lua/plenary.nvim'
+    plenary = 'nvim-lua/plenary.nvim',
+    promise = {'kevinhwang91/promise-async', no_extra_config = true },
 }
 

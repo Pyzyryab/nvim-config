@@ -8,5 +8,7 @@ return {
     mini_identscope = 'echasnovski/mini.indentscope',
 
     ufo = 'kevinhwang91/nvim-ufo',
+
+    winbar = 'SmiteshP/nvim-navic',
 }
 
