@@ -58,6 +58,7 @@ wk.register({
         },
         g = {
             name = '+git',
+            s = { vim.cmd.Git, 'Shows git status via vim-fugitive' },
             -- gitsigns maps are just labels, since they need to be attached per buffer (ideally)
             nh = { "Next Hunk" },
             ph = { "Prev Hunk" },
