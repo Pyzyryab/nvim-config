@@ -6,6 +6,7 @@ return {
         vim.opt.sessionoptions:append("localoptions")
 
         require('projections').setup({
+
             workspaces = {
                 -- { path = "~/repos", patterns = {} }      , -- An empty pattern list indicates that all subdirectories are projects
                 -- i.e patterns are not considered
