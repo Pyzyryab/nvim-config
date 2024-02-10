@@ -38,7 +38,7 @@ return {
             -- https://github.com/VonHeikemen/lsp-zero.nvim/blob/v3.x/README.md#keybindings-1
             mapping = cmp.mapping.preset.insert({
                 -- confirm completion item
-                ['<Enter>'] = cmp.mapping.confirm({ select = true }),
+                ['<Enter>'] = cmp.mapping.confirm({ select = false }),
 
                 -- trigger completion menu
                 ['<C-Space>'] = cmp.mapping.complete(),
