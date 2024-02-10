@@ -7,6 +7,7 @@ return {
     config = function()
         require('telescope').load_extension('fzf')
         --require('telescope').load_extension('todo-comments')
+        require("telescope").load_extension("notify")
     end,
     file_ignore_patterns = { '.git/' },
     borders = {},

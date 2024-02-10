@@ -13,6 +13,9 @@ ui.lualine = {
     event = 'VeryLazy',
 }
 
+-- Popup messages/notifications
+ui.notify = 'rcarriga/nvim-notify'
+
 -- Handling transparency
 ui.transparency = {'xiyaowong/transparent.nvim', event = {'UIEnter'}, lazy = false, no_extra_config = true}
 
