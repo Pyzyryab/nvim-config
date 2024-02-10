@@ -97,6 +97,11 @@ wk.register({
                 end,
                 "Toggle Treesitter Context",
             },
+        },
+        u = {
+            name = '+undo',
+            t = { vim.cmd.UndotreeToggle, 'Toggles ON/OFF the handler of previous changes' },
+            n = { function() require("notify").dismiss({ silent = true, pending = true }) end,"Dismiss all Notifications", }
         }
     },
 })

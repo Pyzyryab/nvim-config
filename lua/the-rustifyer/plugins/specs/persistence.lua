@@ -3,5 +3,7 @@
 --
 return {
     persistence = 'folke/persistence.nvim',
-    projections = { 'gnikdroy/projections.nvim' } }
+    projections = { 'gnikdroy/projections.nvim' },
+    undotree = { 'mbbill/undotree', cmd = 'UndotreeToggle',  no_extra_config = true }
+}
 
