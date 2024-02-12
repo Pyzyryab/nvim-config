@@ -11,11 +11,10 @@ local path = {}
 function sys:load_data()
     local os_name = vim.loop.os_uname().sysname
     self.is_mac = os_name == "Darwin"
-	self.is_linux = os_name == "Linux"
-	self.is_windows = os_name == "Windows_NT"
-	self.is_wsl = vim.fn.has("wsl") == 1
+    self.is_linux = os_name == "Linux"
+    self.is_windows = os_name == "Windows_NT"
+    self.is_wsl = vim.fn.has("wsl") == 1
 end
-
 
 function path:load_data()
     -- Utils

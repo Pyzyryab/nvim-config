@@ -14,13 +14,15 @@ return {
         -- This is where all the LSP shenanigans will live
         local lsp_zero = require('lsp-zero')
         lsp_zero.extend_lspconfig()
-
+        -- TODO discard from lsp_zero the java autoconfig
         --- if you want to know more about lsp-zero and mason.nvim
         --- read this: https://github.com/VonHeikemen/lsp-zero.nvim/blob/v3.x/doc/md/guides/integrate-with-mason-nvim.md
         lsp_zero.on_attach(function(client, bufnr)
             -- Integration with navic
             if client.server_capabilities.documentSymbolProvider then
                 require("nvim-navic").attach(client, bufnr)
+            else
+                vim.notify('navic wasn\'t unable to attach to: ' .. vim.inspect(client), vim.log.levels.WARN, nil)
             end
             -- see :help lsp-zero-keybindings
             -- to learn the available actions
@@ -53,7 +55,9 @@ return {
                     local lua_opts = lsp_zero.nvim_lua_ls()
                     require('lspconfig').lua_ls.setup(lua_opts)
                 end,
-            }
+            },
+            -- Exclude jdtls from automatic configuration, we are doing it with the ftplugin way
+            exclude = { 'jdtls' }
         })
 
         -- technically these are "diagnostic signs"
@@ -74,3 +78,4 @@ return {
         },
     },
 }
+

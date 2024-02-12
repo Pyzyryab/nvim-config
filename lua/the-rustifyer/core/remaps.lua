@@ -4,37 +4,39 @@
 
 local procs = require('the-rustifyer.utils.procedures')
 local wk = require('which-key')
-local trouble = require('trouble')
+
+local cmd = '<Cmd>'
+local CR = '<CR>'
 
 wk.register({
-    ["<S-h>"] = { "<cmd>BufferLineCyclePrev<cr>", "Prev buffer" },
-    ["<S-l>"] = { "<cmd>BufferLineCycleNext<cr>", "Next buffer" },
-}, { mode = "n" })
+    ['<S-h>'] = { '<cmd>BufferLineCyclePrev<cr>', 'Prev buffer' },
+    ['<S-l>'] = { '<cmd>BufferLineCycleNext<cr>', 'Next buffer' },
+}, { mode = 'n' })
 
 wk.register({
-    { mode = "n" },
-    ["<leader>"] = {
+    { mode = 'n' },
+    ['<leader>'] = {
         a = {
             w = { '<cmd>AddWorkspace<cr>', 'Add the CWD to the projects of the workspace' },
         },
         b = {
             name = '+buffers',
-            p = { "<Cmd>BufferLineTogglePin<CR>", "Toggle pin" },
-            P = { "<Cmd>BufferLineGroupClose ungrouped<CR>", "Delete non-pinned buffers" },
-            o = { "<Cmd>BufferLineCloseOthers<CR>", "Delete other buffers" },
-            r = { "Cmd>BufferLineCloseRight<CR>", "Delete buffers to the right" },
-            l = { "<Cmd>BufferLineCloseLeft<CR>", "Delete buffers to the left" },
-            d = { procs.minibufremove, "Delete Buffer" },
-            D = { function() require("mini.bufremove").delete(0, true) end, "Delete Buffer (Force)" },
+            p = { '<Cmd> BufferLineTogglePin<CR>' , 'Toggle pin' },
+            P = { '<Cmd> BufferLineGroupClose ungrouped<CR>' , 'Delete non-pinned buffers' },
+            o = { '<Cmd> BufferLineCloseOthers<CR>' , 'Delete other buffers' },
+            r = { '<Cmd> BufferLineCloseRight<CR>' , 'Delete buffers to the right' },
+            l = { '<Cmd> BufferLineCloseLeft<CR>' , 'Delete buffers to the left' },
+            d = { procs.minibufremove, 'Delete Buffer' },
+            D = { function() require("mini.bufremove").delete(0, true) end, 'Delete Buffer (Force)' },
         },
         d = {
             name = '+diagnostics/trouble',
-            t = { function() trouble.toggle() end, "Trouble toogle" },
-            w = { function() trouble.toggle("workspace_diagnostics") end, "Workspace diagnostics" },
-            d = { function() trouble.toggle("document_diagnostics") end, "Document diagnostics" },
-            q = { function() trouble.toggle("quickfix") end, "Diagnostics quickfix" },
-            l = { function() trouble.toggle("loclist") end, "Diagnostics loclist" },
-            r = { function() trouble.toggle("lsp_references") end, "Lsp References" },
+            t = { '<Cmd> require("trouble").toggle() <CR>', 'Trouble toogle' },
+            w = { '<Cmd> require("trouble").toggle("workspace_diagnostics") <CR>', 'Workspace diagnostics' },
+            d = { '<Cmd> require("trouble").toggle("document_diagnostics") <CR>', 'Document diagnostics' },
+            q = { '<Cmd> require("trouble").toggle("quickfix") <CR>', 'Diagnostics quickfix' },
+            l = { '<Cmd> require("trouble").toggle("loclist") <CR>', 'Diagnostics loclist' },
+            r = { '<Cmd> require("trouble").toggle("lsp_references") <CR>', 'Lsp References' },
         },
         e = {
             name = 'editor',
@@ -44,45 +46,46 @@ wk.register({
             g = { '<cmd>Neotree float git status<cr>', 'Neotree show git status' },
         },
         f = {
-            name = "+find/file",
-            f = { "<cmd>Telescope find_files<cr>", "Find Files" },
-            o = { "<cmd>Telescope oldfiles<cr>", "Open Recent Files" },
-            g = { "<cmd>Telescope git_files<cr>", "Find files on git repository" },
-            b = { "<cmd>Telescope buffers<cr>", "Find open buffers" },
-            c = { "<cmd>Telescope commands<cr>", "Show commands" },
-            h = { "<cmd>Telescope help_tags<cr>", "Show help tags" },
-            p = { "<cmd>Telescope projections<cr>", "Search projects" },
-            k = { "<cmd>Telescope colorscheme<cr>", "Show and preview colorschemes" },
-            t = { "<cmd>TodoTelescope<cr>", "Open a TODOs preview" },
-            n = { "<cmd>Telescope notify<cr>", "Displays the notifications triggered" },
+            name = '+find/file',
+            f = { '<cmd>Telescope find_files<cr>', 'Find Files' },
+            o = { '<cmd>Telescope oldfiles<cr>', 'Open Recent Files' },
+            g = { '<cmd>Telescope git_files<cr>', 'Find files on git repository' },
+            b = { '<cmd>Telescope buffers<cr>', 'Find open buffers' },
+            c = { '<cmd>Telescope commands<cr>', 'Show commands' },
+            h = { '<cmd>Telescope help_tags<cr>', 'Show help tags' },
+            p = { '<cmd>Telescope projections<cr>', 'Search projects' },
+            k = { '<cmd>Telescope colorscheme<cr>', 'Show and preview colorschemes' },
+            t = { '<cmd>TodoTelescope<cr>', 'Open a TODOs preview' },
+            n = { '<cmd>Telescope notify<cr>', 'Displays the notifications triggered' },
         },
         g = {
             name = '+git',
             s = { vim.cmd.Git, 'Shows git status via vim-fugitive' },
             -- gitsigns maps are just labels, since they need to be attached per buffer (ideally)
-            nh = { "Next Hunk" },
-            ph = { "Prev Hunk" },
-            hs = { "Stage Hunk" },
-            hr = { "Reset Hunk" },
-            sb = { "Stage Buffer" },
-            us = { "Undo Stage Hunk" },
-            rb = { "Reset Buffer" },
-            hp = { "Preview Hunk Inline" },
-            bl = { "Blame Line" },
-            hd = { "Diff This" },
-            hD = { "Diff This ~" },
+            nh = { 'Next Hunk' },
+            ph = { 'Prev Hunk' },
+            hs = { 'Stage Hunk' },
+            hr = { 'Reset Hunk' },
+            sb = { 'Stage Buffer' },
+            us = { 'Undo Stage Hunk' },
+            rb = { 'Reset Buffer' },
+            hp = { 'Preview Hunk Inline' },
+            bl = { 'Blame Line' },
+            hd = { 'Diff This' },
+            hD = { 'Diff This ~' },
         },
         l = {
             name = '+line/live',
             n = { procs.toggle_line_numbers, 'Toggle between absolute and relative line numbers' },
-            g = { "<cmd>Telescope live_grep<cr>", "Find text in files" },
+            g = { '<cmd>Telescope live_grep<cr>', 'Find text in files' },
         },
         p = {
             name = '+persistence',
-            s = { function() require("persistence").load() end, "Restore Session" },
-            l = { function() require("persistence").load({ last = true }) end, "Restore Last Session" },
-            d = { function() require("persistence").stop() end, "Don't Save Current Session" },
+            s = { function() require("persistence").load() end, 'Restore Session' },
+            l = { function() require("persistence").load({ last = true }) end, 'Restore Last Session' },
+            d = { function() require("persistence").stop() end, 'Don\'t Save Current Session' },
         },
+        q = { '<cmd>close<CR>', 'Fires the `Close` cmd' },
         s = {
             name = '+search',
             s = { '<cmd>lua require("spectre").toggle()<CR>', 'Toggle Spectre' },
@@ -90,23 +93,62 @@ wk.register({
             p = { '<cmd>lua require("spectre").open_file_search({select_word=true})<CR>', 'Search on current file' }
         },
         t = {
+            name = 'terminal',
+            s = { cmd .. 'TermSelect' .. CR, 'Shows opened terminals. Allows to pick them' },
+            o = { cmd .. 'ToggleTerm' .. CR, 'Toggle ToggleTerm' },
+            g = { function()
+                local Terminal = require('toggleterm.terminal').Terminal
+                local lazygit  = Terminal:new({
+                    cmd = 'lazygit',
+                    dir = 'git_dir',
+                    direction = 'float',
+                    float_opts = {
+                        border = 'double',
+                    },
+                })
+                lazygit:toggle() -- TODO Toggle doesn't pick the already opened one
+            end, 'Open Lazy Git on ToggleTerm' },
+        },
+        ts = {
             name = '+treessitter',
             u = {
                 function()
-                    local tsc = require("treesitter-context")
+                    local tsc = require('treesitter-context')
                     tsc.toggle()
                 end,
-                "Toggle Treesitter Context",
+                'Toggle Treesitter Context',
             },
         },
         u = {
             name = '+undo',
             t = { vim.cmd.UndotreeToggle, 'Toggles ON/OFF the handler of previous changes' },
-            n = { function() require("notify").dismiss({ silent = true, pending = true }) end,"Dismiss all Notifications", }
+            n = { function() require('notify').dismiss({ silent = true, pending = true }) end, 'Dismiss all Notifications', }
         }
     },
 })
 
+
+-- Toggleterm on terminal mode
+function _G.set_terminal_keymaps()
+    local opts = { buffer = 0 }
+    -- vim.keymap.set('t', '<esc>', [[<C-\><C-n>]], opts)
+    vim.keymap.set('t', '<C-h>', [[<C-\><C-n>]], opts)
+    --vim.keymap.set('t', 'jk', [[<C-\><C-n>]], opts)
+    vim.keymap.set('t', '<C-h>', [[<Cmd>wincmd h<CR>]], opts)
+    vim.keymap.set('t', '<C-j>', [[<Cmd>wincmd j<CR>]], opts)
+    vim.keymap.set('t', '<C-k>', [[<Cmd>wincmd k<CR>]], opts)
+    vim.keymap.set('t', '<C-l>', [[<Cmd>wincmd l<CR>]], opts)
+    vim.keymap.set('t', '<C-w>', [[<C-\><C-n><C-w>]], opts)
+    vim.keymap.set('t', '<C-q>', [[<C-\><C-n><C-w>q]], opts)
+    -- force close without prompting
+    vim.keymap.set("t", "<A-c>", [[<Cmd>q!<CR>]], opts)
+end
+
+-- if you only want these mappings for toggle term use term://*toggleterm#* instead
+vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
+
+--
+--
 
 local noremapsilent = { noremap = true, silent = true }
 

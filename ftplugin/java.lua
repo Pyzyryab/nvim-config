@@ -27,7 +27,7 @@ local config = {
         debounce_text_changes = 80,
     },
     on_attach = on_attach, -- We pass our on_attach keybindings to the configuration map
-    root_dir = root_dir, -- Set the root directory to our found root_marker
+    root_dir = _client.config.root_dir, -- Set the root directory to our found root_marker
     -- Here you can configure eclipse.jdt.ls specific settings
     -- These are defined by the eclipse.jdt.ls project and will be passed to eclipse when starting.
     -- See https://github.com/eclipse/eclipse.jdt.ls/wiki/Running-the-JAVA-LS-server-from-the-command-line#initialize-request

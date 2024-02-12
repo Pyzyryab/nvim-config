@@ -7,5 +7,13 @@
 return {
     cmd = {'ToggleTerm'},
     version = "*",
-    config = true
+    config = true,
+    opts = {
+        size = 10,
+        autochdir = true,
+        winbar = {
+            enabled = true,
+            name_formatter = nil
+        }
+    }
 }
