@@ -2,7 +2,7 @@
 -- our LSP servers, DAPs, linters and formatters
 
 return {
-    lazy = false,
+    event = 'VeryLazy',
     cmd = 'Mason',
     build = ":MasonUpdate",
     keys = { { "<leader>cm", "<cmd>Mason<cr>", desc = "Mason" } },
@@ -22,6 +22,8 @@ return {
             -- DAPs
             'codelldb',
             'cpptools',
+            -- formatters
+            'asmfmt',
         },
 
         ui = {
@@ -32,5 +34,27 @@ return {
             }
         },
     },
+    config = function(_, opts)
+        require('mason').setup(opts)
+        local registry = require("mason-registry")
+
+        registry.refresh(function ()
+            return registry.get_all_package_names()
+        end)
+
+        local function ensure_installed()
+            for _, tool in ipairs(opts.ensure_installed) do
+                local p = registry.get_package(tool)
+                if not p:is_installed() then
+                    p:install()
+                end
+            end
+        end
+        if registry.refresh then
+            registry.refresh(ensure_installed)
+        else
+            ensure_installed()
+        end
+    end
 }
 
