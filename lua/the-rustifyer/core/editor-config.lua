@@ -7,17 +7,22 @@ vim.opt.termguicolors = true
 -- Access colors present in 256 colorspace
 vim.g.base16_colorspace = 256
 
--- Set transparency
--- vim.cmd [[ hi Normal guibg=NONE ctermbg=NONE ]]
--- vim.cmd [[ hi NonText guibg=NONE ctermbg=NONE ]]
--- vim.cmd [[ hi VertSplit guibg=NONE ctermbg=NONE ]]
--- vim.cmd [[ hi StatusLine guibg=NONE ctermbg=NONE ]]
--- vim.cmd [[ hi StatusLineNC guibg=NONE ctermbg=NONE ]]
+-- Setting git bash on Windows by default
+local is_windows = require('the-rustifyer.core.globals').sys.is_windows
+if is_windows then
+    local bash_options = {
+        shell = 'C:/Program Files/Git/bin/bash.exe', -- Assuming that this is always the correct path on W2
+        shellcmdflag = "-i -l",
+        shellredir = "",
+        shellpipe = "2>&1",
+        shellquote = "",
+        shellxquote = "",
+    }
 
--- For a floating window (popup menu), set transparency
--- vim.cmd [[ hi NormalNC guibg=NONE ctermbg=NONE ]]
--- vim.cmd [[ hi NormalFloat guibg=NONE ctermbg=NONE ]]
--- vim.cmd [[ hi Neotree guibg=NONE ctermbg=NONE ]]
+    for option, value in pairs(bash_options) do
+        vim.opt[option] = value
+    end
+end
 
 vim.opt.nu = true
 vim.opt.relativenumber = true
@@ -51,4 +56,3 @@ vim.o.foldcolumn = '1'
 vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
 vim.o.foldlevelstart = 99
 vim.o.foldenable = true
-

@@ -11,9 +11,11 @@ return {
     opts = {
         size = 10,
         autochdir = true,
+        start_in_insert = true,
         winbar = {
             enabled = true,
-            name_formatter = nil
+            -- name_formatter = nil
         }
     }
 }
+
