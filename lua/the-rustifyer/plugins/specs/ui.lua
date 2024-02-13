@@ -13,6 +13,9 @@ ui.lualine = {
     event = 'VeryLazy',
 }
 
+-- Winbar
+ui.barbecue = "utilyre/barbecue.nvim"
+
 -- Popup messages/notifications
 ui.notify = 'rcarriga/nvim-notify'
 

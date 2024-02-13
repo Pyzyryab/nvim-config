@@ -4,6 +4,9 @@
 vim.opt.guicursor = '' -- fat cursor enabled (even on insert mode)
 vim.opt.termguicolors = true
 
+-- triggers CursorHold event faster
+vim.opt.updatetime = 200
+
 -- Access colors present in 256 colorspace
 vim.g.base16_colorspace = 256
 
