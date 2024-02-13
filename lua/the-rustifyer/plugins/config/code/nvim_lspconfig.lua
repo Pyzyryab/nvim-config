@@ -55,8 +55,8 @@ return {
                     local lua_opts = lsp_zero.nvim_lua_ls()
                     require('lspconfig').lua_ls.setup(lua_opts)
                 end,
-                require('lspconfig').clangd.setup { on_attach = on_attach },
-                require('lspconfig').rust_analyzer.setup { on_attach = on_attach },
+                -- require('lspconfig').clangd.setup { on_attach = on_attach },
+                -- require('lspconfig').rust_analyzer.setup { on_attach = on_attach },
             },
             -- Exclude jdtls from automatic configuration, we are doing it with the ftplugin way
             exclude = { 'jdtls' }

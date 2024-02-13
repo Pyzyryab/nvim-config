@@ -23,14 +23,3 @@ require('the-rustifyer.core.editor-config')
 -- Registering the custom autocommands
 require('the-rustifyer.core.autocmds')
 
--- Manually making `mason` available at start up time
-require('mason').setup({
-    ui = {
-        icons = {
-            package_installed = '✓',
-            package_pending = '➜',
-            package_uninstalled = '✗'
-        }
-    }
-})
-
