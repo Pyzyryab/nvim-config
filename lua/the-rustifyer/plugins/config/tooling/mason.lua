@@ -11,7 +11,7 @@ return {
             -- LSPs
             'rust-analyzer',
             'clangd', -- C/C++
-            'ast-grep',
+            -- 'ast-grep',
             'asm-lsp', -- Assembly
             'jedi-language-server', -- Python
             'jdtls', -- Java (Eclipse)

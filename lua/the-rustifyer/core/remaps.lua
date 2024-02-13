@@ -54,7 +54,7 @@ wk.register({
             c = { '<cmd>Telescope commands<cr>', 'Show commands' },
             h = { '<cmd>Telescope help_tags<cr>', 'Show help tags' },
             p = { '<cmd>Telescope projections<cr>', 'Search projects' },
-            k = { '<cmd>Telescope colorscheme<cr>', 'Show and preview colorschemes' },
+            k = { function() require("telescope.builtin").colorscheme() end, 'Show and preview colorschemes' },
             t = { '<cmd>TodoTelescope<cr>', 'Open a TODOs preview' },
             n = { '<cmd>Telescope notify<cr>', 'Displays the notifications triggered' },
         },
