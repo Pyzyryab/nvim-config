@@ -9,11 +9,13 @@ local consts = require('the-rustifyer.core.constants')
 local p_sep = globals.path.sep
 local jdtls_path = consts.dirs.nvim_data .. p_sep .. 'mason' .. p_sep .. 'packages' .. p_sep .. 'jdtls'
 local jdtls_jar_path = vim.fn.glob(jdtls_path .. '/plugins/org.eclipse.equinox.launcher_*.jar')
-local root_dir = require('jdtls.setup').find_root({ '.gitignore', 'code/', '.gitattributtes', 'README.md' })
+-- local root_dir = require('jdtls.setup').find_root({ '.gitignore', 'code/', '.gitattributtes', 'README.md' })
+local project_root_dir = ""
 
 local on_attach = function(_client, bufnr)
+    project_root_dir = _client.config.project_root_dir
+    print('Print: detected root_dir', project_root_dir)
     local bufopts = { noremap = true, silent = true, buffer = bufnr }
-
     -- Java extensions provided by jdtls
     procs.nnoremap("<C-o>", jdtls.organize_imports, bufopts, "Organize imports")
     procs.nnoremap("<space>ev", jdtls.extract_variable, bufopts, "Extract variable")
@@ -27,7 +29,7 @@ local config = {
         debounce_text_changes = 80,
     },
     on_attach = on_attach, -- We pass our on_attach keybindings to the configuration map
-    root_dir = _client.config.root_dir, -- Set the root directory to our found root_marker
+    root_dir = vim.fn.getcwd(), -- Set the root directory to our found root_marker
     -- Here you can configure eclipse.jdt.ls specific settings
     -- These are defined by the eclipse.jdt.ls project and will be passed to eclipse when starting.
     -- See https://github.com/eclipse/eclipse.jdt.ls/wiki/Running-the-JAVA-LS-server-from-the-command-line#initialize-request
@@ -70,7 +72,9 @@ local config = {
 
         -- 💀
         -- See `data directory configuration` section in the README
-        '-data', vim.fn.getcwd() -- TODO change this when it's ready the neoconf plugin for a custom java project root
+        '-data',
+        -- project_root_dir
+        vim.fn.getcwd() -- TODO change this when it's ready the neoconf plugin for a custom java project root
     },
 
     -- Here you can configure eclipse.jdt.ls specific settings

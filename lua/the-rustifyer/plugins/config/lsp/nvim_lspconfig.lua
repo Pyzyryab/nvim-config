@@ -4,12 +4,6 @@
 local procs = require('the-rustifyer.utils.procedures')
 
 return {
-    cmd = { 'LspInfo', 'LspInstall', 'LspStart' },
-    event = { 'BufReadPre', 'BufNewFile' },
-    dependencies = {
-        { 'hrsh7th/cmp-nvim-lsp' },
-        { 'williamboman/mason-lspconfig.nvim' },
-    },
     config = function()
         -- This is where all the LSP shenanigans will live
         local lsp_zero = require('lsp-zero')
@@ -47,7 +41,7 @@ return {
                 { noremap = true, silent = true, buffer = bufnr, desc = "Code actions" })
             procs.nnoremap('<leader>=', function() vim.lsp.buf.format { async = true } end, bufopts, "Format file")
         end)
-
+print('before require mason-lspconfig')
         require('mason-lspconfig').setup({
             handlers = {
                 lsp_zero.default_setup,
@@ -55,11 +49,11 @@ return {
                     local lua_opts = lsp_zero.nvim_lua_ls()
                     require('lspconfig').lua_ls.setup(lua_opts)
                 end,
+                jdtls = lsp_zero.noop, -- Exclude jdtls from automatic configuration, we are doing it with the ftplugin way
                 -- require('lspconfig').clangd.setup { on_attach = on_attach },
                 -- require('lspconfig').rust_analyzer.setup { on_attach = on_attach },
             },
-            -- Exclude jdtls from automatic configuration, we are doing it with the ftplugin way
-            exclude = { 'jdtls' }
+            -- exclude = { 'jdtls' }
         })
 
         -- technically these are "diagnostic signs"

@@ -31,12 +31,12 @@ wk.register({
         },
         d = {
             name = '+diagnostics/trouble',
-            t = { '<Cmd> require("trouble").toggle() <CR>', 'Trouble toogle' },
-            w = { '<Cmd> require("trouble").toggle("workspace_diagnostics") <CR>', 'Workspace diagnostics' },
-            d = { '<Cmd> require("trouble").toggle("document_diagnostics") <CR>', 'Document diagnostics' },
-            q = { '<Cmd> require("trouble").toggle("quickfix") <CR>', 'Diagnostics quickfix' },
-            l = { '<Cmd> require("trouble").toggle("loclist") <CR>', 'Diagnostics loclist' },
-            r = { '<Cmd> require("trouble").toggle("lsp_references") <CR>', 'Lsp References' },
+            t = { '<Cmd> lua require("trouble").toggle() <CR>', 'Trouble toogle' },
+            w = { '<Cmd> lua require("trouble").toggle("workspace_diagnostics") <CR>', 'Workspace diagnostics' },
+            d = { '<Cmd> lua require("trouble").toggle("document_diagnostics") <CR>', 'Document diagnostics' },
+            q = { '<Cmd> lua require("trouble").toggle("quickfix") <CR>', 'Diagnostics quickfix' },
+            l = { '<Cmd> lua require("trouble").toggle("loclist") <CR>', 'Diagnostics loclist' },
+            r = { '<Cmd> lua require("trouble").toggle("lsp_references") <CR>', 'Lsp References' },
         },
         e = {
             name = 'editor',

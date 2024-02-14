@@ -10,7 +10,7 @@ return {
     config = true,
     opts = {
         size = 10,
-        autochdir = true,
+        -- autochdir = true,
         start_in_insert = true,
         winbar = {
             enabled = true,

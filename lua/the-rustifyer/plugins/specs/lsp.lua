@@ -1,9 +1,9 @@
 -- LSP core plugins
 --
 return {
-    lsp_zero = { 'VonHeikemen/lsp-zero.nvim' },
-    --mason_lsp_config = {'williamboman/mason-lspconfig.nvim', config = true, no_extra_config = true },
-    nvim_lspconfig = { 'neovim/nvim-lspconfig', config = true },
+    lsp_zero = 'VonHeikemen/lsp-zero.nvim',
+    mason_lsp_config = {'williamboman/mason-lspconfig.nvim', no_extra_config = true },
+    nvim_lspconfig = { 'neovim/nvim-lspconfig', config = true, event = { 'BufReadPre', 'BufNewFile' }, },
 
     nvim_jdtls = { 'mfussenegger/nvim-jdtls', ft = 'java', no_extra_config = true },
 
