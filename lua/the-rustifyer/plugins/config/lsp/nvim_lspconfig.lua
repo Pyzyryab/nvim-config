@@ -42,18 +42,58 @@ return {
             procs.nnoremap('<leader>=', function() vim.lsp.buf.format { async = true } end, bufopts, "Format file")
         end)
 
+        local lspconfig = require('lspconfig')
+
         require('mason-lspconfig').setup({
             handlers = {
                 lsp_zero.default_setup,
                 lua_ls = function()
                     local lua_opts = lsp_zero.nvim_lua_ls()
-                    require('lspconfig').lua_ls.setup(lua_opts)
+                    lspconfig.lua_ls.setup(lua_opts)
                 end,
                 jdtls = lsp_zero.noop, -- Exclude jdtls from automatic configuration, we are doing it with the ftplugin way
                 -- require('lspconfig').clangd.setup { on_attach = on_attach },
                 -- require('lspconfig').rust_analyzer.setup { on_attach = on_attach },
+                clangd = function()
+                    lspconfig.clangd.setup(
+                        keys = {
+                            { "<leader>cR", "<cmd>ClangdSwitchSourceHeader<cr>", desc = "Switch Source/Header (C/C++)" },
+                        },
+                        root_dir = function(fname)
+                            return require("lspconfig.util").root_pattern(
+                                "Makefile",
+                                "configure.ac",
+                                "configure.in",
+                                "config.h.in",
+                                "meson.build",
+                                "meson_options.txt",
+                                "build.ninja"
+                            )(fname) or
+                            require("lspconfig.util").root_pattern("compile_commands.json", "compile_flags.txt")(
+                                fname
+                            ) or require("lspconfig.util").find_git_ancestor(fname)
+                        end,
+                        filetypes = { 'c', 'cpp', 'cppm', 'ixx', 'objc', 'objcpp', 'cuda', 'proto' },
+                        capabilities = {
+                            offsetEncoding = { "utf-16" },
+                        },
+                        cmd = {
+                            "clangd",
+                            "--background-index",
+                            "--clang-tidy",
+                            "--header-insertion=iwyu",
+                            "--completion-style=detailed",
+                            "--function-arg-placeholders",
+                            "--fallback-style=llvm",
+                        },
+                        init_options = {
+                            usePlaceholders = true,
+                            completeUnimported = true,
+                            clangdFileStatus = true,
+                        },
+                    })
+                end,
             },
-            -- exclude = { 'jdtls' }
         })
 
         -- technically these are "diagnostic signs"
@@ -66,51 +106,4 @@ return {
             info = '»'
         })
     end,
-    opts = {
-        servers = {
-            -- Ensure mason installs the server
-            clangd = {
-                keys = {
-                    { "<leader>cR", "<cmd>ClangdSwitchSourceHeader<cr>", desc = "Switch Source/Header (C/C++)" },
-                },
-                root_dir = function(fname)
-                    return require("lspconfig.util").root_pattern(
-                        "Makefile",
-                        "configure.ac",
-                        "configure.in",
-                        "config.h.in",
-                        "meson.build",
-                        "meson_options.txt",
-                        "build.ninja"
-                    )(fname) or require("lspconfig.util").root_pattern("compile_commands.json", "compile_flags.txt")(
-                        fname
-                    ) or require("lspconfig.util").find_git_ancestor(fname)
-                end,
-                capabilities = {
-                    offsetEncoding = { "utf-16" },
-                },
-                cmd = {
-                    "clangd",
-                    "--background-index",
-                    "--clang-tidy",
-                    "--header-insertion=iwyu",
-                    "--completion-style=detailed",
-                    "--function-arg-placeholders",
-                    "--fallback-style=llvm",
-                },
-                init_options = {
-                    usePlaceholders = true,
-                    completeUnimported = true,
-                    clangdFileStatus = true,
-                },
-            },
-        },
-        setup = {
-            clangd = function(_, opts)
-                            vim.notify("clangd opts", vim.log.levels.INFO, opts)
-                 require("clangd_extensions").setup(opts)
-                return false
-            end,
-        },
-    }
 }
