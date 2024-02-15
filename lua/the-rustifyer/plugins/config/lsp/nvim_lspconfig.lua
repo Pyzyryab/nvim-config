@@ -41,7 +41,7 @@ return {
                 { noremap = true, silent = true, buffer = bufnr, desc = "Code actions" })
             procs.nnoremap('<leader>=', function() vim.lsp.buf.format { async = true } end, bufopts, "Format file")
         end)
-print('before require mason-lspconfig')
+
         require('mason-lspconfig').setup({
             handlers = {
                 lsp_zero.default_setup,

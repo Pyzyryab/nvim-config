@@ -1,8 +1,12 @@
 -- Custom VIM autocommands
 --
 
+local augroup = vim.api.nvim_create_augroup       -- Create/get autocommand group
+local autocmd = vim.api.nvim_create_autocmd       -- Create autocommand
+local usercmd = vim.api.nvim_create_user_command   -- Create usercommand
+
 --- Allowing 'wqa' to leave even if there's `ToggleTerm` instances active
-vim.api.nvim_create_autocmd({ "TermEnter" }, {
+autocmd({ "TermEnter" }, {
     callback = function()
         print('Raising TermEnter autocommand')
         for _, buffers in ipairs(vim.fn.getbufinfo()) do
@@ -15,5 +19,20 @@ vim.api.nvim_create_autocmd({ "TermEnter" }, {
             end
         end
     end,
+})
+
+-- Highlight on yank
+augroup('YankHighlight', { clear = true })
+autocmd('TextYankPost', {
+  group = 'YankHighlight',
+  callback = function()
+    vim.highlight.on_yank({ higroup = 'IncSearch', timeout = '1000' })
+  end
+})
+
+-- Remove whitespace on save
+autocmd('BufWritePre', {
+  pattern = '',
+  command = ":%s/\\s\\+$//e"
 })
 
