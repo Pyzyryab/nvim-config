@@ -19,9 +19,13 @@ return {
             -- 'golangci-lint-ls',
             'lua-language-server',
             'taplo', -- Markdown
+
             -- DAPs
             'codelldb',
             'cpptools',
+            'java-debug-adapter',
+            'java-test',
+           
             -- formatters
             'asmfmt',
         },

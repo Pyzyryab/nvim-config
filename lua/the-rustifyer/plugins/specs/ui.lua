@@ -20,7 +20,7 @@ ui.barbecue = "utilyre/barbecue.nvim"
 ui.notify = 'rcarriga/nvim-notify'
 
 -- Handling transparency
-ui.transparency = {'xiyaowong/transparent.nvim', event = {'UIEnter'}, lazy = false, no_extra_config = true}
+ui.transparent = 'xiyaowong/transparent.nvim'
 
 -- Better vim.ui
 ui.dressing = 'stevearc/dressing.nvim'
