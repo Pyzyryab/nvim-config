@@ -65,16 +65,16 @@ wk.register({
         },
         e = {
             name = 'editor',
-            t = { '<cmd>neotree toggle<cr>', 'toggles neotree depending on its current status' },
-            o = { '<cmd>neotree<cr>', 'opens neotree' },
-            b = { '<cmd>neotree toggle show buffers right<cr>', 'neotree toggle show buffers right' },
-            g = { '<cmd>neotree float git status<cr>', 'neotree show git status' },
+            t = { '<cmd>Neotree toggle<cr>', 'toggles neotree depending on its current status' },
+            o = { '<cmd>Neotree<cr>', 'opens neotree' },
+            b = { '<cmd>Neotree toggle show buffers right<cr>', 'neotree toggle show buffers right' },
+            g = { '<cmd>Neotree float git status<cr>', 'neotree show git status' },
         },
         f = {
             name = '+find/file',
-            f = { '<cmd>telescope find_files<cr>', 'find files' },
-            o = { '<cmd>telescope oldfiles<cr>', 'open recent files' },
-            g = { '<cmd>telescope git_files<cr>', 'find files on git repository' },
+            f = { '<cmd>Telescope find_files<cr>', 'find files' },
+            o = { '<cmd>Telescope oldfiles<cr>', 'open recent files' },
+            g = { '<cmd>Telescope git_files<cr>', 'find files on git repository' },
             b = { '<cmd>Telescope buffers<cr>', 'Find open buffers' },
             c = { '<cmd>Telescope commands<cr>', 'Show commands' },
             h = { '<cmd>Telescope help_tags<cr>', 'Show help tags' },
@@ -216,7 +216,7 @@ vim.keymap.set('n', 'n', 'nzzzv')
 vim.keymap.set('n', 'N', 'Nzzzv')
 
 -- Greatest remap ever. Thank you, theprimagean!
-vim.keymap.set('x', '<leader>p', [["_dP]])
+vim.keymap.set('x', '<leader>p', "\"_dP")
 
 -- Yank the selected text to the system clipboard ("+y).
 -- In Visual mode, it yanks the visually selected text
@@ -229,3 +229,4 @@ vim.keymap.set('n', '<leader>Y', [["+Y]])
 -- In summary, pressing <leader>d in Normal or Visual mode will delete
 -- the selected text and place it into the black hole register,
 vim.keymap.set({ 'n', 'v' }, '<leader>d', [["_d]])
+
