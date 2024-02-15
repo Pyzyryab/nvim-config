@@ -7,14 +7,13 @@ local globals = require('the-rustifyer.core.globals')
 local consts = require('the-rustifyer.core.constants')
 
 local p_sep = globals.path.sep
-local jdtls_path = consts.dirs.nvim_data .. p_sep .. 'mason' .. p_sep .. 'packages' .. p_sep .. 'jdtls'
+local mason_path = consts.dirs.nvim_data .. p_sep .. 'mason' .. p_sep .. 'packages'
+
+local jdtls_path = mason_path .. p_sep .. 'jdtls'
 local jdtls_jar_path = vim.fn.glob(jdtls_path .. '/plugins/org.eclipse.equinox.launcher_*.jar')
 -- local root_dir = require('jdtls.setup').find_root({ '.gitignore', 'code/', '.gitattributtes', 'README.md' })
-local project_root_dir = ""
 
 local on_attach = function(_client, bufnr)
-    project_root_dir = _client.config.project_root_dir
-    print('Print: detected root_dir', project_root_dir)
     local bufopts = { noremap = true, silent = true, buffer = bufnr }
     -- Java extensions provided by jdtls
     procs.nnoremap("<C-o>", jdtls.organize_imports, bufopts, "Organize imports")
@@ -23,6 +22,13 @@ local on_attach = function(_client, bufnr)
     vim.keymap.set('v', "<space>em", [[<ESC><CMD>lua require('jdtls').extract_method(true)<CR>]],
     { noremap = true, silent = true, buffer = bufnr, desc = "Extract method" })
 end
+
+local bundles = {
+  -- Path to the Microsoft's Java debug plugin
+  vim.fn.glob(mason_path .. p_sep .. 'java-debug-adapter/extension/server/com.microsoft.java.debug.plugin-*.jar', 1),
+}
+-- Extending the bundles table to add the plugin that allows us to debug Java tests within Neovim
+vim.list_extend(bundles, vim.split(vim.fn.glob(mason_path .. p_sep .. "java-test/extension/server/*.jar", 1), "\n"))
 
 local config = {
     flags = {
@@ -41,6 +47,11 @@ local config = {
     -- 💀
     -- This is the default if not provided, you can remove it. Or adjust as needed.
     -- One dedicated LSP server & client will be started per unique root_dir
+
+    init_options = {
+        bundles = bundles,
+    },
+
     cmd = {
         -- 💀
         'java', -- or '/path/to/java17_or_newer/bin/java'
