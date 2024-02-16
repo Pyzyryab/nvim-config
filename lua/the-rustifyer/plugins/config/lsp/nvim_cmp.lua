@@ -1,10 +1,7 @@
 -- `nvim cmp` configuration
 --
 return {
-    dependencies = {
-        { 'L3MON4D3/LuaSnip' },
-    },
-    config = function()
+   config = function()
         -- Here is where you configure the autocompletion settings.
         local lsp_zero = require('lsp-zero')
         lsp_zero.extend_cmp()
@@ -28,10 +25,11 @@ return {
             -- if you don't know what is a "source" in nvim-cmp read this:
             -- https://github.com/VonHeikemen/lsp-zero.nvim/blob/v3.x/doc/md/autocomplete.md#adding-a-source
             sources = {
-                { name = 'path' },
                 { name = 'nvim_lsp' },
+                { name = 'path' },
                 { name = 'luasnip', keyword_length = 2 },
                 { name = 'buffer',  keyword_length = 3 },
+                { name = 'calc' },
             },
             completion = {
                 completeopt = "menu,menuone,noinsert",
@@ -81,3 +79,4 @@ return {
         })
     end,
 }
+

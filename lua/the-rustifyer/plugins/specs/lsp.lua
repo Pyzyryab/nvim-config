@@ -12,6 +12,7 @@ return {
     cmp_nvim_lsp = { 'hrsh7th/cmp-nvim-lsp', event = { 'BufReadPre', 'BufNewFile' }, no_extra_config = true },
     cmp_buffer = { 'hrsh7th/cmp-buffer', event = { 'BufReadPre', 'BufNewFile' }, no_extra_config = true },
     cmp_path = { 'hrsh7th/cmp-path', event = { 'BufReadPre', 'BufNewFile' }, no_extra_config = true },
+    cmp_path = { 'hrsh7th/cmp-calc', event = { 'BufReadPre', 'BufNewFile' }, no_extra_config = true },
     cmp_luasnip = { 'saadparwaiz1/cmp_luasnip', event = { 'BufReadPre', 'BufNewFile' }, no_extra_config = true },
     friendly_snippets = { 'rafamadriz/friendly-snippets', event = { 'BufReadPre', 'BufNewFile' }, no_extra_config = true },
     lspkind = { 'onsails/lspkind.nvim', event = { 'BufReadPre', 'BufNewFile' }, no_extra_config = true },
