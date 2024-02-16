@@ -35,6 +35,18 @@ return {
                 { name = 'calc' },
                 { name = 'treesitter' },
             },
+            sorting = {
+                comparators = {
+                    cmp.config.compare.offset,
+                    cmp.config.compare.exact,
+                    cmp.config.compare.recently_used,
+                    require("clangd_extensions.cmp_scores"),
+                    cmp.config.compare.kind,
+                    cmp.config.compare.sort_text,
+                    cmp.config.compare.length,
+                    cmp.config.compare.order,
+                },
+            },
             window = {
                 completion = cmp.config.window.bordered(),
                 documentation = cmp.config.window.bordered(),
@@ -87,7 +99,7 @@ return {
                 { name = 'buffer' }
             }
         })
-        -- `:` cmdline setup.
+        --[[ -- `:` cmdline setup.
         cmp.setup.cmdline(':', {
             mapping = cmp.mapping.preset.cmdline(),
             sources = cmp.config.sources({
@@ -100,6 +112,6 @@ return {
                     }
                 }
             })
-        })
+        }) ]]
     end,
 }

@@ -15,6 +15,9 @@ return {
             else
                 vim.notify('navic wasn\'t unable to attach to: ' .. vim.inspect(client), vim.log.levels.WARN, nil)
             end
+
+            --[[ require("clangd_extensions.inlay_hints").setup_autocmd()
+            require("clangd_extensions.inlay_hints").set_inlay_hints() ]]
             -- see :help lsp-zero-keybindings
             -- to learn the available actions
             --lsp_zero.default_keymaps({ buffer = bufnr })
@@ -50,24 +53,24 @@ return {
                 jdtls = lsp_zero.noop, -- Exclude jdtls from automatic configuration, we are doing it with the ftplugin way
                 -- require('lspconfig').clangd.setup { on_attach = on_attach },
                 -- require('lspconfig').rust_analyzer.setup { on_attach = on_attach },
-                clangd = function()
+                --[[ clangd = function()
                     lspconfig.clangd.setup({
                         keys = {
                             { "<leader>cR", "<cmd>ClangdSwitchSourceHeader<cr>", desc = "Switch Source/Header (C/C++)" },
                         },
                         root_dir = function(fname)
                             return require("lspconfig.util").root_pattern(
-                                "Makefile",
-                                "configure.ac",
-                                "configure.in",
-                                "config.h.in",
-                                "meson.build",
-                                "meson_options.txt",
-                                "build.ninja"
-                            )(fname) or
-                            require("lspconfig.util").root_pattern("compile_commands.json", "compile_flags.txt")(
-                                fname
-                            ) or require("lspconfig.util").find_git_ancestor(fname)
+                                    "Makefile",
+                                    "configure.ac",
+                                    "configure.in",
+                                    "config.h.in",
+                                    "meson.build",
+                                    "meson_options.txt",
+                                    "build.ninja"
+                                )(fname) or
+                                require("lspconfig.util").root_pattern("compile_commands.json", "compile_flags.txt")(
+                                    fname
+                                ) or require("lspconfig.util").find_git_ancestor(fname)
                         end,
                         filetypes = { 'c', 'cpp', 'cppm', 'ixx', 'objc', 'objcpp', 'cuda', 'proto' },
                         capabilities = {
@@ -88,7 +91,7 @@ return {
                             clangdFileStatus = true,
                         },
                     })
-                end,
+                end, ]]
             },
         })
 

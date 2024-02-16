@@ -6,7 +6,7 @@ return {
         inlay_hints = {
             inline = false,
         },
-        ast = {
+        --[[ ast = {
             --These require codicons (https://github.com/microsoft/vscode-codicons)
             role_icons = {
                 type = "",
@@ -25,7 +25,7 @@ return {
                 TemplateTemplateParm = "",
                 TemplateParamObject = "",
             },
-        },
+        }, ]]
     },
 }
 
