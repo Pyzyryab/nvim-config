@@ -1,7 +1,7 @@
 -- Configuration for the plugin that manages Neovim notifications via UI components
 --
 return {
-    lazy = false,
+    event = {'VeryLazy'},
     opts = {
         timeout = 3000,
         max_height = function()
