@@ -76,7 +76,7 @@ wk.register({
             J = { CMD .. 'lua require"dap".step_over()' .. CR, 'Step over' },
             K = { CMD .. 'lua require"dap".step_into()' .. CR, 'Step into' },
             O = { CMD .. 'lua require"dap".step_out()' .. CR, 'Step out' },
-            D = { CMD .. 'lua require"dap".disconnect()' .. CR, '' },
+            D = { CMD .. 'lua require"dap".disconnect()' .. CR, 'Disconnect' },
             T = { CMD .. 'lua require"dap".terminate()' .. CR, 'Terminate' },
             R = { CMD .. 'lua require"dap".repl.toggle()' .. CR, 'Open REPL' },
             L = { CMD .. 'lua require"dap".run_last()' .. CR, 'Run Last' },
@@ -93,6 +93,7 @@ wk.register({
             o = { CMD .. 'Neotree' .. CR, 'opens neotree' },
             b = { CMD .. 'Neotree toggle show buffers right' .. CR, 'neotree toggle show buffers right' },
             g = { CMD .. 'Neotree float git status' .. CR, 'neotree show git status' },
+            e = { CMD .. 'Neotree diagnostics reveal bottom' .. CR, 'neotree show workpace diagnostics' },
         },
         f = {
             name = '+find/file',
