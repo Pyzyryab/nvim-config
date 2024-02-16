@@ -17,7 +17,7 @@ wk.register({
                 function()
                     vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(ESC, true, true, true), 'n', true)
                     require("Comment.api").toggle.linewise(vim.fn.visualmode())
-                end, 'Comment selection'
+                end, 'Comment selection (Visual)'
             },
         },
     },
@@ -86,6 +86,12 @@ wk.register({
             end, 'Scopes' },
             F = { CMD .. 'Telescope dap frames' .. CR, 'List Frames' },
             Q = { CMD .. 'Telescope dap commands' .. CR, 'List commands' },
+            -- Pending to add or to review
+            -- :Telescope dap commands
+            -- :Telescope dap configurations
+            -- :Telescope dap list_breakpoints
+            -- :Telescope dap variables
+            -- :Telescope dap frames
         },
         e = {
             name = 'editor',
