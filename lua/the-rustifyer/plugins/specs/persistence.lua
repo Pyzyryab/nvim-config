@@ -4,6 +4,7 @@
 return {
     persistence = 'folke/persistence.nvim',
     projections = { 'gnikdroy/projections.nvim' },
-    undotree = { 'mbbill/undotree', cmd = 'UndotreeToggle',  no_extra_config = true }
+    undotree = { 'mbbill/undotree', cmd = 'UndotreeToggle', no_extra_config = true },
+    sqlite = {'kkharji/sqlite.lua', module = 'sqlite', no_extra_config = true },
 }
 

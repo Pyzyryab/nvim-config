@@ -2,9 +2,9 @@
 --
 return {
     dependencies = {
-        {'L3MON4D3/LuaSnip'}
+        { 'L3MON4D3/LuaSnip' }
     },
-   config = function()
+    config = function()
         -- Here is where you configure the autocompletion settings.
         local lsp_zero = require('lsp-zero')
         lsp_zero.extend_cmp()
@@ -30,26 +30,25 @@ return {
             sources = {
                 { name = 'nvim_lsp' },
                 { name = 'path' },
-                { name = 'luasnip', keyword_length = 2 },
-                { name = 'buffer',  keyword_length = 3 },
+                { name = 'luasnip',   keyword_length = 2 },
+                { name = 'buffer',    keyword_length = 3 },
                 { name = 'calc' },
                 { name = 'treesitter' },
-            },
-            completion = {
-                completeopt = "menu,menuone,noinsert",
             },
             window = {
                 completion = cmp.config.window.bordered(),
                 documentation = cmp.config.window.bordered(),
             },
-            -- default keybindings for nvim-cmp are here:
-            -- https://github.com/VonHeikemen/lsp-zero.nvim/blob/v3.x/README.md#keybindings-1
             mapping = cmp.mapping.preset.insert({
                 -- confirm completion item
-                ['<Enter>'] = cmp.mapping.confirm({ select = false }),
+                ['<CR>'] = cmp.mapping.confirm({ select = false }),
 
                 -- trigger completion menu
                 ['<C-Space>'] = cmp.mapping.complete(),
+
+                -- Cycle the completition menu
+                ['<Tab>'] = cmp_action.luasnip_supertab(),
+                ['<S-Tab>'] = cmp_action.luasnip_shift_supertab(),
 
                 -- scroll up and down the documentation window
                 ['<C-u>'] = cmp.mapping.scroll_docs(-4),
@@ -66,10 +65,10 @@ return {
             formatting = {
                 format = lspkind.cmp_format({
                     mode = 'symbol', -- show only symbol annotations
-                    maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
+                    maxwidth = 50,   -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
                     -- can also be a function to dynamically calculate max width such as
                     -- maxwidth = function() return math.floor(0.45 * vim.o.columns) end,
-                    ellipsis_char = '...', -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
+                    ellipsis_char = '...',    -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
                     show_labelDetails = true, -- show labelDetails in menu. Disabled by default
 
                     -- The function below will be called before any actual modifications from lspkind

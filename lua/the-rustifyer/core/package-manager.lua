@@ -49,7 +49,7 @@ lazy.setup(lazy_plugins, {
         lazy = true,
     },
     install = {
-        colorscheme = { 'catpuccin', },
+        colorscheme = { 'catppuccin', },
     },
     checker = { enabled = true }, -- automatically check for plugin update_in_insert
     cache = {

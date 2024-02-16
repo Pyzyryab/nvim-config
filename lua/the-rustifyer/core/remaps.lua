@@ -5,83 +5,107 @@
 local procs = require('the-rustifyer.utils.procedures')
 local wk = require('which-key')
 
-local cmd = '<Cmd>'
+local CMD = '<Cmd>'
 local CR = '<CR>'
+local ESC = '<Esc>'
 
 wk.register({
-    ['<S-h>'] = { '<cmd>BufferLineCyclePrev<cr>', 'Prev buffer' },
-    ['<S-l>'] = { '<cmd>BufferLineCycleNext<cr>', 'Next buffer' },
-}, { mode = 'n' })
+    { mode = 'v' },
+    ['<leader>'] = {
+        c = {
+            b = {
+                function()
+                    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(ESC, true, true, true), 'n', true)
+                    require("Comment.api").toggle.linewise(vim.fn.visualmode())
+                end, 'Comment selection'
+            },
+        },
+    },
+})
 
 wk.register({
     { mode = 'n' },
+    ['<A-h>'] = { CMD .. 'BufferLineCyclePrev' .. CR, 'Prev buffer' },
+    ['<A-l>'] = { CMD .. 'BufferLineCycleNext' .. CR, 'Next buffer' },
     ['<leader>'] = {
         a = {
-            w = { '<cmd>AddWorkspace<cr>', 'Add the CWD to the projects of the workspace' },
+            w = { CMD .. 'AddWorkspace' .. CR, 'Add the CWD to the projects of the workspace' },
         },
         b = {
             name = '+buffers',
-            p = { '<Cmd> BufferLineTogglePin<CR>', 'Toggle pin' },
-            P = { '<Cmd> BufferLineGroupClose ungrouped<CR>', 'Delete non-pinned buffers' },
-            o = { '<Cmd> BufferLineCloseOthers<CR>', 'Delete other buffers' },
-            r = { '<Cmd> BufferLineCloseRight<CR>', 'Delete buffers to the right' },
-            l = { '<Cmd> BufferLineCloseLeft<CR>', 'Delete buffers to the left' },
+            p = { CMD .. 'BufferLineTogglePin' .. CR, 'Toggle pin' },
+            P = { CMD .. 'BufferLineGroupClose ungrouped' .. CR, 'Delete non-pinned buffers' },
+            o = { CMD .. 'BufferLineCloseOthers' .. CR, 'Delete other buffers' },
+            r = { CMD .. 'BufferLineCloseRight' .. CR, 'Delete buffers to the right' },
+            l = { CMD .. 'BufferLineCloseLeft' .. CR, 'Delete buffers to the left' },
             d = { procs.minibufremove, 'Delete Buffer' },
             D = { function() require("mini.bufremove").delete(0, true) end, 'Delete Buffer (Force)' },
         },
         B = {
             name = '+breakpoints',
-            B = { '<cmd>lua require"dap".toggle_breakpoint()<cr>', 'Set breakpoint' },
-            C = { '<cmd>lua require"dap".set_breakpoint(vim.fn.input("Breakpoint condition: "))<cr>', 'Set conditional breakpoint' },
-            L = { '<cmd>lua require"dap".set_breakpoint(nil, nil, vim.fn.input("Log point message: "))<cr>', 'Set log point' },
-            R = { '<cmd>lua require"dap".clear_breakpoints()<cr>', 'Clear breakpoints' },
-            F = { '<cmd>Telescope dap list_breakpoints<cr>', 'List breakpoints' },
+            B = { CMD .. 'lua require"dap".toggle_breakpoint()' .. CR, 'Set breakpoint' },
+            C = { CMD .. 'lua require"dap".set_breakpoint(vim.fn.input("Breakpoint condition: "))' .. CR, 'Set conditional breakpoint' },
+            L = { CMD .. 'lua require"dap".set_breakpoint(nil, nil, vim.fn.input("Log point message: "))' .. CR, 'Set log point' },
+            R = { CMD .. 'lua require"dap".clear_breakpoints()' .. CR, 'Clear breakpoints' },
+            F = { CMD .. 'Telescope dap list_breakpoints' .. CR, 'List breakpoints' },
+        },
+        c = {
+            b = {
+                function()
+                    require("Comment.api").toggle.blockwise.current()
+                end, 'Comment selection'
+            },
+            l = {
+                function()
+                    require("Comment.api").toggle.linewise.current()
+                end, 'Comment line'
+            },
         },
         d = {
             name = '+diagnostics/trouble',
-            t = { '<Cmd> lua require("trouble").toggle() <CR>', 'Trouble toogle' },
-            w = { '<Cmd> lua require("trouble").toggle("workspace_diagnostics") <CR>', 'Workspace diagnostics' },
-            d = { '<Cmd> lua require("trouble").toggle("document_diagnostics") <CR>', 'Document diagnostics' },
-            q = { '<Cmd> lua require("trouble").toggle("quickfix") <CR>', 'Diagnostics quickfix' },
-            l = { '<Cmd> lua require("trouble").toggle("loclist") <CR>', 'Diagnostics loclist' },
-            r = { '<Cmd> lua require("trouble").toggle("lsp_references") <CR>', 'Lsp References' },
+            t = { CMD .. 'lua require("trouble").toggle() ' .. CR, 'Trouble toogle' },
+            w = { CMD .. 'lua require("trouble").toggle("workspace_diagnostics") ' .. CR, 'Workspace diagnostics' },
+            d = { CMD .. 'lua require("trouble").toggle("document_diagnostics") ' .. CR, 'Document diagnostics' },
+            q = { CMD .. 'lua require("trouble").toggle("quickfix") ' .. CR, 'Diagnostics quickfix' },
+            l = { CMD .. 'lua require("trouble").toggle("loclist") ' .. CR, 'Diagnostics loclist' },
+            r = { CMD .. 'lua require("trouble").toggle("lsp_references") ' .. CR, 'Lsp References' },
         },
         D = {
             name = '+debugger',
-            C = { '<cmd>lua require"dap".continue()<cr>', 'Continue' },
-            J = { '<cmd>lua require"dap".step_over()<cr>', 'Step over' },
-            K = { '<cmd>lua require"dap".step_into()<cr>', 'Step into' },
-            O = { '<cmd>lua require"dap".step_out()<cr>', 'Step out' },
-            D = { '<cmd>lua require"dap".disconnect()<cr>', '' },
-            T = { '<cmd>lua require"dap".terminate()<cr>', 'Terminate' },
-            R = { '<cmd>lua require"dap".repl.toggle()<cr>', 'Open REPL' },
-            L = { '<cmd>lua require"dap".run_last()<cr>', 'Run Last' },
+            C = { CMD .. 'lua require"dap".continue()' .. CR, 'Continue' },
+            J = { CMD .. 'lua require"dap".step_over()' .. CR, 'Step over' },
+            K = { CMD .. 'lua require"dap".step_into()' .. CR, 'Step into' },
+            O = { CMD .. 'lua require"dap".step_out()' .. CR, 'Step out' },
+            D = { CMD .. 'lua require"dap".disconnect()' .. CR, '' },
+            T = { CMD .. 'lua require"dap".terminate()' .. CR, 'Terminate' },
+            R = { CMD .. 'lua require"dap".repl.toggle()' .. CR, 'Open REPL' },
+            L = { CMD .. 'lua require"dap".run_last()' .. CR, 'Run Last' },
             V = { 'function() require"dap.ui.widgets".hover() end', 'Variables' },
             s = { function()
                 local widgets = require "dap.ui.widgets"; widgets.centered_float(widgets.scopes)
             end, 'Scopes' },
-            F = { '<cmd>Telescope dap frames<cr>', 'List Frames' },
-            Q = { '<cmd>Telescope dap commands<cr>', 'List commands' },
+            F = { CMD .. 'Telescope dap frames' .. CR, 'List Frames' },
+            Q = { CMD .. 'Telescope dap commands' .. CR, 'List commands' },
         },
         e = {
             name = 'editor',
-            t = { '<cmd>Neotree toggle<cr>', 'toggles neotree depending on its current status' },
-            o = { '<cmd>Neotree<cr>', 'opens neotree' },
-            b = { '<cmd>Neotree toggle show buffers right<cr>', 'neotree toggle show buffers right' },
-            g = { '<cmd>Neotree float git status<cr>', 'neotree show git status' },
+            t = { CMD .. 'Neotree toggle' .. CR, 'toggles neotree depending on its current status' },
+            o = { CMD .. 'Neotree' .. CR, 'opens neotree' },
+            b = { CMD .. 'Neotree toggle show buffers right' .. CR, 'neotree toggle show buffers right' },
+            g = { CMD .. 'Neotree float git status' .. CR, 'neotree show git status' },
         },
         f = {
             name = '+find/file',
-            f = { '<cmd>Telescope find_files<cr>', 'find files' },
-            o = { '<cmd>Telescope oldfiles<cr>', 'open recent files' },
-            g = { '<cmd>Telescope git_files<cr>', 'find files on git repository' },
-            b = { '<cmd>Telescope buffers<cr>', 'Find open buffers' },
-            c = { '<cmd>Telescope commands<cr>', 'Show commands' },
-            h = { '<cmd>Telescope help_tags<cr>', 'Show help tags' },
-            p = { '<cmd>Telescope projections<cr>', 'Search projects' },
+            f = { CMD .. 'Telescope find_files' .. CR, 'find files' },
+            o = { CMD .. 'Telescope oldfiles' .. CR, 'open recent files' },
+            g = { CMD .. 'Telescope git_files' .. CR, 'find files on git repository' },
+            b = { CMD .. 'Telescope buffers' .. CR, 'Find open buffers' },
+            c = { CMD .. 'Telescope commands' .. CR, 'Show commands' },
+            h = { CMD .. 'Telescope help_tags' .. CR, 'Show help tags' },
+            p = { CMD .. 'Telescope projections' .. CR, 'Search projects' },
             k = { function() require("telescope.builtin").colorscheme() end, 'Show and preview colorschemes' },
-            t = { '<cmd>TodoTelescope<cr>', 'Open a TODOs preview' },
-            n = { '<cmd>Telescope notify<cr>', 'Displays the notifications triggered' },
+            t = { CMD .. 'TodoTelescope' .. CR, 'Open a TODOs preview' },
+            n = { CMD .. 'Telescope notify' .. CR, 'Displays the notifications triggered' },
         },
         g = {
             name = '+git',
@@ -102,7 +126,7 @@ wk.register({
         l = {
             name = '+line/live',
             n = { procs.toggle_line_numbers, 'Toggle between absolute and relative line numbers' },
-            g = { '<cmd>Telescope live_grep<cr>', 'Find text in files' },
+            g = { CMD .. 'Telescope live_grep' .. CR, 'Find text in files' },
         },
         p = {
             name = '+persistence',
@@ -110,17 +134,17 @@ wk.register({
             l = { function() require("persistence").load({ last = true }) end, 'Restore Last Session' },
             d = { function() require("persistence").stop() end, 'Don\'t Save Current Session' },
         },
-        q = { '<cmd>close<CR>', 'Fires the `Close` cmd' },
+        q = { CMD .. 'close' .. CR, 'Fires the `Close` cmd' },
         s = {
             name = '+search',
-            s = { '<cmd>lua require("spectre").toggle()<CR>', 'Toggle Spectre' },
-            w = { '<cmd>lua require("spectre").open_visual({select_word=true})<CR>', 'Search current word' },
-            p = { '<cmd>lua require("spectre").open_file_search({select_word=true})<CR>', 'Search on current file' }
+            s = { CMD .. 'lua require("spectre").toggle()' .. CR, 'Toggle Spectre' },
+            w = { CMD .. 'lua require("spectre").open_visual({select_word=true})' .. CR, 'Search current word' },
+            p = { CMD .. 'lua require("spectre").open_file_search({select_word=true})' .. CR, 'Search on current file' }
         },
         t = {
             name = 'terminal',
-            s = { cmd .. 'TermSelect' .. CR, 'Shows opened terminals. Allows to pick them' },
-            o = { cmd .. 'ToggleTerm' .. CR, 'Toggle ToggleTerm' },
+            s = { CMD .. 'TermSelect' .. CR, 'Shows opened terminals. Allows to pick them' },
+            o = { CMD .. 'ToggleTerm' .. CR, 'Toggle ToggleTerm' },
             g = { function()
                 local Terminal = require('toggleterm.terminal').Terminal
                 local lazygit  = Terminal:new({
@@ -172,13 +196,12 @@ end
 -- if you only want these mappings for toggle term use term://*toggleterm#* instead
 vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
 
---
+
+----------------- General custom remaps -----------------
 --
 
 local noremapsilent = { noremap = true, silent = true }
 
------------------ General custom remaps -----------------
---
 -- Opens `Newtr` file explorer
 vim.keymap.set('n', '<leader>pv', vim.cmd.Ex)
 
@@ -189,16 +212,16 @@ vim.api.nvim_set_keymap('n', '<S-Tab>', '<<', noremapsilent)
 vim.api.nvim_set_keymap('v', '<S-Tab>', '<gv', noremapsilent)
 
 -- Move to window using the <ctrl> + hjkl keys
-vim.keymap.set("n", "<C-h>", "<C-w>h", { desc = "Go to left window", remap = true })
-vim.keymap.set("n", "<C-j>", "<C-w>j", { desc = "Go to lower window", remap = true })
-vim.keymap.set("n", "<C-k>", "<C-w>k", { desc = "Go to upper window", remap = true })
-vim.keymap.set("n", "<C-l>", "<C-w>l", { desc = "Go to right window", remap = true })
+vim.keymap.set('n', "<C-h>", "<C-w>h", { desc = "Go to left window", remap = true })
+vim.keymap.set('n', "<C-j>", "<C-w>j", { desc = "Go to lower window", remap = true })
+vim.keymap.set('n', "<C-k>", "<C-w>k", { desc = "Go to upper window", remap = true })
+vim.keymap.set('n', "<C-l>", "<C-w>l", { desc = "Go to right window", remap = true })
 
 -- Resize the current windows size with <ctr> + arrow keys
-vim.keymap.set("n", "<C-Up>", "<cmd>resize -2<cr>", { desc = "Increase window height" })
-vim.keymap.set("n", "<C-Down>", "<cmd>resize +2<cr>", { desc = "Decrease window height" })
-vim.keymap.set("n", "<C-Left>", "<cmd>vertical resize -2<cr>", { desc = "Decrease window width" })
-vim.keymap.set("n", "<C-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase window width" })
+vim.keymap.set('n', "<C-Up>", "<Cmd> resize -2<CR>", { desc = "Increase window height" })
+vim.keymap.set('n', "<C-Down>", "<Cmd> resize +2<CR>", { desc = "Decrease window height" })
+vim.keymap.set('n', "<C-Left>", "<Cmd> vertical resize -2<CR>", { desc = "Decrease window width" })
+vim.keymap.set('n', "<C-Right>", "<Cmd> vertical resize +2<CR>", { desc = "Increase window width" })
 
 -- Moves the selected lines in Visual mode one down (J) or one up (K)
 -- TODO in 'n' and 'v' with Alt - J/K
@@ -230,3 +253,8 @@ vim.keymap.set('n', '<leader>Y', [["+Y]])
 -- the selected text and place it into the black hole register,
 vim.keymap.set({ 'n', 'v' }, '<leader>d', [["_d]])
 
+-- This is going to get The Primagean cancelled X)
+-- But seriously, is not only useful for preserving the content while on vertical visual,
+-- but also helps with Telescope to not close it but easily leave insert mode while
+-- typing something to search without having to hit <Esc>
+vim.keymap.set('i', '<C-c>', '<Esc>')

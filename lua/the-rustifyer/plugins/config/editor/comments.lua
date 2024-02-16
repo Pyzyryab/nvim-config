@@ -1,7 +1,7 @@
 -- Configuration for the `Comments` plugin
 --
 return {
-    event = { 'BufReadPre', 'BufNewFile' },
+    event = { 'BufReadPost', 'BufNewFile' },
     opts = {
         ---Add a space b/w comment and the line
         padding = true,
@@ -9,31 +9,13 @@ return {
         sticky = true,
         ---Lines to be ignored while (un)comment
         ignore = nil,
-        ---LHS of toggle mappings in NORMAL mode
-        toggler = {
-            ---Line-comment toggle keymap
-            line = '<leader>cl',
-            ---Block-comment toggle keymap
-            block = '<leader>cb',
-        },
-        ---LHS of operator-pending mappings in NORMAL and VISUAL mode
-        opleader = {}, -- I don't need them
-        ---LHS of extra mappings
-        extra = {
-            ---Add comment on the line above
-            above = '<leader>ca',
-            ---Add comment on the line below
-            below = '<leader>cu',
-            ---Add comment at the end of line
-            eol = '<leader>ce',
-        },
         ---Enable keybindings
         ---NOTE: If given `false` then the plugin won't create any mappings
         mappings = {
             ---Operator-pending mapping; `gcc` `gbc` `gc[count]{motion}` `gb[count]{motion}`
-            basic = true,
+            basic = false,
             ---Extra mapping; `gco`, `gcO`, `gcA`
-            extra = true,
+            extra = false,
         },
         ---Function to call before (un)comment
         pre_hook = nil,

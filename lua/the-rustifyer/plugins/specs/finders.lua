@@ -9,5 +9,7 @@ finders.fzf_native = 'nvim-telescope/telescope-fzf-native.nvim'
 finders.flash = 'folke/flash.nvim'
 finders.spectre = 'nvim-pack/nvim-spectre'
 
-return finders
+-- Find yanked content to the vim registers
+finders.neoclip = 'AckslD/nvim-neoclip.lua'
 
+return finders
