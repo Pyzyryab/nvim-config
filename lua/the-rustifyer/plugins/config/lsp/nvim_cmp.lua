@@ -1,6 +1,9 @@
 -- `nvim cmp` configuration
 --
 return {
+    dependencies = {
+        {'L3MON4D3/LuaSnip'}
+    },
    config = function()
         -- Here is where you configure the autocompletion settings.
         local lsp_zero = require('lsp-zero')
@@ -30,6 +33,7 @@ return {
                 { name = 'luasnip', keyword_length = 2 },
                 { name = 'buffer',  keyword_length = 3 },
                 { name = 'calc' },
+                { name = 'treesitter' },
             },
             completion = {
                 completeopt = "menu,menuone,noinsert",

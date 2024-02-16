@@ -5,12 +5,9 @@ local procs = require('the-rustifyer.utils.procedures')
 
 return {
     config = function()
-        -- This is where all the LSP shenanigans will live
         local lsp_zero = require('lsp-zero')
         lsp_zero.extend_lspconfig()
-        -- TODO discard from lsp_zero the java autoconfig
-        --- if you want to know more about lsp-zero and mason.nvim
-        --- read this: https://github.com/VonHeikemen/lsp-zero.nvim/blob/v3.x/doc/md/guides/integrate-with-mason-nvim.md
+
         lsp_zero.on_attach(function(client, bufnr)
             -- Integration with navic
             if client.server_capabilities.documentSymbolProvider then
@@ -43,7 +40,6 @@ return {
         end)
 
         local lspconfig = require('lspconfig')
-
         require('mason-lspconfig').setup({
             handlers = {
                 lsp_zero.default_setup,
@@ -55,7 +51,7 @@ return {
                 -- require('lspconfig').clangd.setup { on_attach = on_attach },
                 -- require('lspconfig').rust_analyzer.setup { on_attach = on_attach },
                 clangd = function()
-                    lspconfig.clangd.setup(
+                    lspconfig.clangd.setup({
                         keys = {
                             { "<leader>cR", "<cmd>ClangdSwitchSourceHeader<cr>", desc = "Switch Source/Header (C/C++)" },
                         },
