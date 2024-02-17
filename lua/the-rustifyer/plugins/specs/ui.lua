@@ -25,5 +25,8 @@ ui.transparent = 'xiyaowong/transparent.nvim'
 -- Better vim.ui
 ui.dressing = 'stevearc/dressing.nvim'
 
+-- Lsp progress status
+ui.lsp_progress = 'linrongbin16/lsp-progress.nvim'
+
 return ui
 
