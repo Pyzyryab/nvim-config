@@ -5,10 +5,15 @@
 local procs = require('the-rustifyer.utils.procedures')
 local wk = require('which-key')
 
+-- We store here this callback, so we can pass it later to remaps that should be only working on
+-- specific buffers
+local bufnr = vim.api.nvim_get_current_buf()
+
 local CMD = '<Cmd>'
 local CR = '<CR>'
 local ESC = '<Esc>'
 
+-- Visual mode ones
 wk.register({
     { mode = 'v' },
     ['<leader>'] = {
@@ -23,6 +28,93 @@ wk.register({
     },
 })
 
+-- The Rust remaps :D
+-- Care! They only work when a buffer of ft = 'Rust' is opened and 'rust-analyzer'
+-- is completly load. Otherwise, an error will be thrown
+wk.register({
+    { mode = 'n', buffer = bufnr },
+    ['<leader>'] = {
+        r = {
+            name = '+Rust LSP actions (care!: only enabled for ft = Rust)',
+            c = {
+                function() vim.cmd.RustLsp('openCargo') end, 'Open cargo.toml'
+            },
+            d = {
+                function() vim.cmd.RustLsp('debuggables') end, 'Show debuggables'
+            },
+            D = {
+                -- Display a hover window with the rendered diagnostic, as displayed during cargo build.
+                -- Useful for solving bugs around borrowing and generics, as it consolidates the important bits
+                -- (sometimes across files) together.
+                function() vim.cmd.RustLsp('renderDiagnostic') end, 'Render diagnostic'
+            },
+            e = {
+                -- My favourite one!
+                -- Display a hover window with explanations from the rust error codes index over error diagnostics
+                -- (if they have an error code).
+                function() vim.cmd.RustLsp('explainError') end, 'Explain error'
+            },
+            h = {
+                -- Replaces Neovim's built-in hover handler with hover actions, so you can also use vim.lsp.buf.hover()
+                function() vim.cmd.RustLsp { 'hover', 'actions' } end, 'Hover actions'
+            },
+            p = {
+                function() vim.cmd.RustLsp('parentModule') end, 'Parent module'
+            },
+            r = {
+                function() vim.cmd.RustLsp('runnables') end, 'Show runnables'
+            },
+            t = {
+                function() vim.cmd.RustLsp('testables') end, 'Show testables'
+            },
+        },
+        rl = {
+            name = '+last selected',
+            r = {
+                function() vim.cmd.RustLsp { 'runnables', bang = true } end, 'launch previous runnable'
+            },
+            t = {
+                function() vim.cmd.RustLsp { 'testables', bang = true } end, 'launch previous testable'
+            },
+            d = {
+                function() vim.cmd.RustLsp { 'debuggables', bang = true } end, 'launch previous debuggable'
+            },
+        },
+        rm = {
+            name = '+macros',
+            e = {
+                function() vim.cmd.RustLsp('expandmacro') end, 'Expand macro'
+            },
+            r = {
+                function() vim.cmd.RustLsp('rebuildProcMacros') end, 'Rebuild proc macros'
+            },
+        },
+        rv = {
+            name = '+view',
+            h = {
+                function() vim.cmd.RustLsp { 'view', 'hir' } end, 'View HIR'
+            },
+            m = {
+                function() vim.cmd.RustLsp { 'view', 'mir' } end, 'View MIR'
+            },
+            s = {
+                function()
+                    vim.cmd.RustLsp {
+                        'workspaceSymbol',
+                        '<onlyTypes|allSymbols>' --[[ optional ]],
+                        -- '<query>' --[[ optional ]],
+                        bang = true --[[ optional ]]
+                    }
+                end, 'Show workspace symbols (with deps)'
+            },
+            t = {
+                function() vim.cmd.RustLsp('syntaxTree') end, 'Show syntax tree'
+            },
+        },
+    }
+})
+
+-- General remaps
 wk.register({
     { mode = 'n' },
     ['<A-h>'] = { CMD .. 'BufferLineCyclePrev' .. CR, 'Prev buffer' },
