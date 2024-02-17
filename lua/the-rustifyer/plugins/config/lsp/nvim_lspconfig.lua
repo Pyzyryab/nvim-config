@@ -46,6 +46,7 @@ return {
         require('mason-lspconfig').setup({
             handlers = {
                 lsp_zero.default_setup,
+                rust_analyzer = lsp_zero.noop, -- The `rustaceanvim` plugin will take care of this
                 lua_ls = function()
                     local lua_opts = lsp_zero.nvim_lua_ls()
                     lspconfig.lua_ls.setup(lua_opts)

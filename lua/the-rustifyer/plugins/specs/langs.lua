@@ -2,6 +2,8 @@
 -- but for specific languages
 
 return {
+    -- Rust
+    rustaceanvim = 'mrcjkb/rustaceanvim',
     -- C++, C
     clangd_extension = 'p00f/clangd_extensions.nvim',
     -- Java
