@@ -30,13 +30,12 @@ return {
                 },
                 vimgrep_arguments = {
                     "rg",
-                    "--color=always",
+                    "--color=never",
                     "--no-heading",
                     "--with-filename",
                     "--line-number",
                     "--column",
                     "--smart-case",
-                    "--trim"
                 },
             },
             extensions = {
