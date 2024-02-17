@@ -1,9 +1,9 @@
 -- Custom VIM autocommands
 --
 
-local augroup = vim.api.nvim_create_augroup       -- Create/get autocommand group
-local autocmd = vim.api.nvim_create_autocmd       -- Create autocommand
-local usercmd = vim.api.nvim_create_user_command   -- Create usercommand
+local augroup = vim.api.nvim_create_augroup      -- Create/get autocommand group
+local autocmd = vim.api.nvim_create_autocmd      -- Create autocommand
+local usercmd = vim.api.nvim_create_user_command -- Create usercommand
 
 --- Allowing 'wqa' to leave even if there's `ToggleTerm` instances active
 autocmd({ "TermEnter" }, {
@@ -24,22 +24,22 @@ autocmd({ "TermEnter" }, {
 -- Highlight on yank
 augroup('YankHighlight', { clear = true })
 autocmd('TextYankPost', {
-  group = 'YankHighlight',
-  callback = function()
-    vim.highlight.on_yank({ higroup = 'IncSearch', timeout = '1000' })
-  end
+    group = 'YankHighlight',
+    callback = function()
+        vim.highlight.on_yank({ higroup = 'IncSearch', timeout = '1000' })
+    end
 })
 
 -- Remove whitespace on save
 autocmd('BufWritePre', {
-  pattern = '',
-  command = ":%s/\\s\\+$//e"
+    pattern = '',
+    command = ":%s/\\s\\+$//e"
 })
 
 -- listen lsp-progress event and refresh lualine
 vim.api.nvim_create_augroup("lualine_augroup", { clear = true })
 vim.api.nvim_create_autocmd("User", {
-  group = "lualine_augroup",
-  pattern = "LspProgressStatusUpdated",
-  callback = require("lualine").refresh,
+    group = "lualine_augroup",
+    pattern = "LspProgressStatusUpdated",
+    callback = require("lualine").refresh,
 })
