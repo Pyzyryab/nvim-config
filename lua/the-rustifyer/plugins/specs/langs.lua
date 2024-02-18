@@ -4,6 +4,7 @@
 return {
     -- Rust
     rustaceanvim = 'mrcjkb/rustaceanvim',
+    crates = 'saecki/crates.nvim',
     -- C++, C
     clangd_extension = 'p00f/clangd_extensions.nvim',
     -- Java
