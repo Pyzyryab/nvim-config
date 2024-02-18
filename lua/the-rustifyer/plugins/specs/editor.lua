@@ -7,9 +7,6 @@ return {
     indent_blankline = 'lukas-reineke/indent-blankline.nvim',
     mini_identscope = 'echasnovski/mini.indentscope',
 
-    -- Folding capabilities
-    ufo = 'kevinhwang91/nvim-ufo',
-
     -- Statuline with the LSP symbols
     winbar = 'SmiteshP/nvim-navic',
 

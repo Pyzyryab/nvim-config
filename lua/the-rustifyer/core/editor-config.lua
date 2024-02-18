@@ -29,6 +29,7 @@ end
 
 vim.opt.nu = true
 vim.opt.relativenumber = true
+vim.opt.cursorline = true
 
 vim.opt.tabstop = 4 -- indentation's configuration (tabs at 4, please!)
 vim.opt.softtabstop = 4
@@ -58,4 +59,9 @@ vim.opt.colorcolumn = '120' -- maybe a function per type of language in the open
 vim.o.foldcolumn = '1'
 vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
 vim.o.foldlevelstart = 99
-vim.o.foldenable = true
+-- vim.o.foldenable = true
+
+-- Treesitter folding
+vim.wo.foldmethod = 'expr'
+vim.wo.foldexpr = 'nvim_treesitter#foldexpr()'
+
