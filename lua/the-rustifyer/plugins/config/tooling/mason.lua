@@ -25,7 +25,7 @@ return {
             'cpptools',
             'java-debug-adapter',
             'java-test',
-           
+
             -- formatters
             'asmfmt',
         },

@@ -29,12 +29,12 @@ dirs.plugins = utils.path.join(dirs.root, consts.plugins)
 dirs.specs = utils.path.join(dirs.plugins, consts.specs)
 dirs.plugins_config = utils.path.join(dirs.plugins, consts.config)
 
-    dirs.nvim = vim.fn.stdpath('config')
-    dirs.nvim_data = vim.fn.stdpath('data')
-    dirs.lua = utils.path.join(dirs.nvim, consts.lua)
+dirs.nvim = vim.fn.stdpath('config')
+dirs.nvim_data = vim.fn.stdpath('data')
+dirs.lua = utils.path.join(dirs.nvim, consts.lua)
 
+--
 consts.mods = mods
 consts.dirs = dirs
 
 return consts
-

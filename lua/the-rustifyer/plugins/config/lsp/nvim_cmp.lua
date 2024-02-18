@@ -29,6 +29,7 @@ return {
             -- https://github.com/VonHeikemen/lsp-zero.nvim/blob/v3.x/doc/md/autocomplete.md#adding-a-source
             sources = {
                 { name = 'nvim_lsp' },
+                { name = 'nvim_lsp_signature_help' },
                 { name = 'path' },
                 { name = 'luasnip',   keyword_length = 2 },
                 { name = 'buffer',    keyword_length = 3 },
