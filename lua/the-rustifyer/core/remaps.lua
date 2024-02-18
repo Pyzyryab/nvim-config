@@ -178,12 +178,11 @@ wk.register({
             end, 'Scopes' },
             F = { CMD .. 'Telescope dap frames' .. CR, 'List Frames' },
             Q = { CMD .. 'Telescope dap commands' .. CR, 'List commands' },
+            U = { function() require("dapui").toggle() end, 'Open debugger UI' },
             -- Pending to add or to review
-            -- :Telescope dap commands
             -- :Telescope dap configurations
             -- :Telescope dap list_breakpoints
             -- :Telescope dap variables
-            -- :Telescope dap frames
         },
         e = {
             name = 'editor',
