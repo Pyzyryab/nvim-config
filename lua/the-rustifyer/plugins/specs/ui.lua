@@ -8,10 +8,7 @@ ui.nui = {'MunifTanjim/nui.nvim', no_extra_config = true}
 ui.web_devicons = {'nvim-tree/nvim-web-devicons', no_extra_config = true}
 
 -- bottom statusline
-ui.lualine = {
-    'nvim-lualine/lualine.nvim',
-    event = 'VeryLazy',
-}
+ui.lualine = { 'nvim-lualine/lualine.nvim' }
 
 -- Winbar
 ui.barbecue = "utilyre/barbecue.nvim"

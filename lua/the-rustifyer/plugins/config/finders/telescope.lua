@@ -1,7 +1,8 @@
 -- Configuration for the `telescope` Neovim plugin
 --
 return {
-    event = 'VeryLazy',
+    -- event = 'VeryLazy',
+    cmd = { 'Telescope' },
     tag = '0.1.5',
     dependencies = { 'nvim-lua/plenary.nvim' },
     config = function()

@@ -1,6 +1,7 @@
 -- Configuration for the statusline shown on the bottom of the editor
 --
 return {
+    event = 'VeryLazy',
     config = function()
         require('lsp-progress').setup({})
         require('lualine').setup({

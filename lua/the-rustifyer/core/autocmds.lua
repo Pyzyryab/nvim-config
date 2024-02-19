@@ -8,7 +8,6 @@ local usercmd = vim.api.nvim_create_user_command -- Create usercommand
 --- Allowing 'wqa' to leave even if there's `ToggleTerm` instances active
 autocmd({ "TermEnter" }, {
     callback = function()
-        print('Raising TermEnter autocommand')
         for _, buffers in ipairs(vim.fn.getbufinfo()) do
             local filetype = vim.api.nvim_buf_get_option(buffers.bufnr, "filetype")
             if filetype == "toggleterm" then
@@ -36,10 +35,10 @@ autocmd('BufWritePre', {
     command = ":%s/\\s\\+$//e"
 })
 
--- listen lsp-progress event and refresh lualine
+--[[ -- listen lsp-progress event and refresh lualine
 vim.api.nvim_create_augroup("lualine_augroup", { clear = true })
 vim.api.nvim_create_autocmd("User", {
     group = "lualine_augroup",
     pattern = "LspProgressStatusUpdated",
     callback = require("lualine").refresh,
-})
+}) ]]
