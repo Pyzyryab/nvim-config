@@ -60,16 +60,16 @@ return {
                         },
                         root_dir = function(fname)
                             return require("lspconfig.util").root_pattern(
-                                    "compile_commands.json",
-                                    "compile_flags.txt",
-                                    "Makefile",
-                                    "configure.ac",
-                                    "configure.in",
-                                    "config.h.in",
-                                    "meson.build",
-                                    "meson_options.txt",
-                                    "build.ninja"
-                                )(fname) or require("lspconfig.util").find_git_ancestor(fname)
+                                "compile_commands.json",
+                                "compile_flags.txt",
+                                "Makefile",
+                                "configure.ac",
+                                "configure.in",
+                                "config.h.in",
+                                "meson.build",
+                                "meson_options.txt",
+                                "build.ninja"
+                            )(fname) or require("lspconfig.util").find_git_ancestor(fname)
                         end,
                         filetypes = { 'c', 'cc', 'cpp', 'cppm', 'ixx', 'objc', 'cuda', 'proto' },
                         capabilities = {
@@ -83,6 +83,12 @@ return {
                             "--completion-style=detailed",
                             "--function-arg-placeholders",
                             "--fallback-style=llvm",
+                            "--pch-storage=memory",
+                            "--suggest-missing-includes",
+                            "--all-scopes-completion",
+                            "--log=verbose",
+                            "--pretty",
+                            "--header-insertion=never"
                         },
                         init_options = {
                             usePlaceholders = true,
