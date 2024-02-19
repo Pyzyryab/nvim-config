@@ -65,3 +65,6 @@ vim.o.foldlevelstart = 99
 vim.wo.foldmethod = 'expr'
 vim.wo.foldexpr = 'nvim_treesitter#foldexpr()'
 
+-- Enabling C++ typical named modules extensions to be detected as C++ files
+vim.cmd([[ autocmd BufNewFile,BufRead *.cppm set filetype=cpp ]])
+vim.cmd([[ autocmd BufNewFile,BufRead *.ixx  set filetype=cpp ]])
