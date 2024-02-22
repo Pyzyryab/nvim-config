@@ -215,14 +215,6 @@ return {
                     k = { function() require("telescope.builtin").colorscheme() end, 'Show and preview colorschemes' },
                     t = { CMD .. 'TodoTelescope' .. CR, 'Open a TODOs preview' },
                     n = { CMD .. 'Telescope notify' .. CR, 'Displays the notifications triggered' },
-                    -- Telescope pending to review and add remaps
-                    --[[ nnoremap("<leader>fm", "<cmd>Telescope marks<cr>", "Find mark")
-            nnoremap("<leader>fr", "<cmd>Telescope lsp_references<cr>", "Find references (LSP)")
-            nnoremap("<leader>fs", "<cmd>Telescope lsp_document_symbols<cr>", "Find symbols (LSP)")
-            nnoremap("<leader>fc", "<cmd>Telescope lsp_incoming_calls<cr>", "Find incoming calls (LSP)")
-            nnoremap("<leader>fo", "<cmd>Telescope lsp_outgoing_calls<cr>", "Find outgoing calls (LSP)")
-            nnoremap("<leader>fi", "<cmd>Telescope lsp_implementations<cr>", "Find implementations (LSP)")
-            nnoremap("<leader>fx", "<cmd>Telescope diagnostics bufnr=0<cr>", "Find errors (LSP)") ]]
                 },
                 g = {
                     name = '+git',
@@ -241,9 +233,17 @@ return {
                     hD = { 'Diff This ~' },
                 },
                 l = {
-                    name = '+line/live',
-                    n = { procs.toggle_line_numbers, 'Toggle between absolute and relative line numbers' },
-                    g = { CMD .. 'Telescope live_grep' .. CR, 'Find text in files' },
+                    name = '+LSP', --NOTE Not all the LSP remaps are here for now
+                    I = { CMD .. 'LspInfo' .. CR, 'Opens the LSP info floating window' },
+                    L = { CMD .. 'LspLog' .. CR, 'Opens the LSP log file' },
+                    r = { CMD .. 'Telescope lsp_references' .. CR, 'References' },
+                    s = { CMD .. 'Telescope lsp_document_symbols' .. CR, 'Symbols' },
+                    i = { CMD .. 'Telescope lsp_implementations' .. CR, 'Implementations' },
+                    e = { CMD .. 'Telescope diagnostics bufnr=0' .. CR, 'Errors' },
+                    m = { CMD .. 'Telescope marks' .. CR, 'Find Mark' },
+                    c = { CMD .. 'Telescope lsp_incoming_calls' .. CR, 'Find LSP incoming calls' },
+                    o = { CMD .. 'Telescope lsp_outgoing_calls' .. CR, 'Find LSP outgoing calls' },
+                    k = { function() require("lsp_signature").toggle_float_win() end, 'toggle signature' },
                 },
                 p = {
                     name = '+persistence',
@@ -254,6 +254,7 @@ return {
                 q = { CMD .. 'close' .. CR, 'Fires the `Close` cmd' },
                 s = {
                     name = '+search',
+                    f = { CMD .. 'Telescope live_grep' .. CR, 'Find text in files' },
                     s = { CMD .. 'lua require("spectre").toggle()' .. CR, 'Toggle Spectre' },
                     w = { CMD .. 'lua require("spectre").open_visual({select_word=true})' .. CR, 'Search current word' },
                     p = { CMD .. 'lua require("spectre").open_file_search({select_word=true})' .. CR, 'Search on current file' }
@@ -289,6 +290,10 @@ return {
                     name = '+undo',
                     t = { vim.cmd.UndotreeToggle, 'Toggles ON/OFF the handler of previous changes' },
                     n = { function() require('notify').dismiss({ silent = true, pending = true }) end, 'Dismiss all Notifications', }
+                },
+                x = {
+                    name = '+extra',
+                    n = { procs.toggle_line_numbers, 'Toggle between absolute and relative line numbers' },
                 }
             },
         })

@@ -16,9 +16,6 @@ return {
                 vim.notify('navic wasn\'t unable to attach to: ' .. vim.inspect(client), vim.log.levels.WARN, nil)
             end
 
-            require("clangd_extensions.inlay_hints").setup_autocmd()
-            require("clangd_extensions.inlay_hints").set_inlay_hints()
-
             -- see :help lsp-zero-keybindings
             -- to learn the available actions
             --lsp_zero.default_keymaps({ buffer = bufnr })
@@ -55,6 +52,10 @@ return {
                 jdtls = lsp_zero.noop, -- Exclude jdtls from automatic configuration, we are doing it with the ftplugin way
                 clangd = function()
                     lspconfig.clangd.setup({
+                        on_attach = function(_, bufnr)
+                            require("clangd_extensions.inlay_hints").setup_autocmd()
+                            require("clangd_extensions.inlay_hints").set_inlay_hints()
+                        end,
                         keys = {
                             { "<leader>cR", "<cmd>ClangdSwitchSourceHeader<cr>", desc = "Switch Source/Header (C/C++)" },
                         },
@@ -71,24 +72,26 @@ return {
                                 "build.ninja"
                             )(fname) or require("lspconfig.util").find_git_ancestor(fname)
                         end,
-                        filetypes = { 'c', 'cc', 'cpp', 'cppm', 'ixx', 'objc', 'cuda', 'proto' },
+                        filetypes = { 'c', 'cc', 'cpp', 'cppm', 'ixx', 'h', 'hpp', 'objc', 'cuda' },
                         capabilities = {
                             offsetEncoding = { "utf-16" },
                         },
                         cmd = {
-                            "clangd",
+                            "C:/msys64/clang64/bin/clangd.exe", --TODO win + msys2 specific. Configure it later
+                            '--query-driver="C:/msys64/clang64/bin/clang-*"',
+                            '--enable-config',
                             "--background-index",
                             "--clang-tidy",
-                            "--header-insertion=iwyu",
+                            -- "--header-insertion=iwyu",
                             "--completion-style=detailed",
                             "--function-arg-placeholders",
                             "--fallback-style=llvm",
-                            "--pch-storage=memory",
-                            "--suggest-missing-includes",
-                            "--all-scopes-completion",
+                            -- "--pch-storage=memory",
+                            -- "--suggest-missing-includes",
+                            -- "--all-scopes-completion",
                             "--log=verbose",
                             "--pretty",
-                            "--header-insertion=never"
+                            -- "--header-insertion=never"
                         },
                         init_options = {
                             usePlaceholders = true,
