@@ -2,7 +2,7 @@
 --
 return {
     lsp_zero = 'VonHeikemen/lsp-zero.nvim',
-    mason_lsp_config = {'williamboman/mason-lspconfig.nvim', no_extra_config = true },
+    mason_lsp_config = { 'williamboman/mason-lspconfig.nvim', no_extra_config = true },
     nvim_lspconfig = { 'neovim/nvim-lspconfig', config = true, event = { 'BufReadPre', 'BufNewFile' }, },
 
     nvim_cmp = { 'hrsh7th/nvim-cmp', event = 'InsertEnter' },
@@ -14,5 +14,14 @@ return {
     cmp_luasnip = { 'saadparwaiz1/cmp_luasnip', event = { 'BufReadPre', 'BufNewFile' }, no_extra_config = true },
     friendly_snippets = { 'rafamadriz/friendly-snippets', event = { 'BufReadPre', 'BufNewFile' }, no_extra_config = true },
     lspkind = { 'onsails/lspkind.nvim', event = { 'BufReadPre', 'BufNewFile' }, no_extra_config = true },
-}
 
+    nvim_docs = { -- Pops up a new buffer with the docs of the selected/highlighted text
+        "amrbashir/nvim-docs-view",
+        lazy = true,
+        cmd = "DocsViewToggle",
+        opts = {
+            position = "right",
+            width = 60
+        }
+    },
+}
