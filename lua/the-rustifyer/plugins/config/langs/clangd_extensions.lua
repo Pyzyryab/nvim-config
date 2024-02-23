@@ -4,9 +4,11 @@ return {
     config = function() end,
     opts = {
         inlay_hints = {
-            inline = false,
+            inline = true,
+            only_current_line = true,
+            only_current_line_autocmd = { 'CursorHold' },
         },
-        --[[ ast = {
+        ast = {
             --These require codicons (https://github.com/microsoft/vscode-codicons)
             role_icons = {
                 type = "",
@@ -25,7 +27,7 @@ return {
                 TemplateTemplateParm = "",
                 TemplateParamObject = "",
             },
-        }, ]]
+        },
     },
 }
 

@@ -25,6 +25,8 @@ ui.dressing = 'stevearc/dressing.nvim'
 -- Lsp visual information
 ui.lsp_progress = { 'linrongbin16/lsp-progress.nvim', no_extra_config = true }
 
+ui.fidget = { "j-hui/fidget.nvim", }
+
 ui.lsp_signature = {
     "ray-x/lsp_signature.nvim",
     event = 'VeryLazy',

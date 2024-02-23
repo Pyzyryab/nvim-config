@@ -2,7 +2,7 @@
 -- of showing a popup with the keymaps/remaps defined for the setup
 --
 return {
-    event = "VeryLazy",
+    event = 'VeryLazy',
     init = function()
         vim.o.timeout = true
         vim.o.timeoutlen = 1000
@@ -256,7 +256,7 @@ return {
                     u = { CMD .. 'URLOpenUnderCursor' .. CR, 'Opens the URL under the cursor' },
                     h = { CMD .. 'URLOpenHighlightAll' .. CR, 'Highlights all the URLs present on the current buffer' },
                     c = { CMD .. 'URLOpenHighlightAllClear' .. CR, 'Clears all the highlighter URLs' },
-                    o = { CMD .. 'Mason' .. CR, 'Opens the Mason GUI' },
+                    m = { CMD .. 'Mason' .. CR, 'Opens the Mason GUI' },
                 },
                 p = {
                     name = '+persistence',

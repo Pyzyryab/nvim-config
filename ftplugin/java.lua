@@ -85,7 +85,7 @@ local config = {
         -- See `data directory configuration` section in the README
         '-data',
         -- project_root_dir
-        vim.fn.getcwd() -- TODO change this when it's ready the neoconf plugin for a custom java project root
+        vim.fn.getcwd()
     },
 
     -- Here you can configure eclipse.jdt.ls specific settings

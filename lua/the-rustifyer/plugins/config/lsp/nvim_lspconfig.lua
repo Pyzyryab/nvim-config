@@ -2,6 +2,7 @@
 --
 
 local procs = require('the-rustifyer.utils.procedures')
+local consts = require('the-rustifyer.core.constants')
 
 return {
     config = function()
@@ -41,6 +42,7 @@ return {
         end)
 
         local lspconfig = require('lspconfig')
+        local lsp_util = require("lspconfig.util")
         require('mason-lspconfig').setup({
             handlers = {
                 lsp_zero.default_setup,
@@ -52,15 +54,11 @@ return {
                 jdtls = lsp_zero.noop, -- Exclude jdtls from automatic configuration, we are doing it with the ftplugin way
                 clangd = function()
                     lspconfig.clangd.setup({
-                        on_attach = function(_, bufnr)
-                            require("clangd_extensions.inlay_hints").setup_autocmd()
-                            require("clangd_extensions.inlay_hints").set_inlay_hints()
-                        end,
-                        keys = {
+                        keys = { -- TODO move it to which key
                             { "<leader>cR", "<cmd>ClangdSwitchSourceHeader<cr>", desc = "Switch Source/Header (C/C++)" },
                         },
                         root_dir = function(fname)
-                            return require("lspconfig.util").root_pattern(
+                            return lsp_util.root_pattern(
                                 "compile_commands.json",
                                 "compile_flags.txt",
                                 "Makefile",
@@ -70,14 +68,16 @@ return {
                                 "meson.build",
                                 "meson_options.txt",
                                 "build.ninja"
-                            )(fname) or require("lspconfig.util").find_git_ancestor(fname)
+                            )(fname) or lsp_util.find_git_ancestor(fname)
                         end,
-                        filetypes = { 'c', 'cc', 'cpp', 'cppm', 'ixx', 'h', 'hpp', 'objc', 'cuda' },
+                        ft = consts.lsp.clangd_fts,
                         capabilities = {
                             offsetEncoding = { "utf-16" },
                         },
                         cmd = {
-                            "C:/msys64/clang64/bin/clangd.exe", --TODO win + msys2 specific. Configure it later
+                            "C:/msys64/clang64/bin/clangd.exe", -- TODO win + msys2 specific. Configure it later
+                            -- conf below and above paths to be able to work with Unix based paths
+                            -- or wait for configure it based on some other plugin to handle dynamic config
                             '--query-driver="C:/msys64/clang64/bin/clang-*"',
                             '--enable-config',
                             "--background-index",

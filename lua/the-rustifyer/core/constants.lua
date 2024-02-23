@@ -37,4 +37,12 @@ dirs.lua = utils.path.join(dirs.nvim, consts.lua)
 consts.mods = mods
 consts.dirs = dirs
 
+-- LSP specific configurations per server
+local lsp = {
+    -- Filetypes passed to clangd to be configured
+    clangd_fts = { "c", 'cc', "cpp", 'h', 'hpp', 'cppm', 'ixx', "objc", "objcpp", "cuda" },
+}
+consts.lsp = lsp
+
+
 return consts
