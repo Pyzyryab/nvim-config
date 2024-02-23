@@ -5,17 +5,23 @@ return {
     event = 'VeryLazy',
     cmd = 'Mason',
     build = ":MasonUpdate",
-    keys = { { "<leader>cm", "<cmd>Mason<cr>", desc = "Mason" } },
     opts = {
         ensure_installed = {
             -- LSPs
             'rust-analyzer',
-            'clangd', -- C/C++
+            -- 'clangd', -- C/C++ --NOTE Clangd is always installed manually in all of my machines,
+            -- because I will have the full LLVM suite in all of them, so I don't want the Mason
+            -- version (in almost any case). Uncommented the 'clangd' entry or install it manually
+            -- via the GUI of Mason plugin (<leader>om)
+
             -- 'ast-grep',
+
             'asm-lsp', -- Assembly
+
             'jedi-language-server', -- Python
             'jdtls', -- Java (Eclipse)
             'gopls',
+
             -- 'golangci-lint-ls',
             'lua-language-server',
             'taplo', -- Markdown

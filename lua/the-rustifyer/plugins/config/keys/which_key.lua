@@ -163,6 +163,11 @@ return {
                             require("Comment.api").toggle.linewise.current()
                         end, 'Comment line'
                     },
+                    -- CMake plugin actions
+                    mg = { CMD .. 'CMakeGenerate' .. CR, 'Runs <CMakeGenerate>' },
+                    mb = { CMD .. 'CMakeBuild' .. CR, 'Runs <CMakeBuild>' },
+                    mr = { CMD .. 'CMakeRun' .. CR, 'Runs <CMakeRun>' },
+                    mt = { CMD .. 'CMakeRunTest' .. CR, 'Runs <CMakeRunTest>' },
                 },
                 d = {
                     name = '+diagnostics/trouble',
@@ -248,6 +253,10 @@ return {
                 o = {
                     name = '+open',
                     d = { CMD .. 'DocsViewToggle' .. CR, 'Toggles a buffer with documentation for the selected item' },
+                    u = { CMD .. 'URLOpenUnderCursor' .. CR, 'Opens the URL under the cursor' },
+                    h = { CMD .. 'URLOpenHighlightAll' .. CR, 'Highlights all the URLs present on the current buffer' },
+                    c = { CMD .. 'URLOpenHighlightAllClear' .. CR, 'Clears all the highlighter URLs' },
+                    o = { CMD .. 'Mason' .. CR, 'Opens the Mason GUI' },
                 },
                 p = {
                     name = '+persistence',
