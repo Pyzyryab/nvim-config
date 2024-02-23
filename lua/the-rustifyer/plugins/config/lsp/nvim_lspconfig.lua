@@ -75,7 +75,8 @@ return {
                             offsetEncoding = { "utf-16" },
                         },
                         cmd = {
-                            "C:/msys64/clang64/bin/clangd.exe", -- TODO win + msys2 specific. Configure it later
+                            vim.fn.expand("~/Desktop/TODO/code/own/llvm-project/build/bin/clangd.exe"), -- TODO win + msys2 specific. Configure it later
+                            -- "C:/msys64/clang64/bin/clangd.exe", -- TODO win + msys2 specific. Configure it later
                             -- conf below and above paths to be able to work with Unix based paths
                             -- or wait for configure it based on some other plugin to handle dynamic config
                             '--query-driver="C:/msys64/clang64/bin/clang-*"',

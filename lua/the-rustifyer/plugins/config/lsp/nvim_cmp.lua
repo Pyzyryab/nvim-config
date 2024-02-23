@@ -31,8 +31,8 @@ return {
                 { name = 'nvim_lsp' },
                 { name = 'nvim_lsp_signature_help' },
                 { name = 'path' },
-                { name = 'luasnip',   keyword_length = 2 },
-                { name = 'buffer',    keyword_length = 3 },
+                { name = 'luasnip',                keyword_length = 2 },
+                { name = 'buffer',                 keyword_length = 3 },
                 { name = 'calc' },
                 { name = 'treesitter' },
             },
@@ -75,7 +75,7 @@ return {
             formatting = {
                 format = lspkind.cmp_format({
                     mode = 'symbol_text', -- show only symbol annotations
-                    maxwidth = 50,   -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
+                    maxwidth = 50,        -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
                     -- can also be a function to dynamically calculate max width such as
                     -- maxwidth = function() return math.floor(0.45 * vim.o.columns) end,
                     ellipsis_char = '...',    -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
@@ -84,25 +84,20 @@ return {
             },
         })
         -- `/` cmdline setup.
-        cmp.setup.cmdline('/', {
+        cmp.setup.cmdline({ "/", "?" }, {
             mapping = cmp.mapping.preset.cmdline(),
             sources = {
                 { name = 'buffer' }
             }
         })
         -- `:` cmdline setup.
-        cmp.setup.cmdline(':', {
+        cmp.setup.cmdline(":", {
             mapping = cmp.mapping.preset.cmdline(),
             sources = cmp.config.sources({
-                { name = 'path' }
+                { name = "path" },
             }, {
-                {
-                    name = 'cmdline',
-                    option = {
-                        ignore_cmds = { 'Man', '!' }
-                    }
-                }
-            })
+                { name = "cmdline" },
+            }),
         })
     end,
 }

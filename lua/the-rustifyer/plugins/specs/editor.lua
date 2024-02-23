@@ -22,6 +22,27 @@ return {
     -- Handling line/block commentary
     comments = 'numToStr/Comment.nvim',
 
+    -- Set cursor on the last editing position on reopen
+    lastplace = { 'farmergreg/vim-lastplace', event = 'VeryLazy', no_extra_config = true },
+
+    -- Better tracking of the editor's cursor position
+    cursor_pos = {
+        'gen740/SmoothCursor.nvim',
+        event = 'VeryLazy',
+        config = function()
+            vim.fn.sign_define('smoothcursor_v', { text = ' ' })
+            vim.fn.sign_define('smoothcursor_V', { text = '' })
+            vim.fn.sign_define('smoothcursor_i', { text = '' })
+            vim.fn.sign_define('smoothcursor_�', { text = '' })
+            vim.fn.sign_define('smoothcursor_R', { text = '󰊄' })
+            require('smoothcursor').setup({
+                cursor = '▷',
+                fg = '#8aa872'
+                -- type = 'matrix'
+            })
+        end
+    },
+
     -- URL open
     url_open = {
         "sontungexpt/url-open",

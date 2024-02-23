@@ -65,6 +65,23 @@ vim.o.foldlevelstart = 99
 vim.wo.foldmethod = 'expr'
 vim.wo.foldexpr = 'nvim_treesitter#foldexpr()'
 
+-- Insert two spaces after a '.', '?' and '!' with a join command.
+-- Otherwise only one space is inserted.
+-- Concept credit: https://github.com/tjdevries
+vim.opt.joinspaces = false
+
+-- List mode: By default, show tabs as ">", trailing spaces as "-", and
+vim.opt.list = true
+-- non-breakable space characters as "+". Useful to see the difference between
+-- tabs and spaces and for trailing blanks. Further changed by
+-- set listchars=tab:»·,trail:·,extends:↪,precedes:↩
+vim.opt.listchars = {
+  tab = "»·",
+  trail = "·",
+  extends = "↪",
+  precedes = "↩",
+}
+
 -- Enabling C++ typical named modules extensions to be detected as C++ files
 vim.cmd([[ autocmd BufNewFile,BufRead *.cppm set filetype=cpp ]])
 vim.cmd([[ autocmd BufNewFile,BufRead *.ixx  set filetype=cpp ]])

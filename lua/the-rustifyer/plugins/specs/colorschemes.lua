@@ -5,5 +5,6 @@ return {
     tokyonight = 'folke/tokyonight.nvim',
     catppuccin = 'catppuccin/nvim',
     github = 'projekt0n/github-nvim-theme',
+    onedark = 'navarasu/onedark.nvim',
 }
 
