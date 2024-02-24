@@ -3,5 +3,6 @@
 
 return {
     nvim_dap = 'mfussenegger/nvim-dap',
-    nvim_dap_ui = 'rcarriga/nvim-dap-ui'
+    nvim_dap_ui = 'rcarriga/nvim-dap-ui',
+    nvim_dap_ui_text = 'nvim-dap-virtual-text'
 }
