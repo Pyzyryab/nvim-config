@@ -276,18 +276,22 @@ return {
                     name = '+terminal',
                     s = { CMD .. 'TermSelect' .. CR, 'Shows opened terminals. Allows to pick them' },
                     o = { CMD .. 'ToggleTerm' .. CR, 'Toggle ToggleTerm' },
-                    g = { function()
+                    g = {
+                        CMD .. 'TermExec cmd="lazygit" direction=float hidden=true close_on_exit=true' .. CR,
+                        --[[ function()
                         local Terminal = require('toggleterm.terminal').Terminal
                         local lazygit  = Terminal:new({
                             cmd = 'lazygit',
-                            dir = 'git_dir',
+                            -- dir = 'git_dir', --TODO Broken on W2
                             direction = 'float',
+                            close_on_exit = true,
                             float_opts = {
                                 border = 'double',
                             },
                         })
                         lazygit:toggle() -- TODO Toggle doesn't pick the already opened one
-                    end, 'Open Lazy Git on ToggleTerm' },
+                    end ]]
+                    'Open Lazy Git on ToggleTerm' },
                 },
                 ts = {
                     name = '+treessitter',
