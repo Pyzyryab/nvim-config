@@ -28,7 +28,7 @@ M.languages = {
 --    xml = { treesitter = 'xml' },
 --    javascript = { treesitter = 'javascript' },
 --    typescript = { treesitter = 'typescript' },
---    html = { treesitter = 'html' },
+   html = { treesitter = 'html' },
 --    css = { treesitter = 'css' },
 --    scss = { treesitter = 'scss' },
 --    json = { treesitter = 'json' },

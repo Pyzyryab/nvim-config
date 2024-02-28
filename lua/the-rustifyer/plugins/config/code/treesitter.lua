@@ -1,6 +1,7 @@
 -- Treesitter plugin configuration via a custom callback
 return {
     event = { 'BufReadPre', 'BufNewFile' },
+    cmd = { 'TSInstall', 'TSUpdate' },
     highlight = { enabled = true },
     indent = { enable = true },
     config = function()
