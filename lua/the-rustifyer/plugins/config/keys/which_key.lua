@@ -275,23 +275,33 @@ return {
                 t = {
                     name = '+terminal',
                     s = { CMD .. 'TermSelect' .. CR, 'Shows opened terminals. Allows to pick them' },
-                    o = { CMD .. 'ToggleTerm' .. CR, 'Toggle ToggleTerm' },
-                    g = {
-                        CMD .. 'TermExec cmd="lazygit" direction=float hidden=true close_on_exit=true' .. CR,
-                        --[[ function()
-                        local Terminal = require('toggleterm.terminal').Terminal
-                        local lazygit  = Terminal:new({
-                            cmd = 'lazygit',
-                            -- dir = 'git_dir', --TODO Broken on W2
-                            direction = 'float',
-                            close_on_exit = true,
-                            float_opts = {
-                                border = 'double',
-                            },
+                    t = { CMD .. 'ToggleTermToggleAll' .. CR, 'Toggles all terminals' },
+                    o = { require('the-rustifyer.core.globals').sys.is_windows and
+                    function()
+                        local term = require('toggleterm.terminal').Terminal:new({
+                            cmd = 'bash.exe',
+                            direction = 'horizontal',
+                            dir = 'git_dir',
+                            close_on_exit = true
                         })
-                        lazygit:toggle() -- TODO Toggle doesn't pick the already opened one
-                    end ]]
-                    'Open Lazy Git on ToggleTerm' },
+                        term:toggle()
+                    end or CMD .. 'ToggleTerm' .. CR, 'Opens a new terminal' },
+                    g = {
+                        -- CMD .. 'TermExec cmd="lazygit" direction=float name="lazygit" go_back=0 close_on_exit=true' .. CR,
+                        function() --TODO The above line it's kinda provisonal conf while knowing what's going wrong between different windows hosts
+                            local Terminal = require('toggleterm.terminal').Terminal
+                            local lazygit  = Terminal:new({
+                                cmd = 'lazygit',
+                                dir = 'git_dir',
+                                direction = 'float',
+                                close_on_exit = true,
+                                float_opts = {
+                                    border = 'double',
+                                },
+                            })
+                            lazygit:toggle() -- TODO Toggle doesn't pick the already opened one
+                        end,
+                        'Open Lazy Git on ToggleTerm' },
                 },
                 ts = {
                     name = '+treessitter',
