@@ -16,6 +16,8 @@ return {
         local procs = require('the-rustifyer.utils.procedures')
         local wk = require('which-key')
 
+        local is_win = require('the-rustifyer.core.globals').sys.is_windows
+
         -- We store here this callback, so we can pass it later to remaps that should be only working on
         -- specific buffers
         local bufnr = vim.api.nvim_get_current_buf()
@@ -276,19 +278,14 @@ return {
                     name = '+terminal',
                     s = { CMD .. 'TermSelect' .. CR, 'Shows opened terminals. Allows to pick them' },
                     t = { CMD .. 'ToggleTermToggleAll' .. CR, 'Toggles all terminals' },
-                    o = { require('the-rustifyer.core.globals').sys.is_windows and
-                    function()
-                        local term = require('toggleterm.terminal').Terminal:new({
-                            cmd = 'bash.exe',
-                            direction = 'horizontal',
-                            dir = 'git_dir',
-                            close_on_exit = true
-                        })
-                        term:toggle()
-                    end or CMD .. 'ToggleTerm' .. CR, 'Opens a new terminal' },
+                    o = { (function()
+                        if is_win then vim.opt.shellcmdflag = "-s" end
+                        return CMD .. 'ToggleTerm' .. CR
+                    end)(), 'Opens a new terminal' },
                     g = {
                         -- CMD .. 'TermExec cmd="lazygit" direction=float name="lazygit" go_back=0 close_on_exit=true' .. CR,
                         function() --TODO The above line it's kinda provisonal conf while knowing what's going wrong between different windows hosts
+                            if is_win then vim.opt.shellcmdflag = "-s -c" end
                             local Terminal = require('toggleterm.terminal').Terminal
                             local lazygit  = Terminal:new({
                                 cmd = 'lazygit',

@@ -17,7 +17,7 @@ if is_windows then
         -- shell = 'bash.exe', -- Assuming that this is always the correct path on W2
         shell = os.getenv('USERPROFILE') .. '\\AppData\\Local\\Programs\\Git\\bin\\bash.exe', -- Assuming that this is always the correct path on W2
         -- shell = 'C:\\"Program Files"\\Git\\bin\\bash.exe',
-        shellcmdflag = "-s -c",
+        shellcmdflag = "-s",
         shellredir = "",
         shellpipe = "2>&1",
         shellquote = "",
