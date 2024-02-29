@@ -25,6 +25,14 @@ return {
     -- Set cursor on the last editing position on reopen
     lastplace = { 'farmergreg/vim-lastplace', event = 'VeryLazy', no_extra_config = true },
 
+    -- Better scrool movements
+    scrool_mov = {
+        "karb94/neoscroll.nvim",
+        config = function()
+            require('neoscroll').setup {}
+        end
+    },
+
     -- Better tracking of the editor's cursor position
     cursor_pos = {
         'gen740/SmoothCursor.nvim',
