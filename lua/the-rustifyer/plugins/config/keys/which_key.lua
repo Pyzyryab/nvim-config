@@ -277,7 +277,7 @@ return {
                 t = {
                     name = '+terminal',
                     s = { CMD .. 'TermSelect' .. CR, 'Shows opened terminals. Allows to pick them' },
-                    t = { CMD .. 'ToggleTermToggleAll' .. CR, 'Toggles all terminals' },
+                    a = { CMD .. 'ToggleTermToggleAll' .. CR, 'Toggles all terminals' },
                     o = { (function()
                         if is_win then vim.opt.shellcmdflag = "-s" end
                         return CMD .. 'ToggleTerm' .. CR
@@ -298,7 +298,37 @@ return {
                             })
                             lazygit:toggle() -- TODO Toggle doesn't pick the already opened one
                         end,
-                        'Open Lazy Git on ToggleTerm' },
+                        'Open Lazygit on ToggleTerm'
+                    },
+                    j = {
+                        function() --TODO The above line it's kinda provisonal conf while knowing what's going wrong between different windows hosts
+                            if is_win then vim.opt.shellcmdflag = "-s" end
+                            local Terminal = require('toggleterm.terminal').Terminal
+                            local float_term  = Terminal:new({
+                                dir = 'git_dir',
+                                direction = 'float',
+                                close_on_exit = true,
+                                float_opts = {
+                                    border = 'double',
+                                },
+                            })
+                            float_term:toggle() -- TODO Toggle doesn't pick the already opened one
+                        end,
+                        'Open/Toggle a float terminal'
+                    },
+                    k = {
+                        function() --TODO The above line it's kinda provisonal conf while knowing what's going wrong between different windows hosts
+                            if is_win then vim.opt.shellcmdflag = "-s" end
+                            local Terminal = require('toggleterm.terminal').Terminal
+                            local float_term  = Terminal:new({
+                                dir = 'git_dir',
+                                direction = 'tab',
+                                close_on_exit = false,
+                            })
+                            float_term:toggle() -- TODO Toggle doesn't pick the already opened one
+                        end,
+                        'Open/Toggle a float terminal'
+                    },
                 },
                 ts = {
                     name = '+treessitter',
