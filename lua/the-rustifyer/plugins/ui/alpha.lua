@@ -1,5 +1,5 @@
 return {
-{'goolord/alpha-nvim',
+'goolord/alpha-nvim',
     dependencies = {
         { 'MunifTanjim/nui.nvim'},
         { 'nvim-tree/nvim-web-devicons'},
@@ -70,5 +70,5 @@ return {
             end,
         })
     end,
-},
 }
+

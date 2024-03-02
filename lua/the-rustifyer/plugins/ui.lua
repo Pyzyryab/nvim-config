@@ -3,8 +3,6 @@
 return {
 
 
--- bottom statusline
-{ 'nvim-lualine/lualine.nvim' },
 
 -- Winbar
 {"utilyre/barbecue.nvim"},
