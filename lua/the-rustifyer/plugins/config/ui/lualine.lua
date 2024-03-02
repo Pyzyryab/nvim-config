@@ -29,6 +29,11 @@ return {
                 lualine_b = { 'branch', 'diff', 'diagnostics' },
                 lualine_c = { 'filename' },
                 lualine_x = {
+                    {
+                        require("lazy.status").updates,
+                        cond = require("lazy.status").has_updates,
+                        color = { fg = "#ff9e64" },
+                    },
                     { -- Setup lsp-progress component
                         function()
                             -- listen lsp-progress event and refresh lualine
@@ -49,11 +54,7 @@ return {
                                     local client_names = {}
                                     for _, client in ipairs(active_clients) do
                                         if client and client.name ~= "" then
-                                            table.insert(
-                                                client_names,
-                                                1,
-                                                client.name
-                                            )
+                                            table.insert(client_names, 1, client.name)
                                         end
                                     end
                                     return table.concat(client_names, "  ")

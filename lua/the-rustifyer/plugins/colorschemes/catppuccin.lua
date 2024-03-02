@@ -1,0 +1,5 @@
+-- `Catppuccin` colorscheme configuration
+--
+return {
+}
+

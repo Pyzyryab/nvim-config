@@ -1,8 +1,6 @@
 -- returns a table with all the languages for which I will like to have
 -- support between the different tools, specially LSP, formatters...
 --
-local sys = require('the-rustifyer.core.globals').sys
-
 local M = {}
 
 M.languages = {
