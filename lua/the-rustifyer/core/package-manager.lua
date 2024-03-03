@@ -16,12 +16,15 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
     spec = {
-        {import = 'the-rustifyer.plugins'},
-        {import = 'the-rustifyer.plugins.ui'},
-        {import = 'the-rustifyer.plugins.lsp'},
-        {import = 'the-rustifyer.plugins.code'},
-        {import = 'the-rustifyer.plugins.editor'},
-        {import = 'the-rustifyer.plugins.colorschemes'},
+        { import = 'the-rustifyer.plugins' },
+        { import = 'the-rustifyer.plugins.ui' },
+        { import = 'the-rustifyer.plugins.lsp' },
+        { import = 'the-rustifyer.plugins.dap' },
+        { import = 'the-rustifyer.plugins.code' },
+        { import = 'the-rustifyer.plugins.extra' },
+        { import = 'the-rustifyer.plugins.langs' },
+        { import = 'the-rustifyer.plugins.editor' },
+        { import = 'the-rustifyer.plugins.colorschemes' },
     },
     defaults = {
         lazy = true,
@@ -31,13 +34,13 @@ require("lazy").setup({
     },
     checker = { enabled = true }, -- automatically check for plugin update_in_insert
     cache = {
-	    enabled = true,
---	    disable_events = { "UIEnter", "BufReadPre" },
+        enabled = true,
+        --	    disable_events = { "UIEnter", "BufReadPre" },
     },
     reset_packpath = true,
     performance = {
         rtp = {
-	    paths = {},
+            paths = {},
             -- disable some rtp plugins
             disabled_plugins = {
                 'gzip',
@@ -52,4 +55,3 @@ require("lazy").setup({
         },
     },
 })
-

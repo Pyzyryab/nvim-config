@@ -1,4 +1,0 @@
--- Greeter plugin configuration
---
-return {
-

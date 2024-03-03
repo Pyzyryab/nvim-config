@@ -1,3 +1,0 @@
--- Configuration for the which-key plugin, which takes care
--- of showing a popup with the keymaps/remaps defined for the setup
---
