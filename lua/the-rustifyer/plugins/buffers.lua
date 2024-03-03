@@ -3,7 +3,6 @@
 return {
     {
         'akinsho/bufferline.nvim',
-        -- event = { 'BufRead', 'BufNewFile' },
         event = 'VeryLazy',
         dependencies = {
             {'echasnovski/mini.bufremove'},

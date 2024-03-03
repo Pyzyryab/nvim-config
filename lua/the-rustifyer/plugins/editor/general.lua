@@ -1,30 +1,32 @@
--- Plugins for enhace buffers when they can be seen or perceived
--- as "editor" things
 return {
-    mini_animate = 'echasnovski/mini.animate',
+    -- Set cursor on the last editing position on reopen
+    { 'farmergreg/vim-lastplace', event = 'VeryLazy' },
 
-    -- Indentation guides
-    indent_blankline = 'lukas-reineke/indent-blankline.nvim',
-    mini_identscope = 'echasnovski/mini.indentscope',
-
-    -- Statuline with the LSP symbols
-    winbar = 'SmiteshP/nvim-navic',
+    -- Cursor animations while moving
+    {
+        'echasnovski/mini.animate',
+        enabled = false,
+        event = { 'BufReadPre', 'BufNewFile' },
+        opts = {
+            cursor = { enable = true, },
+            -- Vertical scroll
+            scroll = { enable = true, },
+            -- Window resize
+            resize = { enable = true, },
+            -- Window open
+            open = { enable = true, },
+            -- Window close
+            close = { enable = true, },
+        }
+    },
 
     -- highlighting
-    illuminate = 'RRethy/vim-illuminate',
-
-    -- todo's
-    todo_comments = 'folke/todo-comments.nvim',
-
-    -- Autocomplete pairs of code symbols like '(', '{'...
-    autopairs = 'windwp/nvim-autopairs',
-
-
-    -- Set cursor on the last editing position on reopen
-    lastplace = { 'farmergreg/vim-lastplace', event = 'VeryLazy', no_extra_config = true },
+    {
+        'RRethy/vim-illuminate',
+    },
 
     -- Better scrool movements
-    scrool_mov = {
+    {
         "karb94/neoscroll.nvim",
         config = function()
             require('neoscroll').setup {}
@@ -32,7 +34,7 @@ return {
     },
 
     -- Better tracking of the editor's cursor position
-    cursor_pos = {
+    {
         'gen740/SmoothCursor.nvim',
         event = 'VeryLazy',
         config = function()
@@ -50,7 +52,7 @@ return {
     },
 
     -- URL open
-    url_open = {
+    {
         "sontungexpt/url-open",
         branch = "mini",
         event = { 'BufReadPost', 'BufNewFile' },
@@ -64,3 +66,4 @@ return {
         end,
     },
 }
+

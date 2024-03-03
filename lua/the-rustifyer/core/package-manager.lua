@@ -18,6 +18,9 @@ require("lazy").setup({
     spec = {
         {import = 'the-rustifyer.plugins'},
         {import = 'the-rustifyer.plugins.ui'},
+        {import = 'the-rustifyer.plugins.lsp'},
+        {import = 'the-rustifyer.plugins.code'},
+        {import = 'the-rustifyer.plugins.editor'},
         {import = 'the-rustifyer.plugins.colorschemes'},
     },
     defaults = {
