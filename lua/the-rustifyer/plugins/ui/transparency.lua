@@ -2,13 +2,14 @@
 --
 return {
     'xiyaowong/transparent.nvim',
-    event = 'UIEnter',
+    event = 'VimEnter',
     config = function()
         require('transparent').setup {
             extra_groups = {
-                "NeoTreeNormal",
-                "NeoTreeNormalNC",
-                "NormalFloat",
+                'Alpha',
+                'NeoTreeNormal',
+                'NeoTreeNormalNC',
+                'NormalFloat',
             },
         }
     end,
