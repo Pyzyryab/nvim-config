@@ -283,7 +283,7 @@ return {
                     g = {
                         -- CMD .. 'TermExec cmd="lazygit" direction=float name="lazygit" go_back=0 close_on_exit=true' .. CR,
                         function() --TODO The above line it's kinda provisonal conf while knowing what's going wrong between different windows hosts
-                            if is_win then vim.opt.shellcmdflag = "-s -c" end
+                            -- if is_win then vim.opt.shellcmdflag = "-s -c" end
                             local Terminal = require('toggleterm.terminal').Terminal
                             local lazygit  = Terminal:new({
                                 cmd = 'lazygit',
@@ -300,7 +300,7 @@ return {
                     },
                     j = {
                         function() --TODO The above line it's kinda provisonal conf while knowing what's going wrong between different windows hosts
-                            if is_win then vim.opt.shellcmdflag = "-s" end
+                            -- if is_win then vim.opt.shellcmdflag = "-s" end
                             local Terminal   = require('toggleterm.terminal').Terminal
                             local float_term = Terminal:new({
                                 dir = 'git_dir',

@@ -1,4 +1,4 @@
--- This file holds my personal editor's configuration and settings
+-- This file holds the core editor's configuration and settings
 --
 
 vim.opt.guicursor = '' -- fat cursor enabled (even on insert mode)
@@ -14,8 +14,8 @@ vim.g.base16_colorspace = 256
 local is_windows = require('the-rustifyer.core.globals').sys.is_windows
 if is_windows then
     local bash_options = {
-        -- shell = 'bash.exe', --  This won't applies in one of my setups, where's just to many git-bash(es)
-        shell = os.getenv('USERPROFILE') .. '\\AppData\\Local\\Programs\\Git\\bin\\bash.exe', -- Assuming that this is always the correct path on W2
+        shell = 'bash.exe', --  This won't applies in one of my setups, where's just to many git-bash(es)
+        -- shell = os.getenv('USERPROFILE') .. '\\AppData\\Local\\Programs\\Git\\bin\\bash.exe', -- Assuming that this is always the correct path on W2
         -- shell = 'C:\\"Program Files"\\Git\\bin\\bash.exe',
         shellcmdflag = "-s",
         shellredir = "",
