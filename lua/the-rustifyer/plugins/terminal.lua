@@ -13,8 +13,8 @@ return {
         version = "*",
         config = true,
         opts = {
-            size = 10,
-            open_mapping = '<leader>to',
+            size = 15,
+            -- open_mapping = '<leader>to',
             insert_mappings = true,
             terminal_mappings = true,
             highlights = {

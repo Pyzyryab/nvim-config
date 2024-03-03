@@ -4,6 +4,7 @@ return {
     -- Show the loading progress and the state of the servers in the statusline
     {
         'linrongbin16/lsp-progress.nvim',
+        -- Plugin configuration is elsewhere
     },
 
     -- Better graphics for showing real time LSP information and message interchanging between clients and servers

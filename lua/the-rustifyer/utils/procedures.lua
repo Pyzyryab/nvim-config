@@ -49,13 +49,26 @@ function M.minibufremove()
 end
 
 ---
--- Helper to create a remaps that toggles between relative and absolute numbers
+-- Helper to create a remap that toggles between relative and absolute numbers
 function M.toggle_line_numbers()
     local enabled_rel_line_nums = vim.wo.relativenumber == true
     if enabled_rel_line_nums then
         vim.cmd('set number norelativenumber')
     else
         vim.cmd('set number relativenumber')
+    end
+end
+
+
+---
+-- Helper to create a remap that toggles the visualization of the folding column
+function M.toggle_folding_column()
+    local foldcolumn_visible = vim.o.foldcolumn == '1'
+
+    if foldcolumn_visible then
+        vim.cmd('set foldcolumn=0')
+    else
+        vim.cmd('set foldcolumn=1')
     end
 end
 

@@ -10,15 +10,17 @@ return {
         opts = {
             options = {
                 indicator = {
-                    icon = '▎', -- this should be omitted if indicator style is not 'icon'
+                    -- icon = '▎', -- this should be omitted if indicator style is not 'icon'
                     style = 'underline',
+                    -- style = 'icon',
                 },
                 hover = {
                     enabled = true,
                     delay = 200,
                     reveal = { 'close' }
                 },
-                separator_style = 'slant',
+                -- separator_style = 'slant',
+                separator_style = 'padded_slope',
                 -- stylua: ignore
                 close_command = function(n) require("mini.bufremove").delete(n, false) end,
                 -- stylua: ignore

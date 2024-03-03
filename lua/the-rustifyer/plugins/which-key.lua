@@ -156,7 +156,7 @@ return {
                     b = {
                         function()
                             require("Comment.api").toggle.blockwise.current()
-                        end, 'Comment selection'
+                        end, 'Comment line/selection'
                     },
                     l = {
                         function()
@@ -301,8 +301,8 @@ return {
                     j = {
                         function() --TODO The above line it's kinda provisonal conf while knowing what's going wrong between different windows hosts
                             if is_win then vim.opt.shellcmdflag = "-s" end
-                            local Terminal = require('toggleterm.terminal').Terminal
-                            local float_term  = Terminal:new({
+                            local Terminal   = require('toggleterm.terminal').Terminal
+                            local float_term = Terminal:new({
                                 dir = 'git_dir',
                                 direction = 'float',
                                 close_on_exit = true,
@@ -317,8 +317,8 @@ return {
                     k = {
                         function() --TODO The above line it's kinda provisonal conf while knowing what's going wrong between different windows hosts
                             if is_win then vim.opt.shellcmdflag = "-s" end
-                            local Terminal = require('toggleterm.terminal').Terminal
-                            local float_term  = Terminal:new({
+                            local Terminal   = require('toggleterm.terminal').Terminal
+                            local float_term = Terminal:new({
                                 dir = 'git_dir',
                                 direction = 'tab',
                                 close_on_exit = false,
@@ -346,6 +346,7 @@ return {
                 x = {
                     name = '+extra',
                     n = { procs.toggle_line_numbers, 'Toggle between absolute and relative line numbers' },
+                    f = { procs.toggle_folding_column, 'Shows/Hides the folding column' },
                 }
             },
         })

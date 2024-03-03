@@ -14,7 +14,7 @@ vim.g.base16_colorspace = 256
 local is_windows = require('the-rustifyer.core.globals').sys.is_windows
 if is_windows then
     local bash_options = {
-        -- shell = 'bash.exe', -- Assuming that this is always the correct path on W2
+        -- shell = 'bash.exe', --  This won't applies in one of my setups, where's just to many git-bash(es)
         shell = os.getenv('USERPROFILE') .. '\\AppData\\Local\\Programs\\Git\\bin\\bash.exe', -- Assuming that this is always the correct path on W2
         -- shell = 'C:\\"Program Files"\\Git\\bin\\bash.exe',
         shellcmdflag = "-s",
@@ -58,10 +58,10 @@ vim.opt.updatetime = 50
 vim.opt.colorcolumn = '120' -- maybe a function per type of language in the opened current buffer?
 
 -- Enabling folding capabilities
-vim.o.foldcolumn = '1'
+vim.o.foldcolumn = '0'
 vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
 vim.o.foldlevelstart = 99
--- vim.o.foldenable = true
+vim.o.foldenable = true
 
 -- Treesitter folding
 vim.wo.foldmethod = 'expr'
@@ -72,8 +72,9 @@ vim.wo.foldexpr = 'nvim_treesitter#foldexpr()'
 -- Concept credit: https://github.com/tjdevries
 vim.opt.joinspaces = false
 
--- List mode: By default, show tabs as ">", trailing spaces as "-", and
 vim.opt.list = true
+
+-- List mode: By default, show tabs as ">", trailing spaces as "-", and
 -- non-breakable space characters as "+". Useful to see the difference between
 -- tabs and spaces and for trailing blanks. Further changed by
 -- set listchars=tab:»·,trail:·,extends:↪,precedes:↩
