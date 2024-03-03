@@ -19,8 +19,6 @@ return {
     -- Autocomplete pairs of code symbols like '(', '{'...
     autopairs = 'windwp/nvim-autopairs',
 
-    -- Handling line/block commentary
-    comments = 'numToStr/Comment.nvim',
 
     -- Set cursor on the last editing position on reopen
     lastplace = { 'farmergreg/vim-lastplace', event = 'VeryLazy', no_extra_config = true },
