@@ -19,8 +19,7 @@ return {
                     delay = 200,
                     reveal = { 'close' }
                 },
-                -- separator_style = 'slant',
-                separator_style = 'padded_slope',
+                separator_style = 'thin',
                 -- stylua: ignore
                 close_command = function(n) require("mini.bufremove").delete(n, false) end,
                 -- stylua: ignore
