@@ -250,6 +250,9 @@ return {
                     o = { CMD .. 'Telescope lsp_outgoing_calls' .. CR, 'Find LSP outgoing calls' },
                     k = { function() require("lsp_signature").toggle_float_win() end, 'toggle signature' },
                 },
+                mp = {
+                    CMD .. 'Glow' .. CR, 'Preview current Mardown file'
+                },
                 o = {
                     name = '+open',
                     d = { CMD .. 'DocsViewToggle' .. CR, 'Toggles a buffer with documentation for the selected item' },
