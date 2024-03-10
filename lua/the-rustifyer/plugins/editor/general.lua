@@ -83,13 +83,13 @@ return {
                     enable = true, -- enable fancy mode
                     head = { cursor = "󰝥", texthl = "SmoothCursorAqua", linehl = nil }, -- false to disable fancy head
                     body = {
-                        { cursor = "󰝥", texthl = "SmoothCursorAqua" },
-                        { cursor = "󰝥", texthl = "SmoothCursorAqua" },
-                        { cursor = "●", texthl = "SmoothCursorAqua" },
-                        { cursor = "●", texthl = "SmoothCursorAqua" },
-                        { cursor = "•", texthl = "SmoothCursorAqua" },
-                        { cursor = ".", texthl = "SmoothCursorAqua" },
-                        { cursor = ".", texthl = "SmoothCursorAqua" },
+                        { cursor = "󰝥", texthl = "SmoothCursorYellow" },
+                        { cursor = "󰝥", texthl = "SmoothCursorYellow" },
+                        { cursor = "●", texthl = "SmoothCursorYellow" },
+                        { cursor = "●", texthl = "SmoothCursorYellow" },
+                        { cursor = "•", texthl = "SmoothCursorYellow" },
+                        { cursor = ".", texthl = "SmoothCursorYellow" },
+                        { cursor = ".", texthl = "SmoothCursorYellow" },
                     },
                     tail = { cursor = nil, texthl = "SmoothCursor" } -- false to disable fancy tail
                 },
