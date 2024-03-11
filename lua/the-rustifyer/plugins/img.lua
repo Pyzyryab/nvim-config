@@ -6,5 +6,5 @@ return {
         'ekickx/clipboard-image.nvim',
     },
 
-    -- TODO add the 3rd image or whatsoever
+    -- TODO: add the 3rd image or whatsoever
 }

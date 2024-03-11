@@ -136,7 +136,7 @@ return {
 },
 
 --
--- TODO pending to decide if we let this one in the setup...
+-- TODO: pending to decide if we let this one in the setup...
 {
     'roobert/action-hints.nvim',
     event = {'BufRead', 'BufNewFile'},

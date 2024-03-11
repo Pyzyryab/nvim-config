@@ -1,5 +1,5 @@
 return {
-    -- TODO This plugin is not correctly configured yet. Review it
+    -- TODO: This plugin is not correctly configured yet. Review it
     'theHamsta/nvim-dap-virtual-text',
     opts = {
         enabled = true,                 -- enable this plugin (the default)

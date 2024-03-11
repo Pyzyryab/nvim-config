@@ -38,7 +38,7 @@ return {
             -- to learn the available actions
             --lsp_zero.default_keymaps({ buffer = bufnr })
 
-            -- Regular Neovim LSP client keymappings TODO pending to move them to the which-key spec config
+            -- Regular Neovim LSP client keymappings TODO: pending to move them to the which-key spec config
             local bufopts = { noremap = true, silent = true, buffer = bufnr }
             procs.nnoremap('gD', vim.lsp.buf.declaration, bufopts, "Go to declaration")
             procs.nnoremap('gd', vim.lsp.buf.definition, bufopts, "Go to definition")
@@ -71,7 +71,7 @@ return {
                 jdtls = lsp_zero.noop, -- Exclude jdtls from automatic configuration, we are doing it with the ftplugin way
                 clangd = function()
                     lspconfig.clangd.setup({
-                        keys = { -- TODO move it to which key
+                        keys = { -- TODO: move it to which key
                         { "<leader>cR", "<cmd>ClangdSwitchSourceHeader<cr>", desc = "Switch Source/Header (C/C++)" },
                     },
                     root_dir = function(fname)
@@ -93,8 +93,8 @@ return {
                     },
                     cmd = {
                         "/home/pyzyryab/code/third_party/llvm-project/clang-tools-extra/clangd",
-                        -- vim.fn.expand("~/Desktop/TODO/code/own/llvm-project/build/bin/clangd.exe"), -- TODO win + msys2 specific. Configure it later
-                        -- "C:/msys64/clang64/bin/clangd.exe", -- TODO win + msys2 specific. Configure it later
+                        -- vim.fn.expand("~/Desktop/TODO:/code/own/llvm-project/build/bin/clangd.exe"), -- TODO: win + msys2 specific. Configure it later
+                        -- "C:/msys64/clang64/bin/clangd.exe", -- TODO: win + msys2 specific. Configure it later
                         -- conf below and above paths to be able to work with Unix based paths
                         -- or wait for configure it based on some other plugin to handle dynamic config
                         '--query-driver="C:/msys64/clang64/bin/clang-*"',

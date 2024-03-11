@@ -26,15 +26,15 @@ return {
         }
     },
 
-    -- Watch the project's TODOs and other tracking commentary tags
+    -- Watch the project's TODO:s and other tracking commentary tags
     {
-        'folke/todo-comments.nvim',
+        'folke/TODO-comments.nvim',
         event = 'VeryLazy',
         dependencies = { "nvim-lua/plenary.nvim" },
         opts = {
             signs = true, -- show icons in the signs column
             sign_priority = 8, -- sign priority
-            -- keywords recognized as todo comments
+            -- keywords recognized as TODO: comments
             keywords = {
                 FIX = {
                     icon = " ", -- icon used for the sign, and in search results
@@ -54,12 +54,12 @@ return {
                 bg = "BOLD", -- The gui style to use for the bg highlight group.
             },
             merge_keywords = true, -- when true, custom keywords will be merged with the defaults
-            -- highlighting of the line containing the todo comment
+            -- highlighting of the line containing the TODO: comment
             -- * before: highlights before the keyword (typically comment characters)
             -- * keyword: highlights of the keyword
-            -- * after: highlights after the keyword (todo text)
+            -- * after: highlights after the keyword (TODO: text)
             highlight = {
-                multiline = true, -- enable multine todo comments
+                multiline = true, -- enable multine TODO: comments
                 multiline_pattern = "^.", -- lua pattern to match the next multiline from the start of the matched keyword
                 multiline_context = 10, -- extra lines that will be re-evaluated when changing a line
                 before = "", -- "fg" or "bg" or empty

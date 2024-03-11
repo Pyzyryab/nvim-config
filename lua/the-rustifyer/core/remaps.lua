@@ -49,7 +49,7 @@ vim.keymap.set('n', "<C-Left>", "<Cmd> vertical resize -2<CR>", { desc = "Decrea
 vim.keymap.set('n', "<C-Right>", "<Cmd> vertical resize +2<CR>", { desc = "Increase window width" })
 
 -- Moves the selected lines in Visual mode one down (J) or one up (K)
--- TODO in 'n' and 'v' with Alt - J/K
+-- TODO: in 'n' and 'v' with Alt - J/K
 vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv")
 vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv")
 

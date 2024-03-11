@@ -218,7 +218,7 @@ return {
                     h = { CMD .. 'Telescope help_tags' .. CR, 'Show help tags' },
                     p = { CMD .. 'Telescope projections' .. CR, 'Search projects' },
                     k = { function() require("telescope.builtin").colorscheme() end, 'Show and preview colorschemes' },
-                    t = { CMD .. 'TodoTelescope' .. CR, 'Open a TODOs preview' },
+                    t = { CMD .. 'TODO:Telescope' .. CR, 'Open a TODO:s preview' },
                     n = { CMD .. 'Telescope notify' .. CR, 'Displays the notifications triggered' },
                 },
                 g = {
@@ -250,8 +250,12 @@ return {
                     o = { CMD .. 'Telescope lsp_outgoing_calls' .. CR, 'Find LSP outgoing calls' },
                     k = { function() require("lsp_signature").toggle_float_win() end, 'toggle signature' },
                 },
-                mp = {
+                mp = { -- TODO: Correct this so the description can be shown correctly
                     CMD .. 'Glow' .. CR, 'Preview current Mardown file'
+                },
+                m = {
+                    name = '+maven',
+                    {CMD .. 'Maven' .. CR, 'Choose Maven command to execute'},
                 },
                 o = {
                     name = '+open',
@@ -285,7 +289,7 @@ return {
                     end)(), 'Opens a new terminal' },
                     g = {
                         -- CMD .. 'TermExec cmd="lazygit" direction=float name="lazygit" go_back=0 close_on_exit=true' .. CR,
-                        function() --TODO The above line it's kinda provisonal conf while knowing what's going wrong between different windows hosts
+                        function() --TODO: The above line it's kinda provisonal conf while knowing what's going wrong between different windows hosts
                             -- if is_win then vim.opt.shellcmdflag = "-s -c" end
                             local Terminal = require('toggleterm.terminal').Terminal
                             local lazygit  = Terminal:new({
@@ -297,12 +301,12 @@ return {
                                     border = 'double',
                                 },
                             })
-                            lazygit:toggle() -- TODO Toggle doesn't pick the already opened one
+                            lazygit:toggle() -- TODO: Toggle doesn't pick the already opened one
                         end,
                         'Open Lazygit on ToggleTerm'
                     },
                     j = {
-                        function() --TODO The above line it's kinda provisonal conf while knowing what's going wrong between different windows hosts
+                        function() --TODO: The above line it's kinda provisonal conf while knowing what's going wrong between different windows hosts
                             -- if is_win then vim.opt.shellcmdflag = "-s" end
                             local Terminal   = require('toggleterm.terminal').Terminal
                             local float_term = Terminal:new({
@@ -313,12 +317,12 @@ return {
                                     border = 'double',
                                 },
                             })
-                            float_term:toggle() -- TODO Toggle doesn't pick the already opened one
+                            float_term:toggle() -- TODO: Toggle doesn't pick the already opened one
                         end,
                         'Open/Toggle a float terminal'
                     },
                     k = {
-                        function() --TODO The above line it's kinda provisonal conf while knowing what's going wrong between different windows hosts
+                        function() --TODO: The above line it's kinda provisonal conf while knowing what's going wrong between different windows hosts
                             if is_win then vim.opt.shellcmdflag = "-s" end
                             local Terminal   = require('toggleterm.terminal').Terminal
                             local float_term = Terminal:new({
@@ -326,7 +330,7 @@ return {
                                 direction = 'tab',
                                 close_on_exit = false,
                             })
-                            float_term:toggle() -- TODO Toggle doesn't pick the already opened one
+                            float_term:toggle() -- TODO: Toggle doesn't pick the already opened one
                         end,
                         'Open/Toggle a float terminal'
                     },

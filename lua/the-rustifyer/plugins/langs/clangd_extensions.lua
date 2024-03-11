@@ -2,7 +2,7 @@
 --
 return {
     'p00f/clangd_extensions.nvim',
-    config = function() end, -- TODO this isn't required, right?
+    config = function() end, -- TODO: this isn't required, right?
     opts = {
         inlay_hints = {
             inline = true,

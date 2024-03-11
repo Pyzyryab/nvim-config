@@ -2,7 +2,7 @@
 --
 
 return {
-    -- TODO merge the configuration on a Rust file with rustaceanvim
+    -- TODO: merge the configuration on a Rust file with rustaceanvim
     'saecki/crates.nvim',
     tag = 'stable',
     event = { "BufRead Cargo.toml" },

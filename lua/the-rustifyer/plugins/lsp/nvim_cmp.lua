@@ -5,7 +5,7 @@ return {
     event = 'InsertEnter',
     dependencies = {
         { 'L3MON4D3/LuaSnip' },
-        -- TODO adjust the event correctly for the ones below
+        -- TODO: adjust the event correctly for the ones below
         { 'hrsh7th/cmp-nvim-lsp', event = { 'BufReadPre', 'BufNewFile' }, },
         { 'hrsh7th/cmp-buffer', event = { 'BufReadPre', 'BufNewFile' }, },
         { 'hrsh7th/cmp-path', event = { 'BufReadPre', 'BufNewFile' }, },
@@ -51,7 +51,7 @@ return {
                     cmp.config.compare.offset,
                     cmp.config.compare.exact,
                     cmp.config.compare.recently_used,
-                    require("clangd_extensions.cmp_scores"), --TODO enable it only when attach to clangd
+                    require("clangd_extensions.cmp_scores"), --TODO: enable it only when attach to clangd
                     cmp.config.compare.kind,
                     cmp.config.compare.sort_text,
                     cmp.config.compare.length,
