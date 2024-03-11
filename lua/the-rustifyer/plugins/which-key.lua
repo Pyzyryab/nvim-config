@@ -350,6 +350,7 @@ return {
                     name = '+extra',
                     n = { procs.toggle_line_numbers, 'Toggle between absolute and relative line numbers' },
                     f = { procs.toggle_folding_column, 'Shows/Hides the folding column' },
+                    t = { CMD .. 'TransparentToggle' .. CR, 'Toggle ON/OFF transparency'},
                 }
             },
         })
