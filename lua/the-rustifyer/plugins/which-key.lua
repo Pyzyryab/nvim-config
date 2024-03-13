@@ -255,7 +255,7 @@ return {
                 },
                 m = {
                     name = '+maven',
-                    {CMD .. 'Maven' .. CR, 'Choose Maven command to execute'},
+                    c = {CMD .. 'Maven' .. CR, 'Choose Maven command to execute'},
                 },
                 o = {
                     name = '+open',
@@ -336,7 +336,7 @@ return {
                     },
                 },
                 ts = {
-                    name = '+treessitter',
+                   name = '+treessitter',
                     u = {
                         function()
                             local tsc = require('treesitter-context')
@@ -355,6 +355,7 @@ return {
                     n = { procs.toggle_line_numbers, 'Toggle between absolute and relative line numbers' },
                     f = { procs.toggle_folding_column, 'Shows/Hides the folding column' },
                     t = { CMD .. 'TransparentToggle' .. CR, 'Toggle ON/OFF transparency'},
+                    s = { CMD .. 'ASToggle' .. CR, 'Toggle ON/OFF autosave'},
                 }
             },
         })
