@@ -218,7 +218,7 @@ return {
                     h = { CMD .. 'Telescope help_tags' .. CR, 'Show help tags' },
                     p = { CMD .. 'Telescope projections' .. CR, 'Search projects' },
                     k = { function() require("telescope.builtin").colorscheme() end, 'Show and preview colorschemes' },
-                    t = { CMD .. 'TODO:Telescope' .. CR, 'Open a TODO:s preview' },
+                    t = { CMD .. 'TODO-Telescope' .. CR, 'Open a TODO:s preview' },
                     n = { CMD .. 'Telescope notify' .. CR, 'Displays the notifications triggered' },
                 },
                 g = {
@@ -236,6 +236,8 @@ return {
                     bl = { 'Blame Line' },
                     hd = { 'Diff This' },
                     hD = { 'Diff This ~' },
+                    w = { function () require('telescope').extensions.git_worktree.git_worktrees() end, 'Show git worktrees via Telescope'},
+                    cw = { function () require('telescope').extensions.git_worktree.create_git_worktree() end, 'Create a new git worktree via Telescope'},
                 },
                 l = {
                     name = '+LSP', --NOTE Not all the LSP remaps are here for now

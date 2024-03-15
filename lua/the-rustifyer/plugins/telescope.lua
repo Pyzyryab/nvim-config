@@ -1,18 +1,20 @@
 -- Fuzzy finder over lists
 return {
-'nvim-telescope/telescope.nvim',
+    'nvim-telescope/telescope.nvim',
     cmd = { 'Telescope' },
     tag = '0.1.5',
     dependencies = { 'nvim-lua/plenary.nvim',
-    {
-        'nvim-telescope/telescope-fzf-native.nvim',
-         build ='cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build'
+        {
+            'nvim-telescope/telescope-fzf-native.nvim',
+            build =
+            'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build'
+        },
     },
-},
     config = function()
         local telescope = require('telescope')
 
         telescope.load_extension('fzf')
+        telescope.load_extension("git_worktree")
 
         telescope.setup({
             file_ignore_patterns = { '.git/' },
