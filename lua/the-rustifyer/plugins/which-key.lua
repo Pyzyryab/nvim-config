@@ -146,10 +146,10 @@ return {
                 },
                 B = {
                     name = '+breakpoints',
-                    B = { CMD .. 'lua require"dap".toggle_breakpoint()' .. CR, 'Set breakpoint' },
-                    C = { CMD .. 'lua require"dap".set_breakpoint(vim.fn.input("Breakpoint condition: "))' .. CR, 'Set conditional breakpoint' },
+                    B = { CMD .. 'lua require("persistent-breakpoints.api").toggle_breakpoint()' .. CR, 'Set breakpoint' },
+                    C = { CMD .. 'lua require("persistent-breakpoints.api").set_conditional_breakpoint()' .. CR, 'Set conditional breakpoint' },
                     L = { CMD .. 'lua require"dap".set_breakpoint(nil, nil, vim.fn.input("Log point message: "))' .. CR, 'Set log point' },
-                    R = { CMD .. 'lua require"dap".clear_breakpoints()' .. CR, 'Clear breakpoints' },
+                    R = { CMD .. 'lua require("persistent-breakpoints.api").clear_all_breakpoints()' .. CR, 'Clear breakpoints' },
                     F = { CMD .. 'Telescope dap list_breakpoints' .. CR, 'List breakpoints' },
                 },
                 c = {
