@@ -218,7 +218,7 @@ return {
                     h = { CMD .. 'Telescope help_tags' .. CR, 'Show help tags' },
                     p = { CMD .. 'Telescope projections' .. CR, 'Search projects' },
                     k = { function() require("telescope.builtin").colorscheme() end, 'Show and preview colorschemes' },
-                    t = { CMD .. 'TODO-Telescope' .. CR, 'Open a TODO:s preview' },
+                    t = { CMD .. 'TodoTelescope' .. CR, 'Open a TODO-\'s preview' },
                     n = { CMD .. 'Telescope notify' .. CR, 'Displays the notifications triggered' },
                 },
                 g = {

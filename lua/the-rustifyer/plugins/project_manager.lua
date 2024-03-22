@@ -5,7 +5,7 @@ return {
     {
         'gnikdroy/projections.nvim',
         event = 'VeryLazy',
-        branch = 'dev',
+        branch = 'pre_release',
         config = function()
             -- Save localoptions to session file
             vim.opt.sessionoptions:append("localoptions")
@@ -53,6 +53,7 @@ return {
             vim.api.nvim_create_autocmd("User", {
                 pattern = "ProjectionsPreStoreSession",
                 callback = function()
+                    vim.notify('A fregar: 3', vim.log.levels.WARN, nil)
                     if pcall(require, "neo-tree") then vim.cmd [[Neotree action=close]] end
                 end
             })
@@ -61,8 +62,21 @@ return {
             local switcher = require("projections.switcher")
             vim.api.nvim_create_autocmd({ "VimEnter" }, {
                 callback = function()
+                    vim.notify('A fregar: 2', vim.log.levels.WARN, nil)
                     if vim.fn.argc() == 0 then switcher.switch(vim.loop.cwd()) end
                 end,
+            })
+
+            -- Set the neo-tree correct CWD when switching projectss
+            vim.api.nvim_create_autocmd("User", {
+                pattern = "ProjectionsPostRestoreSession",
+                callback = function()
+
+                    vim.notify('A fregar: ', vim.log.levels.WARN, nil)
+                    local succ, res = pcall(require, "neo-tree")
+                    --if succ then vim.cmd [[Neotree dir=vim.loop.cwd()]] end
+                    print('Setting neo-tree dir to: ', vim.loop.cwd() .. ' with success: ' .. vim.inspect(succ))
+                end
             })
 
             -- Manual Session commands
@@ -82,16 +96,13 @@ return {
                 Workspace.add(vim.loop.cwd())
             end, {})
 
-
-            -- Set the neo-tree correct CWD when switching projectss
-            vim.api.nvim_create_autocmd("User", {
-                pattern = "ProjectionsPostRestoreSession",
-                callback = function()
-                    local succ, res = pcall(require, "neo-tree")
-                    --if succ then vim.cmd [[Neotree dir=vim.loop.cwd()]] end
-                    print('Setting neo-tree dir to: ', vim.loop.cwd() .. ' with success: ' .. vim.inspect(succ))
-                end
-            })
+            -- Add the parent folder as a workspace
+            -- This has a lot more sense that the default one provided in the documentation, since in such
+            -- documentation, by how are defined the 'Workspaces' they are always a collection of subprojects.
+            -- So, whenever you're in a project, such project should be a child directory of the workspace
+            vim.api.nvim_create_user_command("AddParentAsWorkspace", function()
+                Workspace.add(vim.fn.fnamemodify(vim.loop.cwd(), ':h'))
+            end, {})
         end
     },
 }
