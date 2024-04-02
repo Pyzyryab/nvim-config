@@ -29,6 +29,7 @@ function utils:load_data()
     self.path = path
 end
 
+-- Loading everything into the tables
 sys:load_data()
 path:load_data()
 utils:load_data()

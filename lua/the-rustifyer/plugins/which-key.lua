@@ -373,6 +373,7 @@ return {
                     f = { procs.toggle_folding_column, 'Shows/Hides the folding column' },
                     t = { CMD .. 'TransparentToggle' .. CR, 'Toggle ON/OFF transparency' },
                     s = { CMD .. 'ASToggle' .. CR, 'Toggle ON/OFF autosave' },
+                    m = { CMD .. 'messages' .. CR, 'Show Nvim Cmd messages' },
                 }
             },
         })

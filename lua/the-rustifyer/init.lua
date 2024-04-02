@@ -21,4 +21,4 @@ vim.cmd.colorscheme 'catppuccin'
 require('the-rustifyer.core.autocmds')
 
 -- Launching the autocmd that let's our system know that we've ended all our startup
-vim.api.nvim_exec_autocmds("User", { pattern = "AutostartJDTLS" })
+-- vim.api.nvim_exec_autocmds("User", { pattern = "AutostartJDTLS" })

@@ -1,3 +1,5 @@
+local procs = require('the-rustifyer.utils.procedures')
+
 -- Custom VIM autocommands
 local augroup = vim.api.nvim_create_augroup      -- Create/get autocommand group
 local autocmd = vim.api.nvim_create_autocmd      -- Create autocommand
@@ -20,18 +22,18 @@ autocmd({ "TermEnter" }, {
 
 -- Start the JDTLS LSP server when a Java project is detected
 autocmd('User', {
-    pattern = 'AutostartJDTLS',
+    pattern = 'VeryLazy',
     callback = function()
         local root_dir = vim.fn.getcwd()
-        local root_pom = vim.fn.glob(root_dir, "pom.xml")
-
+        local root_pom = procs.file_exists(root_dir, "pom.xml")
         -- Check for pom.xml under code/ directory
-        local code_dir = root_dir .. "code/"
-        local code_pom = vim.fn.glob(code_dir, "pom.xml")
+        local code_dir = root_dir .. "/code"
+        local code_pom = procs.file_exists(code_dir, "pom.xml")
 
         -- Project is Java if either pom.xml exists
-        if root_pom ~= "" or code_pom ~= "" then
+        if root_pom or code_pom then
             -- Looks like a Java project, start jdtls
+            vim.notify('Java project detected. Starting JDTLS.', vim.log.levels.INFO, nil)
             vim.cmd("source " .. vim.fn.stdpath('config') .. "/ftplugin/java.lua")
         end
     end
