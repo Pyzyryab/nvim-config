@@ -17,9 +17,8 @@ require('the-rustifyer.core.remaps')
 -- Setting the colorscheme of the set up
 vim.cmd.colorscheme 'catppuccin'
 
--- Manually handling required system-wide installations
--- require('the-rustifyer.config.system-wide')
-
 -- Registering the custom autocommands
 require('the-rustifyer.core.autocmds')
 
+-- Launching the autocmd that let's our system know that we've ended all our startup
+vim.api.nvim_exec_autocmds("User", { pattern = "AutostartJDTLS" })

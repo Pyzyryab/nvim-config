@@ -1,6 +1,5 @@
--- This file holds my personal keymaps and remaps, along as the configuration for the leader key
---
--- Not all remaps may be configured here, as they could be directly configured in the plugins
+-- This file holds my personal remaps and keybindings for general Neovim actions/workflows
+-- The plugin keymaps are directly configured on the 'which-key' plugin configuration file
 
 -- Toggleterm on terminal mode
 function _G.set_terminal_keymaps()
@@ -41,6 +40,10 @@ vim.keymap.set('n', "<C-h>", "<C-w>h", { desc = "Go to left window", remap = tru
 vim.keymap.set('n', "<C-j>", "<C-w>j", { desc = "Go to lower window", remap = true })
 vim.keymap.set('n', "<C-k>", "<C-w>k", { desc = "Go to upper window", remap = true })
 vim.keymap.set('n', "<C-l>", "<C-w>l", { desc = "Go to right window", remap = true })
+
+-- Go to prev/next Neovim tab page
+vim.keymap.set('n', '<C-A-h>',  ':-tabnext<CR>', { desc = "Go to the previous tab page", remap = false })
+vim.keymap.set('n', '<C-A-l>',  ':+tabnext<CR>', { desc = "Go to the next tab page", remap = false })
 
 -- Resize the current windows size with <ctr> + arrow keys
 vim.keymap.set('n', "<C-Up>", "<Cmd> resize -2<CR>", { desc = "Increase window height" })

@@ -12,6 +12,9 @@ local mason_path = consts.dirs.nvim_data .. p_sep .. 'mason' .. p_sep .. 'packag
 local jdtls_path = mason_path .. p_sep .. 'jdtls'
 local jdtls_jar_path = vim.fn.glob(jdtls_path .. '/plugins/org.eclipse.equinox.launcher_*.jar')
 -- local root_dir = require('jdtls.setup').find_root({ '.gitignore', 'code/', '.gitattributtes', 'README.md' })
+local home = os.getenv("HOME")
+local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
+local workspace_dir = home .. "/.cache/jdtls/workspace/" .. project_name
 
 local on_attach = function(_client, bufnr)
     local bufopts = { noremap = true, silent = true, buffer = bufnr }
@@ -73,7 +76,6 @@ local config = {
         -- Must point to the                                                     Change this to
         -- eclipse.jdt.ls installation                                           the actual version
 
-
         -- 💀 I only work with Java on Windows or Linux, no need to check anything else
         '-configuration', jdtls_path .. '/config_' .. (globals.sys.is_windows and 'win' or 'linux'),
         -- ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^        ^^^^^^
@@ -83,9 +85,7 @@ local config = {
 
         -- 💀
         -- See `data directory configuration` section in the README
-        '-data',
-        -- project_root_dir
-        vim.fn.getcwd()
+        '-data', workspace_dir
     },
 
     -- Here you can configure eclipse.jdt.ls specific settings
@@ -110,7 +110,8 @@ local config = {
                     "com.sun.*",
                     "io.micrometer.shaded.*",
                     "java.awt.*",
-                    "jdk.*", "sun.*",
+                    "jdk.*",
+                    "sun.*",
                 },
             },
             -- Specify any options for organizing imports

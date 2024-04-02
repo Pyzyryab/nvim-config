@@ -36,5 +36,42 @@ return {
     },
     {
         'ThePrimeagen/git-worktree.nvim',
+    },
+    {
+        'tpope/vim-fugitive',
+        event = 'VeryLazy',
+        cmd = { "Git", "Gwrite", "Gdiffsplit", "Gvdiffsplit" }
+    },
+    {
+        'akinsho/git-conflict.nvim',
+        event = 'VeryLazy',
+        version = '1.3.0',
+        dependencies = {
+            'yorickpeterse/nvim-pqf',
+            config = function()
+                require('pqf').setup({
+                    signs = {
+                        error = 'E',
+                        warning = 'W',
+                        info = 'I',
+                        hint = 'H'
+                    },
+                    show_multiple_lines = false,
+                    max_filename_length = 0,
+                })
+            end
+        },
+        config = function()
+            require 'git-conflict'.setup {
+                default_mappings = {
+                    ours = 'o',
+                    theirs = 't',
+                    none = '0',
+                    both = 'b',
+                    next = 'n',
+                    prev = 'p',
+                },
+            }
+        end
     }
 }

@@ -236,8 +236,8 @@ return {
                     bl = { 'Blame Line' },
                     hd = { 'Diff This' },
                     hD = { 'Diff This ~' },
-                    w = { function () require('telescope').extensions.git_worktree.git_worktrees() end, 'Show git worktrees via Telescope'},
-                    cw = { function () require('telescope').extensions.git_worktree.create_git_worktree() end, 'Create a new git worktree via Telescope'},
+                    w = { function() require('telescope').extensions.git_worktree.git_worktrees() end, 'Show git worktrees via Telescope' },
+                    cw = { function() require('telescope').extensions.git_worktree.create_git_worktree() end, 'Create a new git worktree via Telescope' },
                 },
                 l = {
                     name = '+LSP', --NOTE Not all the LSP remaps are here for now
@@ -257,7 +257,7 @@ return {
                 },
                 m = {
                     name = '+maven',
-                    c = {CMD .. 'Maven' .. CR, 'Choose Maven command to execute'},
+                    c = { CMD .. 'Maven' .. CR, 'Choose Maven command to execute' },
                 },
                 o = {
                     name = '+open',
@@ -290,9 +290,9 @@ return {
                         return CMD .. 'ToggleTerm' .. CR
                     end)(), 'Opens a new terminal' },
                     g = {
-                        -- CMD .. 'TermExec cmd="lazygit" direction=float name="lazygit" go_back=0 close_on_exit=true' .. CR,
+                        -- CMD .. 'TermExec cmd="lazygit" direction=float name="lazygit" go_back=1 close_on_exit=true' .. CR,
                         function() --TODO: The above line it's kinda provisonal conf while knowing what's going wrong between different windows hosts
-                            -- if is_win then vim.opt.shellcmdflag = "-s -c" end
+                            if is_win then vim.opt.shellcmdflag = "-s -c" end
                             local Terminal = require('toggleterm.terminal').Terminal
                             local lazygit  = Terminal:new({
                                 cmd = 'lazygit',
@@ -305,11 +305,27 @@ return {
                             })
                             lazygit:toggle() -- TODO: Toggle doesn't pick the already opened one
                         end,
-                        'Open Lazygit on ToggleTerm'
+                        'Open Lazygit on a floating window'
+                    },
+                    G = {
+                        function()
+                            if is_win then vim.opt.shellcmdflag = "-s -c" end
+                            local Terminal = require('toggleterm.terminal').Terminal
+                            local lazygit  = Terminal:new({
+                                cmd = 'lazygit',
+                                dir = 'git_dir',
+                                direction = 'tab',
+                                close_on_exit = true,
+                                float_opts = {
+                                    border = 'double',
+                                },
+                            })
+                            lazygit:toggle() -- TODO: Toggle doesn't pick the already opened one
+                        end,
+                        'Open Lazygit on a new Tab'
                     },
                     j = {
-                        function() --TODO: The above line it's kinda provisonal conf while knowing what's going wrong between different windows hosts
-                            -- if is_win then vim.opt.shellcmdflag = "-s" end
+                        function()
                             local Terminal   = require('toggleterm.terminal').Terminal
                             local float_term = Terminal:new({
                                 dir = 'git_dir',
@@ -319,26 +335,25 @@ return {
                                     border = 'double',
                                 },
                             })
-                            float_term:toggle() -- TODO: Toggle doesn't pick the already opened one
+                            float_term:toggle()
                         end,
                         'Open/Toggle a float terminal'
                     },
                     k = {
-                        function() --TODO: The above line it's kinda provisonal conf while knowing what's going wrong between different windows hosts
-                            if is_win then vim.opt.shellcmdflag = "-s" end
-                            local Terminal   = require('toggleterm.terminal').Terminal
+                        function()
+                            local Terminal = require('toggleterm.terminal').Terminal
                             local float_term = Terminal:new({
                                 dir = 'git_dir',
                                 direction = 'tab',
                                 close_on_exit = false,
                             })
-                            float_term:toggle() -- TODO: Toggle doesn't pick the already opened one
+                            float_term:toggle()
                         end,
                         'Open/Toggle a float terminal'
                     },
                 },
                 ts = {
-                   name = '+treessitter',
+                    name = '+treessitter',
                     u = {
                         function()
                             local tsc = require('treesitter-context')
@@ -356,8 +371,8 @@ return {
                     name = '+extra',
                     n = { procs.toggle_line_numbers, 'Toggle between absolute and relative line numbers' },
                     f = { procs.toggle_folding_column, 'Shows/Hides the folding column' },
-                    t = { CMD .. 'TransparentToggle' .. CR, 'Toggle ON/OFF transparency'},
-                    s = { CMD .. 'ASToggle' .. CR, 'Toggle ON/OFF autosave'},
+                    t = { CMD .. 'TransparentToggle' .. CR, 'Toggle ON/OFF transparency' },
+                    s = { CMD .. 'ASToggle' .. CR, 'Toggle ON/OFF autosave' },
                 }
             },
         })
