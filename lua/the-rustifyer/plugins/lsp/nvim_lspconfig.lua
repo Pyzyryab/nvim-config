@@ -35,11 +35,15 @@ return {
                 vim.notify('navic wasn\'t unable to attach to: ' .. vim.inspect(client), vim.log.levels.WARN, nil)
             end
 
-            -- see :help lsp-zero-keybindings
-            -- to learn the available actions
-            --lsp_zero.default_keymaps({ buffer = bufnr })
+            local capabilities = vim.lsp.protocol.make_client_capabilities()
+            capabilities.textDocument.completion.completionItem.snippetSupport = true
+            capabilities.textDocument.completion.completionItem.resolveSupport = {
+                properties = { "documentation", "detail", "additionalTextEdits" },
+            }
 
-            -- Regular Neovim LSP client keymappings TODO: pending to move them to the which-key spec config
+            client.capabilities = capabilities
+
+            -- Regular Neovim LSP client keymappings
             local bufopts = { noremap = true, silent = true, buffer = bufnr }
             procs.nnoremap('gD', vim.lsp.buf.declaration, bufopts, "Go to declaration")
             procs.nnoremap('gd', vim.lsp.buf.definition, bufopts, "Go to definition")
@@ -55,7 +59,7 @@ return {
             procs.nnoremap('<leader>rn', vim.lsp.buf.rename, bufopts, "Rename")
             procs.nnoremap('<leader>ca', vim.lsp.buf.code_action, bufopts, "Code actions")
             vim.keymap.set('v', "<leader>ca", "<ESC><CMD>lua vim.lsp.buf.range_code_action()<CR>",
-            { noremap = true, silent = true, buffer = bufnr, desc = "Code actions" })
+                { noremap = true, silent = true, buffer = bufnr, desc = "Code actions" })
             procs.nnoremap('<leader>=', function() vim.lsp.buf.format { async = true } end, bufopts, "Format file")
         end)
 
@@ -73,64 +77,64 @@ return {
                 clangd = function()
                     lspconfig.clangd.setup({
                         keys = { -- TODO: move it to which key
-                        { "<leader>cR", "<cmd>ClangdSwitchSourceHeader<cr>", desc = "Switch Source/Header (C/C++)" },
-                    },
-                    root_dir = function(fname)
-                        return lsp_util.root_pattern(
-                        "compile_commands.json",
-                        "compile_flags.txt",
-                        "Makefile",
-                        "configure.ac",
-                        "configure.in",
-                        "config.h.in",
-                        "meson.build",
-                        "meson_options.txt",
-                        "build.ninja"
-                        )(fname) or lsp_util.find_git_ancestor(fname)
-                    end,
-                    ft = consts.lsp.clangd_fts,
-                    capabilities = {
-                        offsetEncoding = { "utf-16" },
-                    },
-                    cmd = {
-                        "/home/pyzyryab/code/third_party/llvm-project/clang-tools-extra/clangd",
-                        -- vim.fn.expand("~/Desktop/TODO:/code/own/llvm-project/build/bin/clangd.exe"), -- TODO: win + msys2 specific. Configure it later
-                        -- "C:/msys64/clang64/bin/clangd.exe", -- TODO: win + msys2 specific. Configure it later
-                        -- conf below and above paths to be able to work with Unix based paths
-                        -- or wait for configure it based on some other plugin to handle dynamic config
-                        '--query-driver="C:/msys64/clang64/bin/clang-*"',
-                        '--enable-config',
-                        "--background-index",
-                        "--clang-tidy",
-                        -- "--header-insertion=iwyu",
-                        "--completion-style=detailed",
-                        "--function-arg-placeholders",
-                        "--fallback-style=llvm",
-                        -- "--pch-storage=memory",
-                        -- "--suggest-missing-includes",
-                        -- "--all-scopes-completion",
-                        "--log=verbose",
-                        "--pretty",
-                        -- "--header-insertion=never"
-                    },
-                    init_options = {
-                        usePlaceholders = true,
-                        completeUnimported = true,
-                        clangdFileStatus = true,
-                    },
-                })
-            end,
-        },
-    })
+                            { "<leader>cR", "<cmd>ClangdSwitchSourceHeader<cr>", desc = "Switch Source/Header (C/C++)" },
+                        },
+                        root_dir = function(fname)
+                            return lsp_util.root_pattern(
+                                "compile_commands.json",
+                                "compile_flags.txt",
+                                "Makefile",
+                                "configure.ac",
+                                "configure.in",
+                                "config.h.in",
+                                "meson.build",
+                                "meson_options.txt",
+                                "build.ninja"
+                            )(fname) or lsp_util.find_git_ancestor(fname)
+                        end,
+                        ft = consts.lsp.clangd_fts,
+                        capabilities = {
+                            offsetEncoding = { "utf-16" },
+                        },
+                        cmd = {
+                            "/home/pyzyryab/code/third_party/llvm-project/clang-tools-extra/clangd",
+                            -- vim.fn.expand("~/Desktop/TODO:/code/own/llvm-project/build/bin/clangd.exe"), -- TODO: win + msys2 specific. Configure it later
+                            -- "C:/msys64/clang64/bin/clangd.exe", -- TODO: win + msys2 specific. Configure it later
+                            -- conf below and above paths to be able to work with Unix based paths
+                            -- or wait for configure it based on some other plugin to handle dynamic config
+                            '--query-driver="C:/msys64/clang64/bin/clang-*"',
+                            '--enable-config',
+                            "--background-index",
+                            "--clang-tidy",
+                            -- "--header-insertion=iwyu",
+                            "--completion-style=detailed",
+                            "--function-arg-placeholders",
+                            "--fallback-style=llvm",
+                            -- "--pch-storage=memory",
+                            -- "--suggest-missing-includes",
+                            -- "--all-scopes-completion",
+                            "--log=verbose",
+                            "--pretty",
+                            -- "--header-insertion=never"
+                        },
+                        init_options = {
+                            usePlaceholders = true,
+                            completeUnimported = true,
+                            clangdFileStatus = true,
+                        },
+                    })
+                end,
+            },
+        })
 
-    -- technically these are "diagnostic signs"
-    -- neovim enables them by default.
-    -- here we are just changing them to fancy icons.
-    lsp_zero.set_sign_icons({
-        error = '✘',
-        warn = '▲',
-        hint = '⚑',
-        info = '»'
-    })
-end,
+        -- technically these are "diagnostic signs"
+        -- neovim enables them by default.
+        -- here we are just changing them to fancy icons.
+        lsp_zero.set_sign_icons({
+            error = '✘',
+            warn = '▲',
+            hint = '⚑',
+            info = '»'
+        })
+    end,
 }

@@ -37,6 +37,8 @@ vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 vim.opt.smartindent = true
 
+vim.opt.splitright = true -- Split to the right on vertical
+
 vim.opt.wrap = false
 
 vim.opt.swapfile = false
@@ -51,14 +53,14 @@ vim.optscrolloff = 8 -- not sure about this one, let's try it anyway
 vim.opt.signcolumn = 'yes'
 vim.opt.isfname:append('@-@')
 
-vim.opt.updatetime = 50
+vim.opt.updatetime = 100
 
 vim.opt.colorcolumn = '120' -- maybe a function per type of language in the opened current buffer?
 
 -- Enabling folding capabilities
 vim.o.foldcolumn = '0'
-vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
-vim.o.foldlevelstart = 99
+vim.o.foldlevel = 99
+vim.o.foldlevelstart = 99 -- No auto-folding
 vim.o.foldenable = true
 
 -- Treesitter folding

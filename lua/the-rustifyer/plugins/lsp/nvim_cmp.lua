@@ -6,12 +6,14 @@ return {
     dependencies = {
         { 'L3MON4D3/LuaSnip' },
         -- TODO: adjust the event correctly for the ones below
-        { 'hrsh7th/cmp-nvim-lsp', event = { 'BufReadPre', 'BufNewFile' }, },
-        { 'hrsh7th/cmp-buffer', event = { 'BufReadPre', 'BufNewFile' }, },
-        { 'hrsh7th/cmp-path', event = { 'BufReadPre', 'BufNewFile' }, },
-        { 'hrsh7th/cmp-calc', event = { 'BufReadPre', 'BufNewFile' }, },
-        { 'ray-x/cmp-treesitter', event = { 'BufReadPre', 'BufNewFile' }, },
-        { 'saadparwaiz1/cmp_luasnip', event = { 'BufReadPre', 'BufNewFile' }, },
+        { 'hrsh7th/cmp-nvim-lsp',         event = { 'BufReadPre', 'BufNewFile' }, },
+        { 'hrsh7th/cmp-buffer',           event = { 'BufReadPre', 'BufNewFile' }, },
+        { 'hrsh7th/cmp-cmdline',          event = { 'BufReadPre', 'BufNewFile' }, },
+        { 'hrsh7th/cmp-nvim-lua',         event = { 'BufReadPre', 'BufNewFile' }, },
+        { 'hrsh7th/cmp-path',             event = { 'BufReadPre', 'BufNewFile' }, },
+        { 'hrsh7th/cmp-calc',             event = { 'BufReadPre', 'BufNewFile' }, },
+        { 'ray-x/cmp-treesitter',         event = { 'BufReadPre', 'BufNewFile' }, },
+        { 'saadparwaiz1/cmp_luasnip',     event = { 'BufReadPre', 'BufNewFile' }, },
         { 'rafamadriz/friendly-snippets', event = { 'BufReadPre', 'BufNewFile' }, },
     },
     config = function()
@@ -25,6 +27,7 @@ return {
 
         -- this is the function that loads the extra snippets
         -- from rafamadriz/friendly-snippets
+        require("luasnip").config.set_config({ history = true, updateevents = "TextChanged,TextChangedI" })
         require('luasnip.loaders.from_vscode').lazy_load()
 
         -- Mapping <CR> via autopairs
@@ -45,6 +48,7 @@ return {
                 { name = 'buffer',                 keyword_length = 3 },
                 { name = 'calc' },
                 { name = 'treesitter' },
+                { name = 'nvim_lua' },
             },
             sorting = {
                 comparators = {
@@ -92,7 +96,13 @@ return {
                     show_labelDetails = true, -- show labelDetails in menu. Disabled by default
                 })
             },
+            snippet = {
+                expand = function(args)
+                    require('luasnip').lsp_expand(args.body)
+                end,
+            }
         })
+
         -- `/` cmdline setup.
         cmp.setup.cmdline({ "/", "?" }, {
             mapping = cmp.mapping.preset.cmdline(),
@@ -100,14 +110,17 @@ return {
                 { name = 'buffer' }
             }
         })
-        --[[ -- `:` cmdline setup.
+        -- `:` cmdline setup.
         cmp.setup.cmdline(":", {
             mapping = cmp.mapping.preset.cmdline(),
             sources = cmp.config.sources({
                 { name = "path" },
             }, {
                 { name = "cmdline" },
+                option = {
+                    ignore_cmds = { 'Man', '!' }
+                }
             }),
-        }) ]]
+        })
     end,
 }

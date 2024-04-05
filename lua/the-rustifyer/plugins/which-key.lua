@@ -1,3 +1,7 @@
+-- Plugin for having a cheatsheet of all our custom remaps.
+-- It will be triggered after pressing some key and waiting for a second, showing all the available
+-- combinations for the pressed key
+
 return {
     'folke/which-key.nvim',
     event = 'VeryLazy',
@@ -238,6 +242,10 @@ return {
                     hD = { 'Diff This ~' },
                     w = { function() require('telescope').extensions.git_worktree.git_worktrees() end, 'Show git worktrees via Telescope' },
                     cw = { function() require('telescope').extensions.git_worktree.create_git_worktree() end, 'Create a new git worktree via Telescope' },
+                    gt = { CMD .. 'diffget // 2 | diffupdate' .. CR, 'Get changes from target version of the document and updates the indexes' },
+                    gm = { CMD .. 'diffget // 3 | diffupdate' .. CR, 'Get changes from the merge version and updates the indexes' },
+                    dp = { CMD .. 'diffput | diffupdate' .. CR, 'Put the changes on the working copy from the target or merge version and updates the indexes' },
+                    mu = { CMD .. 'diffupdate' .. CR, 'Updates the changes in the gitmergetool' },
                 },
                 l = {
                     name = '+LSP', --NOTE Not all the LSP remaps are here for now
