@@ -38,6 +38,17 @@ return {
         'ThePrimeagen/git-worktree.nvim',
     },
     {
+        'topaxi/gh-actions.nvim',
+        cmd = 'GhActions',
+        -- optional, you can also install and use `yq` instead.
+        build = 'cargo',
+        dependencies = { 'nvim-lua/plenary.nvim', 'MunifTanjim/nui.nvim' },
+        opts = {},
+        config = function(_, opts)
+            require('gh-actions').setup(opts)
+        end,
+    },
+    {
         'tpope/vim-fugitive',
         event = 'VeryLazy',
         cmd = { "Git", "Gwrite", "Gdiffsplit", "Gvdiffsplit" }

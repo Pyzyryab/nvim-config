@@ -228,6 +228,7 @@ return {
                 g = {
                     name = '+git',
                     s = { vim.cmd.Git, 'Shows git status via vim-fugitive' },
+                    a = { CMD .. 'GhActions' .. CR, 'Opens GitHub Actions on buffer' },
                     -- gitsigns maps are just labels, since they need to be attached per buffer (ideally)
                     nh = { 'Next Hunk' },
                     ph = { 'Prev Hunk' },

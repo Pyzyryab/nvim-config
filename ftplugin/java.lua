@@ -31,6 +31,8 @@ local on_attach = function(_client, bufnr)
     procs.nnoremap("<leader>oi", jdtls.organize_imports, bufopts, "Organize imports")
     procs.nnoremap("<leader>ev", jdtls.extract_variable, bufopts, "Extract variable")
     procs.nnoremap("<leader>ec", jdtls.extract_constant, bufopts, "Extract constant")
+    procs.nnoremap("<leader>kt", jdtls.test_class, bufopts, "Test class")
+    procs.nnoremap("<leader>mt", jdtls.test_class, bufopts, "Test nearest method")
     vim.keymap.set('v', "<leader>em", [[<ESC><CMD>lua require('jdtls').extract_method(true)<CR>]],
         { noremap = true, silent = true, buffer = bufnr, desc = "Extract method" })
 end
