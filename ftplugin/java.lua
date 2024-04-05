@@ -97,6 +97,8 @@ local config = {
     settings = {
         java = {
             signatureHelp = { enabled = true },
+            import = {enabled = true},
+            rename = {enabled = true},
             contentProvider = { preferred = 'fernflower' }, -- Use fernflower to decompile library code
             -- Specify any completion options
             completion = {
