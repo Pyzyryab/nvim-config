@@ -97,9 +97,19 @@ local config = {
     settings = {
         java = {
             signatureHelp = { enabled = true },
-            import = {enabled = true},
-            rename = {enabled = true},
+            extendedClientCapabilities = jdtls.extendedClientCapabilities,
+            import = { enabled = true },
+            rename = { enabled = true },
             contentProvider = { preferred = 'fernflower' }, -- Use fernflower to decompile library code
+            maven = {
+                downloadSources = true,
+            },
+            referencesCodeLens = {
+                enabled = true,
+            },
+            references = {
+                includeDecompiledSources = true,
+            },
             -- Specify any completion options
             completion = {
                 favoriteStaticMembers = {
