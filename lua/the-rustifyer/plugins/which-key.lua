@@ -248,6 +248,71 @@ return {
                     dp = { CMD .. 'diffput | diffupdate' .. CR, 'Put the changes on the working copy from the target or merge version and updates the indexes' },
                     mu = { CMD .. 'diffupdate' .. CR, 'Updates the changes in the gitmergetool' },
                 },
+                j = {
+                    name = '+Java',
+                    -- TODO: /code isn't default for all Java project's. Review this
+                    -- TODO: Wrap everything in a custom function
+                    sr = {
+                        function()
+                            if is_win then vim.opt.shellcmdflag = "-s -c" end
+                            local Terminal = require('toggleterm.terminal').Terminal
+                            local lazygit  = Terminal:new({
+                                cmd = 'mvn spring-boot:run',
+                                dir = vim.fn.getcwd() .. '/code',
+                                direction = 'float',
+                                close_on_exit = true,
+                                float_opts = { border = 'double', },
+                            })
+                            lazygit:toggle()
+                        end,
+                        'Run Java Spring Boot Project with Maven'
+                    },
+                    sR = {
+                        function()
+                            if is_win then vim.opt.shellcmdflag = "-s -c" end
+                            local Terminal = require('toggleterm.terminal').Terminal
+                            local lazygit  = Terminal:new({
+                                cmd = 'mvn spring-boot:run',
+                                dir = vim.fn.getcwd() .. '/code',
+                                direction = 'tab',
+                                close_on_exit = true,
+                                float_opts = { border = 'double', },
+                            })
+                            lazygit:toggle()
+                        end,
+                        'Run Java Spring Boot Project with Maven (new tab)'
+                    },
+                    sd = {
+                        function()
+                            if is_win then vim.opt.shellcmdflag = "-s -c" end
+                            local Terminal = require('toggleterm.terminal').Terminal
+                            local lazygit  = Terminal:new({
+                                cmd = "mvn spring-boot:run -Dspring-boot.run.jvmArguments='-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=*:5005'",
+                                dir = vim.fn.getcwd() .. '/code',
+                                direction = 'float',
+                                close_on_exit = true,
+                                float_opts = { border = 'double', },
+                            })
+                            lazygit:toggle()
+                        end,
+                        'Debug Java Spring Boot Project with Maven'
+                    },
+                    sD = {
+                        function()
+                            if is_win then vim.opt.shellcmdflag = "-s -c" end
+                            local Terminal = require('toggleterm.terminal').Terminal
+                            local lazygit  = Terminal:new({
+                                cmd = "mvn spring-boot:run -Dspring-boot.run.jvmArguments='-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=*:5005'",
+                                dir = vim.fn.getcwd() .. '/code',
+                                direction = 'float',
+                                close_on_exit = true,
+                                float_opts = { border = 'double', },
+                            })
+                            lazygit:toggle()
+                        end,
+                        'Debug Java Spring Boot Project with Maven (new tab)'
+                    },
+                },
                 l = {
                     name = '+LSP', --NOTE Not all the LSP remaps are here for now
                     I = { CMD .. 'LspInfo' .. CR, 'Opens the LSP info floating window' },
@@ -266,6 +331,7 @@ return {
                 },
                 m = {
                     name = '+maven',
+                    -- c = { CMD .. 'Maven' .. CR, 'Choose Maven command to execute' },
                     c = { CMD .. 'Maven' .. CR, 'Choose Maven command to execute' },
                 },
                 o = {

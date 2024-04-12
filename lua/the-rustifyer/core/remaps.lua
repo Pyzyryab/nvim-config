@@ -15,6 +15,8 @@ function _G.set_terminal_keymaps()
     vim.keymap.set('t', '<C-q>', [[<C-\><C-n><C-q>]], opts)
     -- force close without prompting
     vim.keymap.set("t", "<A-c>", [[<Cmd>q!<CR>]], opts)
+    vim.keymap.set("t", "<A-p>", [[<Cmd>-tabnext<CR>]], opts)
+    vim.keymap.set("t", "<A-n>", [[<Cmd>+tabnext<CR>]], opts)
 end
 
 -- if you only want these mappings for toggle term use term://*toggleterm#* instead
@@ -31,8 +33,8 @@ vim.keymap.set('n', '<leader>pv', vim.cmd.Ex, { desc = 'Opens the Newtr file exp
 
 -- Remap tab and shift+tab in normal and visual mode to indent/unindent
 vim.api.nvim_set_keymap('n', '<Tab>', '>>', noremapsilent)
-vim.api.nvim_set_keymap('v', '<Tab>', '>gv', noremapsilent)
 vim.api.nvim_set_keymap('n', '<S-Tab>', '<<', noremapsilent)
+vim.api.nvim_set_keymap('v', '<Tab>', '>gv', noremapsilent)
 vim.api.nvim_set_keymap('v', '<S-Tab>', '<gv', noremapsilent)
 
 -- Move to window using the <ctrl> + hjkl keys
@@ -42,8 +44,11 @@ vim.keymap.set('n', "<C-k>", "<C-w>k", { desc = "Go to upper window", remap = tr
 vim.keymap.set('n', "<C-l>", "<C-w>l", { desc = "Go to right window", remap = true })
 
 -- Go to prev/next Neovim tab page
-vim.keymap.set('n', '<C-A-h>',  ':-tabnext<CR>', { desc = "Go to the previous tab page", remap = false })
-vim.keymap.set('n', '<C-A-l>',  ':+tabnext<CR>', { desc = "Go to the next tab page", remap = false })
+vim.keymap.set('n', '<M-p>',  '<Cmd>:-tabnext<CR>', { desc = "Go to the previous tab page", remap = false })
+vim.keymap.set('n', '<M-n>',  '<Cmd>:+tabnext<CR>', { desc = "Go to the next tab page", remap = false })
+--TODO: they aren't working on terminal mode
+vim.keymap.set('t', '<M-p>',  '[[<Esc>:-tabnext<CR>]]', { desc = "Go to the previous tab page", remap = false })
+vim.keymap.set('t', '<M-n>',  '[[<Esc>:+tabnext<CR>]]', { desc = "Go to the next tab page", remap = false })
 
 -- Resize the current windows size with <ctr> + arrow keys
 vim.keymap.set('n', "<C-Up>", "<Cmd> resize -2<CR>", { desc = "Increase window height" })

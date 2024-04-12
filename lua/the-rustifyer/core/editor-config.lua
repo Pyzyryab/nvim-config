@@ -14,10 +14,11 @@ vim.g.base16_colorspace = 256
 local is_windows = require('the-rustifyer.core.globals').sys.is_windows
 if is_windows then
     local bash_options = {
-        shell = 'zsh.exe', --TODO: better pass later the real zsh path from MSYS2
-        shellcmdflag = "-s",
+        -- shell = 'C:\\msys64\\msys2_shell.cmd -defterm -here -no-start -use-full-path -mingw64 -shell zsh', --TODO: better pass later the real zsh path from MSYS2
+        shell = os.getenv('USERPROFILE') .. '/AppData/Local/Programs/Git/usr/bin/zsh.exe', --TODO: better pass later the real zsh path from MSYS2
+        shellcmdflag = "-l",
         shellredir = "",
-        shellpipe = "2>&1",
+        -- shellpipe = "2>&1",
         shellquote = "",
         shellxquote = "",
     }

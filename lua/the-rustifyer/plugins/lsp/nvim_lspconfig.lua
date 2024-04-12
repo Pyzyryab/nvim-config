@@ -22,7 +22,7 @@ return {
         }
     },
     event = { 'BufReadPre', 'BufNewFile' },
-    cmd = { 'LspStart' },
+    cmd = { 'LspStart', 'LspAttach' },
     config = function()
         local lsp_zero = require('lsp-zero')
         lsp_zero.extend_lspconfig()
