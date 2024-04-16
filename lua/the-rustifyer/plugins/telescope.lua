@@ -9,12 +9,12 @@ return {
             build =
             'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build'
         },
+        {
+            'nvim-telescope/telescope-dap.nvim'
+        }
     },
     config = function()
         local telescope = require('telescope')
-
-        telescope.load_extension('fzf')
-        telescope.load_extension("git_worktree")
 
         telescope.setup({
             file_ignore_patterns = { '.git/' },
@@ -54,5 +54,10 @@ return {
                 }
             }
         })
+
+        telescope.load_extension('fzf')
+        telescope.load_extension("git_worktree")
+        telescope.load_extension('dap')
+
     end,
 }

@@ -26,16 +26,19 @@ local on_attach = function(_client, bufnr)
 
     _client.capabilities = capabilities
 
+    jdtls.setup_dap({ hotcodereplace = 'auto' })
+
     local bufopts = { noremap = true, silent = true, buffer = bufnr }
     -- Java extensions provided by jdtls
     procs.nnoremap("<leader>oi", jdtls.organize_imports, bufopts, "Organize imports")
     procs.nnoremap("<leader>ev", jdtls.extract_variable, bufopts, "Extract variable")
     procs.nnoremap("<leader>ec", jdtls.extract_constant, bufopts, "Extract constant")
-    -- procs.nnoremap("<leader>kt", jdtls., bufopts, "Test class")
     procs.nnoremap("<leader>kt", jdtls.test_class, bufopts, "Test class")
     procs.nnoremap("<leader>mt", jdtls.test_class, bufopts, "Test nearest method")
     vim.keymap.set('v', "<leader>em", [[<ESC><CMD>lua require('jdtls').extract_method(true)<CR>]],
         { noremap = true, silent = true, buffer = bufnr, desc = "Extract method" })
+    vim.keymap.set('v', "<space>ca", "<ESC><CMD>lua vim.lsp.buf.range_code_action()<CR>",
+        { noremap = true, silent = true, buffer = bufnr, desc = "Code actions" })
 end
 
 local bundles = {
@@ -94,9 +97,6 @@ local config = {
         '-data', workspace_dir
     },
 
-    -- Here you can configure eclipse.jdt.ls specific settings
-    -- See https://github.com/eclipse/eclipse.jdt.ls/wiki/Running-the-JAVA-LS-server-from-the-command-line#initialize-request
-    -- for a list of options
     settings = {
         java = {
             signatureHelp = { enabled = true },
@@ -158,6 +158,39 @@ local config = {
     end
 }
 
+-- UI
+local finders = require 'telescope.finders'
+local sorters = require 'telescope.sorters'
+local actions = require 'telescope.actions'
+local pickers = require 'telescope.pickers'
+require('jdtls.ui').pick_one_async = function(items, prompt, label_fn, cb)
+    local opts = {}
+    pickers.new(opts, {
+        prompt_title    = prompt,
+        finder          = finders.new_table {
+            results = items,
+            entry_maker = function(entry)
+                return {
+                    value = entry,
+                    display = label_fn(entry),
+                    ordinal = label_fn(entry),
+                }
+            end,
+        },
+        sorter          = sorters.get_generic_fuzzy_sorter(),
+        attach_mappings = function(prompt_bufnr)
+            actions.goto_file_selection_edit:replace(function()
+                local selection = actions.get_selected_entry(prompt_bufnr)
+                actions.close(prompt_bufnr)
+
+                cb(selection.value)
+            end)
+
+            return true
+        end,
+    }):find()
+end
+
 -- This starts a new client & server,
 -- or attaches to an existing client & server depending on the `root_dir`.
-require('jdtls').start_or_attach(config)
+jdtls.start_or_attach(config)

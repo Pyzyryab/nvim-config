@@ -157,6 +157,7 @@ return {
                     F = { CMD .. 'Telescope dap list_breakpoints' .. CR, 'List breakpoints' },
                 },
                 c = {
+                    name = '+comments/+CMake',
                     b = {
                         function()
                             require("Comment.api").toggle.blockwise.current()
@@ -174,35 +175,30 @@ return {
                     mt = { CMD .. 'CMakeRunTest' .. CR, 'Runs <CMakeRunTest>' },
                 },
                 d = {
-                    name = '+diagnostics/trouble',
+                    name = '+debugger/+diagnostics/+trouble',
                     t = { CMD .. 'lua require("trouble").toggle() ' .. CR, 'Trouble toogle' },
                     w = { CMD .. 'lua require("trouble").toggle("workspace_diagnostics") ' .. CR, 'Workspace diagnostics' },
                     d = { CMD .. 'lua require("trouble").toggle("document_diagnostics") ' .. CR, 'Document diagnostics' },
                     q = { CMD .. 'lua require("trouble").toggle("quickfix") ' .. CR, 'Diagnostics quickfix' },
                     l = { CMD .. 'lua require("trouble").toggle("loclist") ' .. CR, 'Diagnostics loclist' },
                     r = { CMD .. 'lua require("trouble").toggle("lsp_references") ' .. CR, 'Lsp References' },
-                },
-                D = {
-                    name = '+debugger',
-                    C = { CMD .. 'lua require"dap".continue()' .. CR, 'Continue' },
-                    J = { CMD .. 'lua require"dap".step_over()' .. CR, 'Step over' },
-                    K = { CMD .. 'lua require"dap".step_into()' .. CR, 'Step into' },
-                    O = { CMD .. 'lua require"dap".step_out()' .. CR, 'Step out' },
+
+                    c = { CMD .. 'lua require"dap".continue()' .. CR, 'Continue' },
+                    s = { CMD .. 'lua require"dap".step_over()' .. CR, 'Step over' },
+                    k = { CMD .. 'lua require"dap".step_into()' .. CR, 'Step into' },
+                    j = { CMD .. 'lua require"dap".step_out()' .. CR, 'Step out' },
                     D = { CMD .. 'lua require"dap".disconnect()' .. CR, 'Disconnect' },
                     T = { CMD .. 'lua require"dap".terminate()' .. CR, 'Terminate' },
                     R = { CMD .. 'lua require"dap".repl.toggle()' .. CR, 'Open REPL' },
                     L = { CMD .. 'lua require"dap".run_last()' .. CR, 'Run Last' },
                     V = { 'function() require"dap.ui.widgets".hover() end', 'Variables' },
-                    s = { function()
+                    S = { function()
                         local widgets = require "dap.ui.widgets"; widgets.centered_float(widgets.scopes)
                     end, 'Scopes' },
                     F = { CMD .. 'Telescope dap frames' .. CR, 'List Frames' },
                     Q = { CMD .. 'Telescope dap commands' .. CR, 'List commands' },
-                    U = { function() require("dapui").toggle() end, 'Open debugger UI' },
-                    -- Pending to add or to review
-                    -- :Telescope dap configurations
-                    -- :Telescope dap list_breakpoints
-                    -- :Telescope dap variables
+                    K = { CMD .. 'Telescope dap configurations' .. CR, 'List of (auto)detected configurations' },
+                    U = { function() require("dapui").toggle() end, 'Toggles the debugger UI' },
                 },
                 e = {
                     name = 'editor',
@@ -213,7 +209,7 @@ return {
                     e = { CMD .. 'Neotree diagnostics reveal bottom' .. CR, 'neotree show workpace diagnostics' },
                 },
                 f = {
-                    name = '+find/file',
+                    name = '+find',
                     f = { CMD .. 'Telescope find_files' .. CR, 'find files' },
                     o = { CMD .. 'Telescope oldfiles' .. CR, 'open recent files' },
                     g = { CMD .. 'Telescope git_files' .. CR, 'find files on git repository' },
@@ -224,6 +220,7 @@ return {
                     k = { function() require("telescope.builtin").colorscheme() end, 'Show and preview colorschemes' },
                     t = { CMD .. 'TodoTelescope' .. CR, 'Open a TODO-\'s preview' },
                     n = { CMD .. 'Telescope notify' .. CR, 'Displays the notifications triggered' },
+                    d = { CMD .. 'Telescope dap commands' .. CR, 'Displays the DAP available commands' },
                 },
                 g = {
                     name = '+git',
