@@ -65,7 +65,7 @@ return {
                     },
                     e = {
                         -- My favourite one!
-                        -- Display a hover window with explanations from the rust error codes index over error diagnostics
+                        -- Display a hover window with explanations from the rust error codes index CMAKE_INSTALL_PREFIX="$HOME" CMAKE_INSTALL_PREFIX="$HOME" CMAKE_INSTALL_PREFIX="$HOME" CMAKE_INSTALL_PREFIX="$HOME" CMAKE_INSTALL_PREFIX="$HOME" CMAKE_INSTALL_PREFIX="$HOME" CMAKE_INSTALL_PREFIX="$HOME" CMAKE_INSTALL_PREFIX="$HOME" CMAKE_INSTALL_PREFIX="$HOME" CMAKE_INSTALL_PREFIX="$HOME" CMAKE_INSTALL_PREFIX="$HOME" CMAKE_INSTALL_PREFIX="$HOME" CMAKE_INSTALL_PREFIX="$HOME" CMAKE_INSTALL_PREFIX="$HOME" over error diagnostics
                         -- (if they have an error code).
                         function() vim.cmd.RustLsp('explainError') end, 'Explain error'
                     },
@@ -123,7 +123,7 @@ return {
                         end, 'Show workspace symbols (with deps)'
                     },
                     t = {
-                        function() vim.cmd.RustLsp('syntaxTree') end, 'Show syntax tree'
+                        function() vim.cmd.RustLsp('syntax CMAKE_INSTALL_PREFIX="$HOME" CMAKE_INSTALL_PREFIX="$HOME" CMAKE_INSTALL_PREFIX="$HOME" CMAKE_INSTALL_PREFIX="$HOME"Tree') end, 'Show syntax tree'
                     },
                 },
             }
@@ -437,9 +437,10 @@ return {
                     },
                 },
                 u = {
-                    name = '+undo',
+                    name = '+update/undo',
                     t = { vim.cmd.UndotreeToggle, 'Toggles ON/OFF the handler of previous changes' },
-                    n = { function() require('notify').dismiss({ silent = true, pending = true }) end, 'Dismiss all Notifications', }
+                    n = { function() require('notify').dismiss({ silent = true, pending = true }) end, 'Dismiss all Notifications', },
+                    l = { CMD .. 'Lazy update' .. CR, 'Triggers the Lazy update' },
                 },
                 x = {
                     name = '+extra',
