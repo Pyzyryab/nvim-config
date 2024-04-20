@@ -1,16 +1,6 @@
 -- UI enhacement to the LSP plugins
 --
 return {
-    -- Virtual lines instead of virtual text for showing LSP messages
-    {
-        "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
-        event = 'LspAttach',
-        config = function()
-            -- Disable virtual_text since it's redundant due to lsp_lines.
-            vim.diagnostic.config({ virtual_text = false, })
-            require("lsp_lines").setup()
-        end,
-    },
     -- Show the loading progress and the state of the servers in the statusline
     {
         'linrongbin16/lsp-progress.nvim',
@@ -145,21 +135,4 @@ return {
         opts = {},
         config = function(_, opts) require 'lsp_signature'.setup(opts) end
     },
-
-    --
-    -- TODO: pending to decide if we let this one in the setup...
-    --[[ {
-    'roobert/action-hints.nvim',
-    enable = false,
-    event = {'BufRead', 'BufNewFile'},
-    config = function()
-        require("action-hints").setup({
-            template = {
-                definition = { text = " ⊛", color = "#add8e6" },
-                references = { text = " ↱%s", color = "#ff6666" },
-            },
-            use_virtual_text = true,
-        })
-    end,
-}, ]]
 }

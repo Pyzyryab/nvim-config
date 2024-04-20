@@ -26,7 +26,6 @@ return {
         }
     },
 
-    -- Watch the project's TODO:s and other tracking commentary tags
     {
         'folke/TODO-comments.nvim',
         event = 'VeryLazy',
