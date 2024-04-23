@@ -1,3 +1,5 @@
+local consts = require('the-rustifyer.core.constants')
+
 return {
 'goolord/alpha-nvim',
     dependencies = {
@@ -9,15 +11,20 @@ return {
     lazy = false,
     opts = function()
         local dashboard = require("alpha.themes.dashboard")
+        local editor_cfg_file = consts.dirs.nvim .. "/lua/the-rustifyer/core/editor-config.lua"
+        local remaps_cfg_file = consts.dirs.nvim .. "/lua/the-rustifyer/core/remaps.lua"
+        local which_key_cfg_file = consts.dirs.nvim .. "/lua/the-rustifyer/plugins/which-key.lua"
 
         --dashboard.section.header.val = vim.split(logos(), '\n')
         -- stylua: ignore
         dashboard.section.buttons.val = {
             dashboard.button("f", " " .. " Find file", "<cmd> Telescope find_files <cr>"),
             dashboard.button("n", " " .. " New file", "<cmd> ene <BAR> startinsert <cr>"),
-            dashboard.button("r", " " .. " Recent files", "<cmd> Telescope oldfiles <cr>"),
+            dashboard.button("o", " " .. " Recent files", "<cmd> Telescope oldfiles <cr>"),
             dashboard.button("g", " " .. " Find text", "<cmd> Telescope live_grep <cr>"),
-            dashboard.button("c", " " .. " Config", "<cmd> e lua/the-rustifyer/core/editor-config.lua <cr>"),
+            dashboard.button("c", " " .. " Config", "<cmd> e " .. editor_cfg_file .. "<cr>"),
+            dashboard.button("r", " " .. " General remaps", "<cmd> e " .. remaps_cfg_file .. "<cr>"),
+            dashboard.button("w", " " .. " Plugin remaps", "<cmd> e " .. which_key_cfg_file .. "<cr>"),
             dashboard.button("s", " " .. " Restore Session", [[<cmd> lua require("persistence").load() <cr>]]),
             dashboard.button("L", " " .. " Strt Leetcode", "<cmd> Leet <cr>"),
             dashboard.button("l", "󰒲 " .. " Lazy", "<cmd> Lazy <cr>"),

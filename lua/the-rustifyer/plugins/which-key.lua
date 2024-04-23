@@ -251,6 +251,9 @@ return {
                     name = '+Java',
                     -- TODO: /code isn't default for all Java project's. Review this
                     -- TODO: Wrap everything in a custom function
+                    c = { CMD .. 'JdtCompile' .. CR, 'Compile Java File/Project with JDTLS' },
+                    ud = { CMD .. 'JdtUpdateDebugConfig' .. CR, 'Scan for autodetect running configurations for debug builds' },
+                    uc = { CMD .. 'JdtUpdateConfig' .. CR, 'Updates the configurations for the current projects' },
                     sr = {
                         function()
                             if is_win then vim.opt.shellcmdflag = "-s -c" end
@@ -335,11 +338,11 @@ return {
                 },
                 o = {
                     name = '+open',
+                    a = { CMD .. 'Alpha' .. CR, 'Opens the setup Dashboard, Alpha' },
                     d = { CMD .. 'DocsViewToggle' .. CR, 'Toggles a buffer with documentation for the selected item' },
                     u = { CMD .. 'URLOpenUnderCursor' .. CR, 'Opens the URL under the cursor' },
                     h = { CMD .. 'URLOpenHighlightAll' .. CR, 'Highlights all the URLs present on the current buffer' },
                     c = { CMD .. 'URLOpenHighlightAllClear' .. CR, 'Clears all the highlighter URLs' },
-                    m = { CMD .. 'Mason' .. CR, 'Opens the Mason GUI' },
                 },
                 p = {
                     name = '+persistence',
@@ -449,6 +452,7 @@ return {
                     t = { CMD .. 'TransparentToggle' .. CR, 'Toggle ON/OFF transparency' },
                     s = { CMD .. 'ASToggle' .. CR, 'Toggle ON/OFF autosave' },
                     m = { CMD .. 'messages' .. CR, 'Show Nvim Cmd messages' },
+                    om = { CMD .. 'Mason' .. CR, 'Opens the Mason GUI' },
                 }
             },
         })

@@ -34,7 +34,9 @@ return {
         opts = {
             ensure_installed = {
                 -- LSPs
-                'rust-analyzer',
+                -- 'rust-analyzer', -- Disabled, since in my dotfiles installation is already included the RA tool,
+                -- and the one embedeed with Mason won't probably fit our toolchain nor the default discovery
+
                 -- 'clangd', -- C/C++ --NOTE Clangd is always installed manually in all of my machines,
                 -- because I will have the full LLVM suite in all of them, so I don't want the Mason
                 -- version (in almost any case). Uncommented the 'clangd' entry or install it manually
