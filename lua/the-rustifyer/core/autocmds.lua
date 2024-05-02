@@ -5,21 +5,6 @@ local augroup = vim.api.nvim_create_augroup      -- Create/get autocommand group
 local autocmd = vim.api.nvim_create_autocmd      -- Create autocommand
 local usercmd = vim.api.nvim_create_user_command -- Create usercommand
 
---- Allowing 'wqa' to leave even if there's `ToggleTerm` instances active
-autocmd({ "TermEnter" }, {
-    callback = function()
-        for _, buffers in ipairs(vim.fn.getbufinfo()) do
-            local filetype = vim.api.nvim_buf_get_option(buffers.bufnr, "filetype")
-            if filetype == "toggleterm" then
-                vim.api.nvim_create_autocmd({ "BufWriteCmd", "FileWriteCmd", "FileAppendCmd" }, {
-                    buffer = buffers.bufnr,
-                    command = "q!",
-                })
-            end
-        end
-    end,
-})
-
 -- Start the JDTLS LSP server when a Java project is detected
 autocmd('User', {
     pattern = 'VeryLazy',

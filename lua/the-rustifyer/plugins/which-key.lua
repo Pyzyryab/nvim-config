@@ -249,71 +249,9 @@ return {
                 },
                 j = {
                     name = '+Java',
-                    -- TODO: /code isn't default for all Java project's. Review this
-                    -- TODO: Wrap everything in a custom function
                     c = { CMD .. 'JdtCompile' .. CR, 'Compile Java File/Project with JDTLS' },
                     ud = { CMD .. 'JdtUpdateDebugConfig' .. CR, 'Scan for autodetect running configurations for debug builds' },
                     uc = { CMD .. 'JdtUpdateConfig' .. CR, 'Updates the configurations for the current projects' },
-                    sr = {
-                        function()
-                            if is_win then vim.opt.shellcmdflag = "-s -c" end
-                            local Terminal = require('toggleterm.terminal').Terminal
-                            local lazygit  = Terminal:new({
-                                cmd = 'mvn spring-boot:run',
-                                dir = vim.fn.getcwd() .. '/code',
-                                direction = 'float',
-                                close_on_exit = true,
-                                float_opts = { border = 'double', },
-                            })
-                            lazygit:toggle()
-                        end,
-                        'Run Java Spring Boot Project with Maven'
-                    },
-                    sR = {
-                        function()
-                            if is_win then vim.opt.shellcmdflag = "-s -c" end
-                            local Terminal = require('toggleterm.terminal').Terminal
-                            local lazygit  = Terminal:new({
-                                cmd = 'mvn spring-boot:run',
-                                dir = vim.fn.getcwd() .. '/code',
-                                direction = 'tab',
-                                close_on_exit = true,
-                                float_opts = { border = 'double', },
-                            })
-                            lazygit:toggle()
-                        end,
-                        'Run Java Spring Boot Project with Maven (new tab)'
-                    },
-                    sd = {
-                        function()
-                            if is_win then vim.opt.shellcmdflag = "-s -c" end
-                            local Terminal = require('toggleterm.terminal').Terminal
-                            local lazygit  = Terminal:new({
-                                cmd = "mvn spring-boot:run -Dspring-boot.run.jvmArguments='-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=*:5005'",
-                                dir = vim.fn.getcwd() .. '/code',
-                                direction = 'float',
-                                close_on_exit = true,
-                                float_opts = { border = 'double', },
-                            })
-                            lazygit:toggle()
-                        end,
-                        'Debug Java Spring Boot Project with Maven'
-                    },
-                    sD = {
-                        function()
-                            if is_win then vim.opt.shellcmdflag = "-s -c" end
-                            local Terminal = require('toggleterm.terminal').Terminal
-                            local lazygit  = Terminal:new({
-                                cmd = "mvn spring-boot:run -Dspring-boot.run.jvmArguments='-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=*:5005'",
-                                dir = vim.fn.getcwd() .. '/code',
-                                direction = 'float',
-                                close_on_exit = true,
-                                float_opts = { border = 'double', },
-                            })
-                            lazygit:toggle()
-                        end,
-                        'Debug Java Spring Boot Project with Maven (new tab)'
-                    },
                 },
                 l = {
                     name = '+LSP', --NOTE Not all the LSP remaps are here for now
@@ -357,77 +295,6 @@ return {
                     s = { CMD .. 'lua require("spectre").toggle()' .. CR, 'Toggle Spectre' },
                     w = { CMD .. 'lua require("spectre").open_visual({select_word=true})' .. CR, 'Search current word' },
                     p = { CMD .. 'lua require("spectre").open_file_search({select_word=true})' .. CR, 'Search on current file' }
-                },
-                t = {
-                    name = '+terminal',
-                    s = { CMD .. 'TermSelect' .. CR, 'Shows opened terminals. Allows to pick them' },
-                    a = { CMD .. 'ToggleTermToggleAll' .. CR, 'Toggles all terminals' },
-                    o = { (function()
-                        if is_win then vim.opt.shellcmdflag = "-s" end
-                        return CMD .. 'ToggleTerm' .. CR
-                    end)(), 'Opens a new terminal' },
-                    g = {
-                        -- CMD .. 'TermExec cmd="lazygit" direction=float name="lazygit" go_back=1 close_on_exit=true' .. CR,
-                        function() --TODO: The above line it's kinda provisonal conf while knowing what's going wrong between different windows hosts
-                            if is_win then vim.opt.shellcmdflag = "-s -c" end
-                            local Terminal = require('toggleterm.terminal').Terminal
-                            local lazygit  = Terminal:new({
-                                cmd = 'lazygit',
-                                dir = 'git_dir',
-                                direction = 'float',
-                                close_on_exit = true,
-                                float_opts = {
-                                    border = 'double',
-                                },
-                            })
-                            lazygit:toggle() -- TODO: Toggle doesn't pick the already opened one
-                        end,
-                        'Open Lazygit on a floating window'
-                    },
-                    G = {
-                        function()
-                            if is_win then vim.opt.shellcmdflag = "-s -c" end
-                            local Terminal = require('toggleterm.terminal').Terminal
-                            local lazygit  = Terminal:new({
-                                cmd = 'lazygit',
-                                dir = 'git_dir',
-                                direction = 'tab',
-                                close_on_exit = true,
-                                float_opts = {
-                                    border = 'double',
-                                },
-                            })
-                            lazygit:toggle() -- TODO: Toggle doesn't pick the already opened one
-                        end,
-                        'Open Lazygit on a new Tab'
-                    },
-                    j = {
-                        function()
-                            local Terminal   = require('toggleterm.terminal').Terminal
-                            local float_term = Terminal:new({
-                                dir = 'git_dir',
-                                direction = 'float',
-                                close_on_exit = true,
-                                float_opts = {
-                                    border = 'double',
-                                },
-                            })
-                            float_term:toggle()
-                        end,
-                        'Open/Toggle a float terminal'
-                    },
-                    k = {
-                        function()
-                            local Terminal = require('toggleterm.terminal').Terminal
-                            local float_term = Terminal:new({
-                                dir = 'git_dir',
-                                direction = 'tab',
-                                close_on_exit = false,
-                            })
-                            float_term:toggle()
-                        end,
-                        'Open/Toggle a float terminal'
-                    },
                 },
                 ts = {
                     name = '+treessitter',
