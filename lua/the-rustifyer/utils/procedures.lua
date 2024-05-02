@@ -35,10 +35,10 @@ function M.minibufremove()
     local bd = require("mini.bufremove").delete
     if vim.bo.modified then
         local choice = vim.fn.confirm(("Save changes to %q?"):format(vim.fn.bufname()), "&Yes\n&No\n&Cancel")
-        if choice == 1 then             -- Yes
+        if choice == 1 then -- Yes
             vim.cmd.write()
             bd(0)
-        elseif choice == 2 then             -- No
+        elseif choice == 2 then -- No
             bd(0, true)
         end
     else
@@ -49,13 +49,25 @@ function M.minibufremove()
 end
 
 ---
--- Helper to create a remaps that toggles between relative and absolute numbers
+-- Helper to create a remap that toggles between relative and absolute numbers
 function M.toggle_line_numbers()
     local enabled_rel_line_nums = vim.wo.relativenumber == true
     if enabled_rel_line_nums then
         vim.cmd('set number norelativenumber')
     else
         vim.cmd('set number relativenumber')
+    end
+end
+
+---
+-- Helper to create a remap that toggles the visualization of the folding column
+function M.toggle_folding_column()
+    local foldcolumn_visible = vim.o.foldcolumn == '1'
+
+    if foldcolumn_visible then
+        vim.cmd('set foldcolumn=0')
+    else
+        vim.cmd('set foldcolumn=1')
     end
 end
 
@@ -92,5 +104,20 @@ function M.load_plugin_extra_config(plug_category, plug_name, lazy_plug)
     return lazy_plug
 end
 
-return M
+---
+-- Checks if a given file at a given path exists
+--
+-- @param directory The string for the target directory
+-- @param filename The string for the target file
+function M.file_exists(directory, filename)
+    local filepath = directory .. "/" .. filename
+    local file = io.open(filepath, "r")
+    if file ~= nil then
+        file:close()
+        return true
+    else
+        return false
+    end
+end
 
+return M

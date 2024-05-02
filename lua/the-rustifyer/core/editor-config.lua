@@ -1,4 +1,4 @@
--- This file holds my personal editor's configuration and settings
+-- This file holds the core editor's configuration and settings
 --
 
 vim.opt.guicursor = '' -- fat cursor enabled (even on insert mode)
@@ -10,25 +10,6 @@ vim.opt.updatetime = 200
 -- Access colors present in 256 colorspace
 vim.g.base16_colorspace = 256
 
--- Setting git bash on Windows by default
-local is_windows = require('the-rustifyer.core.globals').sys.is_windows
-if is_windows then
-    local bash_options = {
-        -- shell = 'bash.exe', -- Assuming that this is always the correct path on W2
-        shell = os.getenv('USERPROFILE') .. '\\AppData\\Local\\Programs\\Git\\bin\\bash.exe', -- Assuming that this is always the correct path on W2
-        -- shell = 'C:\\"Program Files"\\Git\\bin\\bash.exe',
-        shellcmdflag = "-s",
-        shellredir = "",
-        shellpipe = "2>&1",
-        shellquote = "",
-        shellxquote = "",
-    }
-
-    for option, value in pairs(bash_options) do
-        vim.opt[option] = value
-    end
-end
-
 vim.opt.nu = true
 vim.opt.relativenumber = true
 vim.opt.cursorline = true
@@ -38,6 +19,8 @@ vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 vim.opt.smartindent = true
+
+vim.opt.splitright = true -- Split to the right on vertical
 
 vim.opt.wrap = false
 
@@ -53,15 +36,15 @@ vim.optscrolloff = 8 -- not sure about this one, let's try it anyway
 vim.opt.signcolumn = 'yes'
 vim.opt.isfname:append('@-@')
 
-vim.opt.updatetime = 50
+vim.opt.updatetime = 100
 
 vim.opt.colorcolumn = '120' -- maybe a function per type of language in the opened current buffer?
 
 -- Enabling folding capabilities
-vim.o.foldcolumn = '1'
-vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
-vim.o.foldlevelstart = 99
--- vim.o.foldenable = true
+vim.o.foldcolumn = '0'
+vim.o.foldlevel = 99
+vim.o.foldlevelstart = 99 -- No auto-folding
+vim.o.foldenable = true
 
 -- Treesitter folding
 vim.wo.foldmethod = 'expr'
@@ -72,8 +55,9 @@ vim.wo.foldexpr = 'nvim_treesitter#foldexpr()'
 -- Concept credit: https://github.com/tjdevries
 vim.opt.joinspaces = false
 
--- List mode: By default, show tabs as ">", trailing spaces as "-", and
 vim.opt.list = true
+
+-- List mode: By default, show tabs as ">", trailing spaces as "-", and
 -- non-breakable space characters as "+". Useful to see the difference between
 -- tabs and spaces and for trailing blanks. Further changed by
 -- set listchars=tab:»·,trail:·,extends:↪,precedes:↩

@@ -1,26 +1,5 @@
--- This file holds my personal keymaps and remaps, along as the configuration for the leader key
---
--- Not all remaps may be configured here, as they could be directly configured in the plugins
-
--- Toggleterm on terminal mode
-function _G.set_terminal_keymaps()
-    local opts = { buffer = 0 }
-    -- vim.keymap.set('t', '<esc>', [[<C-\><C-n>]], opts)
-    -- vim.keymap.set('t', '<C-h>', [[<C-\><C-n>]], opts)
-    vim.keymap.set('t', 'jk', [[<C-\><C-n>]], opts)
-    vim.keymap.set('t', '<C-h>', [[<Cmd>wincmd h<CR>]], opts)
-    vim.keymap.set('t', '<C-j>', [[<Cmd>wincmd j<CR>]], opts)
-    vim.keymap.set('t', '<C-k>', [[<Cmd>wincmd k<CR>]], opts)
-    vim.keymap.set('t', '<C-l>', [[<Cmd>wincmd l<CR>]], opts)
-    vim.keymap.set('t', '<C-w>', [[<C-\><C-n><C-w>]], opts)
-    vim.keymap.set('t', '<C-q>', [[<C-\><C-n><C-q>]], opts)
-    -- force close without prompting
-    vim.keymap.set("t", "<A-c>", [[<Cmd>q!<CR>]], opts)
-end
-
--- if you only want these mappings for toggle term use term://*toggleterm#* instead
-vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
-
+-- This file holds my personal remaps and keybindings for general Neovim actions/workflows
+-- The plugin keymaps are directly configured on the 'which-key' plugin configuration file
 
 ----------------- General custom remaps -----------------
 --
@@ -28,12 +7,12 @@ vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
 local noremapsilent = { noremap = true, silent = true }
 
 -- Opens `Newtr` file explorer
-vim.keymap.set('n', '<leader>pv', vim.cmd.Ex)
+vim.keymap.set('n', '<leader>pv', vim.cmd.Ex, { desc = 'Opens the Newtr file explorer' })
 
 -- Remap tab and shift+tab in normal and visual mode to indent/unindent
 vim.api.nvim_set_keymap('n', '<Tab>', '>>', noremapsilent)
-vim.api.nvim_set_keymap('v', '<Tab>', '>gv', noremapsilent)
 vim.api.nvim_set_keymap('n', '<S-Tab>', '<<', noremapsilent)
+vim.api.nvim_set_keymap('v', '<Tab>', '>gv', noremapsilent)
 vim.api.nvim_set_keymap('v', '<S-Tab>', '<gv', noremapsilent)
 
 -- Move to window using the <ctrl> + hjkl keys
@@ -42,6 +21,13 @@ vim.keymap.set('n', "<C-j>", "<C-w>j", { desc = "Go to lower window", remap = tr
 vim.keymap.set('n', "<C-k>", "<C-w>k", { desc = "Go to upper window", remap = true })
 vim.keymap.set('n', "<C-l>", "<C-w>l", { desc = "Go to right window", remap = true })
 
+-- Go to prev/next Neovim tab page
+vim.keymap.set('n', '<M-p>',  '<Cmd>:-tabnext<CR>', { desc = "Go to the previous tab page", remap = false })
+vim.keymap.set('n', '<M-n>',  '<Cmd>:+tabnext<CR>', { desc = "Go to the next tab page", remap = false })
+--TODO: they aren't working on terminal mode
+vim.keymap.set('t', '<M-p>',  '[[<Esc>:-tabnext<CR>]]', { desc = "Go to the previous tab page", remap = false })
+vim.keymap.set('t', '<M-n>',  '[[<Esc>:+tabnext<CR>]]', { desc = "Go to the next tab page", remap = false })
+
 -- Resize the current windows size with <ctr> + arrow keys
 vim.keymap.set('n', "<C-Up>", "<Cmd> resize -2<CR>", { desc = "Increase window height" })
 vim.keymap.set('n', "<C-Down>", "<Cmd> resize +2<CR>", { desc = "Decrease window height" })
@@ -49,7 +35,7 @@ vim.keymap.set('n', "<C-Left>", "<Cmd> vertical resize -2<CR>", { desc = "Decrea
 vim.keymap.set('n', "<C-Right>", "<Cmd> vertical resize +2<CR>", { desc = "Increase window width" })
 
 -- Moves the selected lines in Visual mode one down (J) or one up (K)
--- TODO in 'n' and 'v' with Alt - J/K
+-- TODO: in 'n' and 'v' with Alt - J/K
 vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv")
 vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv")
 
