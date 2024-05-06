@@ -10,6 +10,23 @@ vim.opt.updatetime = 200
 -- Access colors present in 256 colorspace
 vim.g.base16_colorspace = 256
 
+-- Setting git bash on Windows by default
+local is_windows = require('the-rustifyer.core.globals').sys.is_windows
+if is_windows then
+    local bash_options = {
+        -- shell = 'C:\\msys64\\msys2_shell.cmd -defterm -here -no-start -use-full-path -mingw64 -shell zsh', --TODO: better pass later the real zsh path from MSYS2
+        shellcmdflag = "-c",
+        shellredir = "",
+        shellpipe = "2>&1",
+        shellquote = "",
+        shellxquote = "",
+    }
+
+    for option, value in pairs(bash_options) do
+        vim.opt[option] = value
+    end
+end
+
 vim.opt.nu = true
 vim.opt.relativenumber = true
 vim.opt.cursorline = true
