@@ -25,6 +25,18 @@ if is_windows then
     for option, value in pairs(bash_options) do
         vim.opt[option] = value
     end
+    -- Clipboard (CARE! Don't enable this unless you're using Nvim >= 0.10, current is 0.9.x)
+    vim.g.clipboard = {
+        name = 'OSC 52',
+        copy = {
+            ['+'] = require('vim.ui.clipboard.osc52').copy('+'),
+            ['*'] = require('vim.ui.clipboard.osc52').copy('*'),
+        },
+        paste = {
+            ['+'] = require('vim.ui.clipboard.osc52').paste('+'),
+            ['*'] = require('vim.ui.clipboard.osc52').paste('*'),
+        },
+    }
 end
 
 vim.opt.nu = true
@@ -79,10 +91,10 @@ vim.opt.list = true
 -- tabs and spaces and for trailing blanks. Further changed by
 -- set listchars=tab:»·,trail:·,extends:↪,precedes:↩
 vim.opt.listchars = {
-  tab = "»·",
-  trail = "·",
-  extends = "↪",
-  precedes = "↩",
+    tab = "»·",
+    trail = "·",
+    extends = "↪",
+    precedes = "↩",
 }
 
 -- Enabling C++ typical named modules extensions to be detected as C++ files
