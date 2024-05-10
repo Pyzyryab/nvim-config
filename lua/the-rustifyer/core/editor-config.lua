@@ -26,7 +26,7 @@ if is_windows then
         vim.opt[option] = value
     end
     -- Clipboard (CARE! Don't enable this unless you're using Nvim >= 0.10, current is 0.9.x)
-    vim.g.clipboard = {
+    --[[vim.g.clipboard = {
         name = 'OSC 52',
         copy = {
             ['+'] = require('vim.ui.clipboard.osc52').copy('+'),
@@ -37,6 +37,7 @@ if is_windows then
             ['*'] = require('vim.ui.clipboard.osc52').paste('*'),
         },
     }
+    --]]
 end
 
 vim.opt.nu = true
