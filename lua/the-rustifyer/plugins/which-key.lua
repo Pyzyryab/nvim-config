@@ -28,300 +28,216 @@ return {
         local CR = '<CR>'
         local ESC = '<Esc>'
 
-        -- Visual mode ones
-        wk.register({
-            { mode = 'v' },
-            ['<leader>'] = {
-                c = {
-                    b = {
-                        function()
-                            vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(ESC, true, true, true), 'n', true)
-                            require("Comment.api").toggle.linewise(vim.fn.visualmode())
-                        end, 'Comment selection (Visual)'
-                    },
-                },
-            },
-        })
-
-        -- The Rust remaps :D
-        -- Care! They only work when a buffer of ft = 'Rust' is opened and 'rust-analyzer'
-        -- is completly load. Otherwise, an error will be thrown
-        wk.register({
-            { mode = 'n', buffer = bufnr },
-            ['<leader>'] = {
-                r = {
-                    name = '+Rust LSP actions (care!: only enabled for ft = Rust)',
-                    c = {
-                        function() vim.cmd.RustLsp('openCargo') end, 'Open cargo.toml'
-                    },
-                    d = {
-                        function() vim.cmd.RustLsp('debuggables') end, 'Show debuggables'
-                    },
-                    D = {
-                        -- Display a hover window with the rendered diagnostic, as displayed during cargo build.
-                        -- Useful for solving bugs around borrowing and generics, as it consolidates the important bits
-                        -- (sometimes across files) together.
-                        function() vim.cmd.RustLsp('renderDiagnostic') end, 'Render diagnostic'
-                    },
-                    e = {
-                        -- My favourite one!
-                        -- Display a hover window with explanations from the rust error codes index CMAKE_INSTALL_PREFIX="$HOME" CMAKE_INSTALL_PREFIX="$HOME" CMAKE_INSTALL_PREFIX="$HOME" CMAKE_INSTALL_PREFIX="$HOME" CMAKE_INSTALL_PREFIX="$HOME" CMAKE_INSTALL_PREFIX="$HOME" CMAKE_INSTALL_PREFIX="$HOME" CMAKE_INSTALL_PREFIX="$HOME" CMAKE_INSTALL_PREFIX="$HOME" CMAKE_INSTALL_PREFIX="$HOME" CMAKE_INSTALL_PREFIX="$HOME" CMAKE_INSTALL_PREFIX="$HOME" CMAKE_INSTALL_PREFIX="$HOME" CMAKE_INSTALL_PREFIX="$HOME" over error diagnostics
-                        -- (if they have an error code).
-                        function() vim.cmd.RustLsp('explainError') end, 'Explain error'
-                    },
-                    h = {
-                        -- Replaces Neovim's built-in hover handler with hover actions, so you can also use vim.lsp.buf.hover()
-                        function() vim.cmd.RustLsp { 'hover', 'actions' } end, 'Hover actions'
-                    },
-                    p = {
-                        function() vim.cmd.RustLsp('parentModule') end, 'Parent module'
-                    },
-                    r = {
-                        function() vim.cmd.RustLsp('runnables') end, 'Show runnables'
-                    },
-                    t = {
-                        function() vim.cmd.RustLsp('testables') end, 'Show testables'
-                    },
-                },
-                rl = {
-                    name = '+last selected',
-                    r = {
-                        function() vim.cmd.RustLsp { 'runnables', bang = true } end, 'launch previous runnable'
-                    },
-                    t = {
-                        function() vim.cmd.RustLsp { 'testables', bang = true } end, 'launch previous testable'
-                    },
-                    d = {
-                        function() vim.cmd.RustLsp { 'debuggables', bang = true } end, 'launch previous debuggable'
-                    },
-                },
-                rm = {
-                    name = '+macros',
-                    e = {
-                        function() vim.cmd.RustLsp('expandmacro') end, 'Expand macro'
-                    },
-                    r = {
-                        function() vim.cmd.RustLsp('rebuildProcMacros') end, 'Rebuild proc macros'
-                    },
-                },
-                rv = {
-                    name = '+view',
-                    h = {
-                        function() vim.cmd.RustLsp { 'view', 'hir' } end, 'View HIR'
-                    },
-                    m = {
-                        function() vim.cmd.RustLsp { 'view', 'mir' } end, 'View MIR'
-                    },
-                    s = {
-                        function()
-                            vim.cmd.RustLsp {
-                                'workspaceSymbol',
-                                '<onlyTypes|allSymbols>' --[[ optional ]],
-                                -- '<query>' --[[ optional ]],
-                                bang = true --[[ optional ]]
-                            }
-                        end, 'Show workspace symbols (with deps)'
-                    },
-                    t = {
-                        function() vim.cmd.RustLsp('syntax CMAKE_INSTALL_PREFIX="$HOME" CMAKE_INSTALL_PREFIX="$HOME" CMAKE_INSTALL_PREFIX="$HOME" CMAKE_INSTALL_PREFIX="$HOME"Tree') end, 'Show syntax tree'
-                    },
-                },
-            }
-        })
-
         -- General remaps
-        wk.register({
-            { mode = 'n' },
-            ['<A-h>'] = { CMD .. 'BufferLineCyclePrev' .. CR, 'Prev buffer' },
-            ['<A-l>'] = { CMD .. 'BufferLineCycleNext' .. CR, 'Next buffer' },
-            ['<leader>'] = {
-                a = {
-                    w = { CMD .. 'AddWorkspace' .. CR, 'Add the CWD to the projects of the workspace' },
-                },
-                b = {
-                    name = '+buffers',
-                    p = { CMD .. 'BufferLineTogglePin' .. CR, 'Toggle pin' },
-                    P = { CMD .. 'BufferLineGroupClose ungrouped' .. CR, 'Delete non-pinned buffers' },
-                    o = { CMD .. 'BufferLineCloseOthers' .. CR, 'Delete other buffers' },
-                    r = { CMD .. 'BufferLineCloseRight' .. CR, 'Delete buffers to the right' },
-                    l = { CMD .. 'BufferLineCloseLeft' .. CR, 'Delete buffers to the left' },
-                    d = { procs.minibufremove, 'Delete Buffer' },
-                    D = { function() require("mini.bufremove").delete(0, true) end, 'Delete Buffer (Force)' },
-                },
-                B = {
-                    name = '+breakpoints',
-                    B = { CMD .. 'lua require("persistent-breakpoints.api").toggle_breakpoint()' .. CR, 'Set breakpoint' },
-                    C = { CMD .. 'lua require("persistent-breakpoints.api").set_conditional_breakpoint()' .. CR, 'Set conditional breakpoint' },
-                    L = { CMD .. 'lua require"dap".set_breakpoint(nil, nil, vim.fn.input("Log point message: "))' .. CR, 'Set log point' },
-                    R = { CMD .. 'lua require("persistent-breakpoints.api").clear_all_breakpoints()' .. CR, 'Clear breakpoints' },
-                    F = { CMD .. 'Telescope dap list_breakpoints' .. CR, 'List breakpoints' },
-                },
-                c = {
-                    name = '+comments/+CMake',
-                    b = {
-                        function()
-                            require("Comment.api").toggle.blockwise.current()
-                        end, 'Comment line/selection'
-                    },
-                    l = {
-                        function()
-                            require("Comment.api").toggle.linewise.current()
-                        end, 'Comment line'
-                    },
-                    -- CMake plugin actions
-                    mg = { CMD .. 'CMakeGenerate' .. CR, 'Runs <CMakeGenerate>' },
-                    mb = { CMD .. 'CMakeBuild' .. CR, 'Runs <CMakeBuild>' },
-                    mr = { CMD .. 'CMakeRun' .. CR, 'Runs <CMakeRun>' },
-                    mt = { CMD .. 'CMakeRunTest' .. CR, 'Runs <CMakeRunTest>' },
-                },
-                d = {
-                    name = '+diagnostics/+trouble',
-                    t = { CMD .. 'lua require("trouble").toggle() ' .. CR, 'Trouble toogle' },
-                    w = { CMD .. 'lua require("trouble").toggle("workspace_diagnostics") ' .. CR, 'Workspace diagnostics' },
-                    d = { CMD .. 'lua require("trouble").toggle("document_diagnostics") ' .. CR, 'Document diagnostics' },
-                    q = { CMD .. 'lua require("trouble").toggle("quickfix") ' .. CR, 'Diagnostics quickfix' },
-                    l = { CMD .. 'lua require("trouble").toggle("loclist") ' .. CR, 'Diagnostics loclist' },
-                    r = { CMD .. 'lua require("trouble").toggle("lsp_references") ' .. CR, 'Lsp References' },
-                },
-                D = {
-                    name = '+debugger',
-                    C = { CMD .. 'lua require"dap".continue()' .. CR, 'Continue' },
-                    K = { CMD .. 'lua require"dap".step_over()' .. CR, 'Step over' },
-                    J = { CMD .. 'lua require"dap".step_into()' .. CR, 'Step into' },
-                    O = { CMD .. 'lua require"dap".step_out()' .. CR, 'Step out' },
-                    D = { CMD .. 'lua require"dap".disconnect()' .. CR, 'Disconnect' },
-                    T = { CMD .. 'lua require"dap".terminate()' .. CR, 'Terminate' },
-                    R = { CMD .. 'lua require"dap".repl.toggle()' .. CR, 'Open REPL' },
-                    L = { CMD .. 'lua require"dap".run_last()' .. CR, 'Run Last' },
-                    V = { 'function() require"dap.ui.widgets".hover() end', 'Variables' },
-                    S = { function()
-                        local widgets = require "dap.ui.widgets"; widgets.centered_float(widgets.scopes)
-                    end, 'Scopes' },
-                    F = { CMD .. 'Telescope dap frames' .. CR, 'List Frames' },
-                    Q = { CMD .. 'Telescope dap commands' .. CR, 'List commands' },
-                    Y = { CMD .. 'Telescope dap configurations' .. CR, 'List (auto)discovered DAP configurations' },
-                    U = { function() require("dapui").toggle() end, 'Toggles the debugger UI' },
-                },
-                e = {
-                    name = 'editor',
-                    t = { CMD .. 'Neotree toggle' .. CR, 'toggles neotree depending on its current status' },
-                    o = { CMD .. 'Neotree' .. CR, 'opens neotree' },
-                    b = { CMD .. 'Neotree toggle show buffers right' .. CR, 'neotree toggle show buffers right' },
-                    g = { CMD .. 'Neotree float git status' .. CR, 'neotree show git status' },
-                    e = { CMD .. 'Neotree diagnostics reveal bottom' .. CR, 'neotree show workpace diagnostics' },
-                },
-                f = {
-                    name = '+find',
-                    f = { CMD .. 'Telescope find_files' .. CR, 'find files' },
-                    o = { CMD .. 'Telescope oldfiles' .. CR, 'open recent files' },
-                    g = { CMD .. 'Telescope git_files' .. CR, 'find files on git repository' },
-                    b = { CMD .. 'Telescope buffers' .. CR, 'Find open buffers' },
-                    c = { CMD .. 'Telescope commands' .. CR, 'Show commands' },
-                    h = { CMD .. 'Telescope help_tags' .. CR, 'Show help tags' },
-                    p = { CMD .. 'Telescope projections' .. CR, 'Search projects' },
-                    k = { function() require("telescope.builtin").colorscheme() end, 'Show and preview colorschemes' },
-                    t = { CMD .. 'TodoTelescope' .. CR, 'Open a TODO-\'s preview' },
-                    n = { CMD .. 'Telescope notify' .. CR, 'Displays the notifications triggered' },
-                    d = { CMD .. 'Telescope dap commands' .. CR, 'Displays the DAP available commands' },
-                },
-                g = {
-                    name = '+git',
-                    s = { vim.cmd.Git, 'Shows git status via vim-fugitive' },
-                    a = { CMD .. 'GhActions' .. CR, 'Opens GitHub Actions on buffer' },
-                    -- gitsigns maps are just labels, since they need to be attached per buffer (ideally)
-                    nh = { 'Next Hunk' },
-                    ph = { 'Prev Hunk' },
-                    hs = { 'Stage Hunk' },
-                    hr = { 'Reset Hunk' },
-                    sb = { 'Stage Buffer' },
-                    us = { 'Undo Stage Hunk' },
-                    rb = { 'Reset Buffer' },
-                    hp = { 'Preview Hunk Inline' },
-                    bl = { 'Blame Line' },
-                    hd = { 'Diff This' },
-                    hD = { 'Diff This ~' },
-                    w = { function() require('telescope').extensions.git_worktree.git_worktrees() end, 'Show git worktrees via Telescope' },
-                    cw = { function() require('telescope').extensions.git_worktree.create_git_worktree() end, 'Create a new git worktree via Telescope' },
-                    gt = { CMD .. 'diffget // 2 | diffupdate' .. CR, 'Get changes from target version of the document and updates the indexes' },
-                    gm = { CMD .. 'diffget // 3 | diffupdate' .. CR, 'Get changes from the merge version and updates the indexes' },
-                    dp = { CMD .. 'diffput | diffupdate' .. CR, 'Put the changes on the working copy from the target or merge version and updates the indexes' },
-                    mu = { CMD .. 'diffupdate' .. CR, 'Updates the changes in the gitmergetool' },
-                },
-                j = {
-                    name = '+Java',
-                    c = { CMD .. 'JdtCompile' .. CR, 'Compile Java File/Project with JDTLS' },
-                    ud = { CMD .. 'JdtUpdateDebugConfig' .. CR, 'Scan for autodetect running configurations for debug builds' },
-                    uc = { CMD .. 'JdtUpdateConfig' .. CR, 'Updates the configurations for the current projects' },
-                },
-                l = {
-                    name = '+LSP', --NOTE Not all the LSP remaps are here for now
-                    I = { CMD .. 'LspInfo' .. CR, 'Opens the LSP info floating window' },
-                    L = { CMD .. 'LspLog' .. CR, 'Opens the LSP log file' },
-                    r = { CMD .. 'Telescope lsp_references' .. CR, 'References' },
-                    s = { CMD .. 'Telescope lsp_document_symbols' .. CR, 'Symbols' },
-                    i = { CMD .. 'Telescope lsp_implementations' .. CR, 'Implementations' },
-                    e = { CMD .. 'Telescope diagnostics bufnr=0' .. CR, 'Errors' },
-                    m = { CMD .. 'Telescope marks' .. CR, 'Find Mark' },
-                    c = { CMD .. 'Telescope lsp_incoming_calls' .. CR, 'Find LSP incoming calls' },
-                    o = { CMD .. 'Telescope lsp_outgoing_calls' .. CR, 'Find LSP outgoing calls' },
-                    k = { function() require("lsp_signature").toggle_float_win() end, 'toggle signature' },
-                },
-                mp = { -- TODO: Correct this so the description can be shown correctly
-                    CMD .. 'Glow' .. CR, 'Preview current Mardown file'
-                },
-                m = {
-                    name = '+maven',
-                    -- c = { CMD .. 'Maven' .. CR, 'Choose Maven command to execute' },
-                    c = { CMD .. 'Maven' .. CR, 'Choose Maven command to execute' },
-                },
-                o = {
-                    name = '+open',
-                    a = { CMD .. 'Alpha' .. CR, 'Opens the setup Dashboard, Alpha' },
-                    d = { CMD .. 'DocsViewToggle' .. CR, 'Toggles a buffer with documentation for the selected item' },
-                    u = { CMD .. 'URLOpenUnderCursor' .. CR, 'Opens the URL under the cursor' },
-                    h = { CMD .. 'URLOpenHighlightAll' .. CR, 'Highlights all the URLs present on the current buffer' },
-                    c = { CMD .. 'URLOpenHighlightAllClear' .. CR, 'Clears all the highlighter URLs' },
-                },
-                p = {
-                    name = '+persistence',
-                    s = { function() require("persistence").load() end, 'Restore Session' },
-                    l = { function() require("persistence").load({ last = true }) end, 'Restore Last Session' },
-                    d = { function() require("persistence").stop() end, 'Don\'t Save Current Session' },
-                },
-                q = { CMD .. 'close' .. CR, 'Fires the `Close` cmd' },
-                s = {
-                    name = '+search',
-                    f = { CMD .. 'Telescope live_grep' .. CR, 'Find text in files' },
-                    s = { CMD .. 'lua require("spectre").toggle()' .. CR, 'Toggle Spectre' },
-                    w = { CMD .. 'lua require("spectre").open_visual({select_word=true})' .. CR, 'Search current word' },
-                    p = { CMD .. 'lua require("spectre").open_file_search({select_word=true})' .. CR, 'Search on current file' }
-                },
-                ts = {
-                    name = '+treessitter',
-                    u = {
-                        function()
-                            local tsc = require('treesitter-context')
-                            tsc.toggle()
-                        end,
-                        'Toggle Treesitter Context',
-                    },
-                },
-                u = {
-                    name = '+update/undo',
-                    t = { vim.cmd.UndotreeToggle, 'Toggles ON/OFF the handler of previous changes' },
-                    n = { function() require('notify').dismiss({ silent = true, pending = true }) end, 'Dismiss all Notifications', },
-                    l = { CMD .. 'Lazy update' .. CR, 'Triggers the Lazy update' },
-                },
-                x = {
-                    name = '+extra',
-                    n = { procs.toggle_line_numbers, 'Toggle between absolute and relative line numbers' },
-                    f = { procs.toggle_folding_column, 'Shows/Hides the folding column' },
-                    t = { CMD .. 'TransparentToggle' .. CR, 'Toggle ON/OFF transparency' },
-                    s = { CMD .. 'ASToggle' .. CR, 'Toggle ON/OFF autosave' },
-                    m = { CMD .. 'messages' .. CR, 'Show Nvim Cmd messages' },
-                    om = { CMD .. 'Mason' .. CR, 'Opens the Mason GUI' },
+
+        wk.add({
+            { "<A-h>", "<Cmd>BufferLineCyclePrev<CR>", desc = "Prev buffer" },
+            { "<A-l>", "<Cmd>BufferLineCycleNext<CR>", desc = "Next buffer" },
+            { "<leader>aw", "<Cmd>AddWorkspace<CR>", desc = "Add the CWD to the projects of the workspace" },
+
+            { "<leader>r", group = "Rust LSP actions (care!: only enabled for ft = Rust)" },
+            { "<leader>rD",
+            -- Display a hover window with the rendered diagnostic, as displayed during cargo build.
+            -- Useful for solving bugs around borrowing and generics, as it consolidates the important bits
+            -- (sometimes across files) together.
+            function() vim.cmd.RustLsp('renderDiagnostic') end, desc = "Render diagnostic" },
+            { "<leader>rc", function() vim.cmd.RustLsp('openCargo') end, desc = "Open cargo.toml" },
+            { "<leader>rd", function() vim.cmd.RustLsp('debuggables') end, desc = "Show debuggables" },
+            { "<leader>re",
+            -- My favourite one!
+            -- Display a hover window with explanations from the rust error codes index CMAKE_INSTALL_PREFIX="$HOME" CMAKE_INSTALL_PREFIX="$HOME" CMAKE_INSTALL_PREFIX="$HOME" CMAKE_INSTALL_PREFIX="$HOME" CMAKE_INSTALL_PREFIX="$HOME" CMAKE_INSTALL_PREFIX="$HOME" CMAKE_INSTALL_PREFIX="$HOME" CMAKE_INSTALL_PREFIX="$HOME" CMAKE_INSTALL_PREFIX="$HOME" CMAKE_INSTALL_PREFIX="$HOME" CMAKE_INSTALL_PREFIX="$HOME" CMAKE_INSTALL_PREFIX="$HOME" CMAKE_INSTALL_PREFIX="$HOME" CMAKE_INSTALL_PREFIX="$HOME" over error diagnostics
+            -- (if they have an error code).
+            function() vim.cmd.RustLsp('explainError') end, desc = "Explain error" },
+            { "<leader>rh",
+            -- Replaces Neovim's built-in hover handler with hover actions, so you can also use vim.lsp.buf.hover()
+            function() vim.cmd.RustLsp { 'hover', 'actions' } end, desc = "Hover actions" },
+
+            { "<leader>rl", group = "last selected" },
+            { "<leader>rld", function() vim.cmd.RustLsp { 'debuggables', bang = true } end, desc = "launch previous debuggable" },
+            { "<leader>rlr", function() vim.cmd.RustLsp { 'runnables', bang = true } end, desc = "launch previous runnable" },
+            { "<leader>rlt", function() vim.cmd.RustLsp { 'testables', bang = true } end, desc = "launch previous testable" },
+
+            { "<leader>rm", group = "macros" },
+            { "<leader>rme", function() vim.cmd.RustLsp('expandmacro') end, desc = "Expand macro" },
+            { "<leader>rmr", function() vim.cmd.RustLsp('rebuildProcMacros') end, desc = "Rebuild proc macros" },
+
+            { "<leader>rp", function() vim.cmd.RustLsp('parentModule') end, desc = "Parent module" },
+            { "<leader>rr", function() vim.cmd.RustLsp('runnables') end, desc = "Show runnables" },
+            { "<leader>rt", function() vim.cmd.RustLsp('testables') end, desc = "Show testables" },
+
+            { "<leader>rv", group = "+/Rust view" },
+            { "<leader>rvh", function() vim.cmd.RustLsp { 'view', 'hir' } end, desc = "View HIR" },
+            { "<leader>rvm", function() vim.cmd.RustLsp { 'view', 'mir' } end, desc = "View MIR" },
+            { "<leader>rvs", function()
+                vim.cmd.RustLsp {
+                    'workspaceSymbol',
+                    '<onlyTypes|allSymbols>' --[[ optional ]],
+                    -- '<query>' --[[ optional ]],
+                    bang = true --[[ optional ]]
                 }
-            },
+            end, desc = "Show workspace symbols (with deps)" },
+            { "<leader>rvt", function() vim.cmd.RustLsp('syntax CMAKE_INSTALL_PREFIX="$HOME" CMAKE_INSTALL_PREFIX="$HOME" CMAKE_INSTALL_PREFIX="$HOME" CMAKE_INSTALL_PREFIX="$HOME"Tree') end, desc = "Show syntax tree" },
+
+            { "<leader>b", group = "buffers" },
+            { "<leader>bd", procs.minibufremove, desc = "Delete Buffer" },
+            { "<leader>bD", function() require("mini.bufremove").delete(0, true) end, desc = "Delete Buffer (Force)" },
+            { "<leader>bP", "<Cmd>BufferLineGroupClose ungrouped<CR>", desc = "Delete non-pinned buffers" },
+            { "<leader>bl", "<Cmd>BufferLineCloseLeft<CR>", desc = "Delete buffers to the left" },
+            { "<leader>bo", "<Cmd>BufferLineCloseOthers<CR>", desc = "Delete other buffers" },
+            { "<leader>bp", "<Cmd>BufferLineTogglePin<CR>", desc = "Toggle pin" },
+            { "<leader>br", "<Cmd>BufferLineCloseRight<CR>", desc = "Delete buffers to the right" },
+
+            { "<leader>B", group = "breakpoints" },
+            { "<leader>BB", '<Cmd>lua require("persistent-breakpoints.api").toggle_breakpoint()<CR>', desc = "Set breakpoint" },
+            { "<leader>BC", '<Cmd>lua require("persistent-breakpoints.api").set_conditional_breakpoint()<CR>', desc = "Set conditional breakpoint" },
+            { "<leader>BF", "<Cmd>Telescope dap list_breakpoints<CR>", desc = "List breakpoints" },
+            { "<leader>BL", '<Cmd>lua require"dap".set_breakpoint(nil, nil, vim.fn.input("Log point message: "))<CR>', desc = "Set log point" },
+            { "<leader>BR", '<Cmd>lua require("persistent-breakpoints.api").clear_all_breakpoints()<CR>', desc = "Clear breakpoints" },
+
+            { "<leader>c", group = "comments/+CMake" },
+            { "<leader>cb", function()
+                require("Comment.api").toggle.blockwise.current()
+            end, desc = "Comment line/selection" },
+            { "<leader>cl", function()
+                require("Comment.api").toggle.linewise.current()
+            end, desc = "Comment line" },
+            { "<leader>cmb", CMD .. "CMakeBuild" .. CR, desc = "Runs <CMakeBuild>" },
+            { "<leader>cmg", CMD .. "CMakeGenerate" .. CR, desc = "Runs <CMakeGenerate>" },
+            { "<leader>cmr", "<Cmd>CMakeRun<CR>", desc = "Runs <CMakeRun>" },
+            { "<leader>cmt", "<Cmd>CMakeRunTest<CR>", desc = "Runs <CMakeRunTest>" },
+
+            { "<leader>d", group = "diagnostics/+trouble" },
+            { "<leader>dd", '<Cmd>lua require("trouble").toggle("document_diagnostics") <CR>', desc = "Document diagnostics" },
+            { "<leader>dl", '<Cmd>lua require("trouble").toggle("loclist") <CR>', desc = "Diagnostics loclist" },
+            { "<leader>dq", '<Cmd>lua require("trouble").toggle("quickfix") <CR>', desc = "Diagnostics quickfix" },
+            { "<leader>dr", '<Cmd>lua require("trouble").toggle("lsp_references") <CR>', desc = "Lsp References" },
+            { "<leader>dt", '<Cmd>lua require("trouble").toggle() <CR>', desc = "Trouble toogle" },
+            { "<leader>dw", '<Cmd>lua require("trouble").toggle("workspace_diagnostics") <CR>', desc = "Workspace diagnostics" },
+
+            { "<leader>D", group = "debugger" },
+            { "<leader>DC", '<Cmd>lua require"dap".continue()<CR>', desc = "Continue" },
+            { "<leader>DD", '<Cmd>lua require"dap".disconnect()<CR>', desc = "Disconnect" },
+            { "<leader>DF", "<Cmd>Telescope dap frames<CR>", desc = "List Frames" },
+            { "<leader>DJ", '<Cmd>lua require"dap".step_into()<CR>', desc = "Step into" },
+            { "<leader>DK", '<Cmd>lua require"dap".step_over()<CR>', desc = "Step over" },
+            { "<leader>DL", '<Cmd>lua require"dap".run_last()<CR>', desc = "Run Last" },
+            { "<leader>DO", '<Cmd>lua require"dap".step_out()<CR>', desc = "Step out" },
+            { "<leader>DQ", "<Cmd>Telescope dap commands<CR>", desc = "List commands" },
+            { "<leader>DR", '<Cmd>lua require"dap".repl.toggle()<CR>', desc = "Open REPL" },
+            { "<leader>DS", function()
+                local widgets = require "dap.ui.widgets"; widgets.centered_float(widgets.scopes)
+            end, desc = "Scopes" },
+            { "<leader>DT", '<Cmd>lua require"dap".terminate()<CR>', desc = "Terminate" },
+            { "<leader>DU", function() require("dapui").toggle() end, desc = "Toggles the debugger UI" },
+            { "<leader>DV", 'function() require"dap.ui.widgets".hover() end', desc = "Variables" },
+            { "<leader>DY", "<Cmd>Telescope dap configurations<CR>", desc = "List (auto)discovered DAP configurations" },
+
+            { "<leader>e", group = "editor" },
+            { "<leader>eb", "<Cmd>Neotree toggle show buffers right<CR>", desc = "neotree toggle show buffers right" },
+            { "<leader>ee", "<Cmd>Neotree diagnostics reveal bottom<CR>", desc = "neotree show workpace diagnostics" },
+            { "<leader>eg", "<Cmd>Neotree float git status<CR>", desc = "neotree show git status" },
+            { "<leader>eo", "<Cmd>Neotree<CR>", desc = "opens neotree" },
+            { "<leader>et", "<Cmd>Neotree toggle<CR>", desc = "toggles neotree depending on its current status" },
+
+            { "<leader>f", group = "find" },
+            { "<leader>fb", "<Cmd>Telescope buffers<CR>", desc = "Find open buffers" },
+            { "<leader>fc", "<Cmd>Telescope commands<CR>", desc = "Show commands" },
+            { "<leader>fd", "<Cmd>Telescope dap commands<CR>", desc = "Displays the DAP available commands" },
+            { "<leader>ff", "<Cmd>Telescope find_files<CR>", desc = "find files" },
+
+            { "<leader>fg", "<Cmd>Telescope git_files<CR>", desc = "find files on git repository" },
+            { "<leader>fh", "<Cmd>Telescope help_tags<CR>", desc = "Show help tags" },
+            { "<leader>fk", function() require("telescope.builtin").colorscheme() end, desc = "Show and preview colorschemes" },
+            { "<leader>fn", "<Cmd>Telescope notify<CR>", desc = "Displays the notifications triggered" },
+            { "<leader>fo", "<Cmd>Telescope oldfiles<CR>", desc = "open recent files" },
+            { "<leader>fp", "<Cmd>Telescope projections<CR>", desc = "Search projects" },
+            { "<leader>ft", "<Cmd>TodoTelescope<CR>", desc = "Open a TODO-'s preview" },
+
+            -- git
+            { "<leader>g", group = "git" },
+            { "<leader>ga", "<Cmd>GhActions<CR>", desc = "Opens GitHub Actions on buffer" },
+            { "<leader>gbl", desc = "Blame Line" },
+            { "<leader>gcw", function() require('telescope').extensions.git_worktree.create_git_worktree() end, desc = "Create a new git worktree via Telescope" },
+            { "<leader>gdp", "<Cmd>diffput | diffupdate<CR>", desc = "Put the changes on the working copy from the target or merge version and updates the indexes" },
+            { "<leader>ggm", "<Cmd>diffget // 3 | diffupdate<CR>", desc = "Get changes from the merge version and updates the indexes" },
+            { "<leader>ggt", "<Cmd>diffget // 2 | diffupdate<CR>", desc = "Get changes from target version of the document and updates the indexes" },
+            { "<leader>ghD", desc = "Diff This ~" },
+            { "<leader>ghd", desc = "Diff This" },
+            { "<leader>ghp", desc = "Preview Hunk Inline" },
+            { "<leader>ghr", desc = "Reset Hunk" },
+            { "<leader>ghs", desc = "Stage Hunk" },
+            { "<leader>gmu", "<Cmd>diffupdate<CR>", desc = "Updates the changes in the gitmergetool" },
+            { "<leader>gnh", desc = "Next Hunk" },
+            { "<leader>gph", desc = "Prev Hunk" },
+            { "<leader>grb", desc = "Reset Buffer" },
+            { "<leader>gs", vim.cmd.Git, desc = "Shows git status via vim-fugitive" },
+            { "<leader>gsb", desc = "Stage Buffer" },
+            { "<leader>gus", desc = "Undo Stage Hunk" },
+            { "<leader>gw", function() require('telescope').extensions.git_worktree.git_worktrees() end, desc = "Show git worktrees via Telescope" },
+
+            -- Java
+            { "<leader>j", group = "Java" },
+            { "<leader>jc", "<Cmd>JdtCompile<CR>", desc = "Compile Java File/Project with JDTLS" },
+            { "<leader>juc", "<Cmd>JdtUpdateConfig<CR>", desc = "Updates the configurations for the current projects" },
+            { "<leader>jud", "<Cmd>JdtUpdateDebugConfig<CR>", desc = "Scan for autodetect running configurations for debug builds" },
+
+            -- LSP
+            { "<leader>l", group = "LSP" },
+            { "<leader>lI", "<Cmd>LspInfo<CR>", desc = "Opens the LSP info floating window" },
+            { "<leader>lL", "<Cmd>LspLog<CR>", desc = "Opens the LSP log file" },
+            { "<leader>lc", "<Cmd>Telescope lsp_incoming_calls<CR>", desc = "Find LSP incoming calls" },
+            { "<leader>le", "<Cmd>Telescope diagnostics bufnr=0<CR>", desc = "Errors" },
+            { "<leader>li", "<Cmd>Telescope lsp_implementations<CR>", desc = "Implementations" },
+            { "<leader>lk", function() require("lsp_signature").toggle_float_win() end, desc = "toggle signature" },
+            { "<leader>lm", "<Cmd>Telescope marks<CR>", desc = "Find Mark" },
+            { "<leader>lo", "<Cmd>Telescope lsp_outgoing_calls<CR>", desc = "Find LSP outgoing calls" },
+            { "<leader>lr", "<Cmd>Telescope lsp_references<CR>", desc = "References" },
+            { "<leader>ls", "<Cmd>Telescope lsp_document_symbols<CR>", desc = "Symbols" },
+
+            -- Maven
+            { "<leader>m", group = "maven" },
+            { "<leader>mc", "<Cmd>Maven<CR>", desc = "Choose Maven command to execute" },
+            { "<leader>mp", "<Cmd>Glow<CR>", desc = "Preview current Mardown file" },
+
+            { "<leader>o", group = "open" },
+            { "<leader>oa", "<Cmd>Alpha<CR>", desc = "Opens the setup Dashboard, Alpha" },
+            { "<leader>oc", "<Cmd>URLOpenHighlightAllClear<CR>", desc = "Clears all the highlighter URLs" },
+            { "<leader>od", "<Cmd>DocsViewToggle<CR>", desc = "Toggles a buffer with documentation for the selected item" },
+            { "<leader>oh", "<Cmd>URLOpenHighlightAll<CR>", desc = "Highlights all the URLs present on the current buffer" },
+            { "<leader>ou", "<Cmd>URLOpenUnderCursor<CR>", desc = "Opens the URL under the cursor" },
+
+            { "<leader>p", group = "persistence" },
+            { "<leader>pd", function() require("persistence").stop() end, desc = "Don't Save Current Session" },
+            { "<leader>pl", function() require("persistence").load({ last = true }) end, desc = "Restore Last Session" },
+            { "<leader>ps", function() require("persistence").load() end, desc = "Fires the 'Close' command" },
+
+            { "<leader>s", group = "search" },
+            { "<leader>sf", "<Cmd>Telescope live_grep<CR>", desc = "Find text in files" },
+            { "<leader>sp", '<Cmd>lua require("spectre").open_file_search({select_word=true})<CR>', desc = "Search on current file" },
+            { "<leader>ss", '<Cmd>lua require("spectre").toggle()<CR>', desc = "Toggle Spectre" },
+            { "<leader>sw", '<Cmd>lua require("spectre").open_visual({select_word=true})<CR>', desc = "Search current word" },
+
+            { "<leader>ts", group = "treessitter" },
+            { "<leader>tsu",
+            function()
+                local tsc = require('treesitter-context')
+                tsc.toggle()
+            end,
+            desc = "Toggle Treesitter Context" },
+
+            { "<leader>u", group = "update/undo" },
+            { "<leader>ul", CMD .. 'Lazy update' .. CR, desc = "Triggers the Lazy update" },
+            { "<leader>un", function() require('notify').dismiss({ silent = true, pending = true }) end, desc = "Dismiss all Notifications" },
+            { "<leader>ut", vim.cmd.UndotreeToggle, desc = "Toggles ON/OFF the handler of previous changes" },
+
+            { "<leader>x", group = "extra" },
+            { "<leader>xf", procs.toggle_folding_column, desc = "Shows/Hides the folding column" },
+            { "<leader>xm", "<Cmd>messages<CR>", desc = "Show Nvim Cmd messages" },
+            { "<leader>xn", procs.toggle_line_numbers, desc = "Toggle between absolute and relative line numbers" },
+            { "<leader>xom", "<Cmd>Mason<CR>", desc = "Opens the Mason GUI" },
+            { "<leader>xs", "<Cmd>ASToggle<CR>", desc = "Toggle ON/OFF autosave" },
+            { "<leader>xt", "<Cmd>TransparentToggle<CR>", desc = "Toggle ON/OFF transparency" },
         })
     end
 }
+
