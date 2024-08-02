@@ -60,7 +60,10 @@ return {
             procs.nnoremap('<leader>ca', vim.lsp.buf.code_action, bufopts, "Code actions")
             vim.keymap.set('v', "<leader>ca", "<ESC><CMD>lua vim.lsp.buf.range_code_action()<CR>",
                 { noremap = true, silent = true, buffer = bufnr, desc = "Code actions" })
-            procs.nnoremap('<leader>=', function() vim.lsp.buf.format { async = true } end, bufopts, "Format file")
+            procs.nnoremap('<leader>=', function()
+                vim.lsp.buf.format { async = true }
+                vim.cmd('%s/\\s\\+$//e')
+            end, bufopts, "Format file")
         end)
 
         local lspconfig = require('lspconfig')

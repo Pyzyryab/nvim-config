@@ -1,5 +1,9 @@
 -- This file holds the core editor's configuration and settings
 --
+--
+
+vim.o.timeout = true
+vim.o.timeoutlen = 10
 
 vim.opt.guicursor = '' -- fat cursor enabled (even on insert mode)
 vim.opt.termguicolors = true

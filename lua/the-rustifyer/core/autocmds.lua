@@ -35,10 +35,10 @@ autocmd('TextYankPost', {
 })
 
 -- Remove whitespace on save
-autocmd('BufWritePre', {
+--[[ autocmd('BufWritePre', {
     pattern = '',
     command = ":%s/\\s\\+$//e"
-})
+}) ]]
 
 -- Cursor position
 autocmd({ 'ModeChanged' }, {
