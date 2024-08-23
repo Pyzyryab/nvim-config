@@ -22,6 +22,7 @@ return {
             },
             root_dir = function(fname)
                 return lsp_util.root_pattern(
+                    ".clangd",
                     "compile_commands.json",
                     "compile_flags.txt",
                     "Makefile",
