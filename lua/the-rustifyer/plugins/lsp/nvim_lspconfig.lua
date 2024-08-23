@@ -2,7 +2,6 @@
 --
 
 local procs = require('the-rustifyer.utils.procedures')
-local consts = require('the-rustifyer.core.constants')
 
 return {
     'neovim/nvim-lspconfig',
@@ -26,6 +25,7 @@ return {
     config = function()
         local lsp_zero = require('lsp-zero')
         lsp_zero.extend_lspconfig()
+        lsp_zero.configure("clangd", require('the-rustifyer.utils.clangd_on_attach'))
 
         lsp_zero.on_attach(function(client, bufnr)
             -- Integration with navic
@@ -67,7 +67,6 @@ return {
         end)
 
         local lspconfig = require('lspconfig')
-        local lsp_util = require("lspconfig.util")
         require('mason-lspconfig').setup({
             handlers = {
                 lsp_zero.default_setup,
@@ -77,56 +76,6 @@ return {
                     lspconfig.lua_ls.setup(lua_opts)
                 end,
                 jdtls = lsp_zero.noop, -- Exclude jdtls from automatic configuration, we are doing it with the ftplugin way
-                clangd = function()
-                    lspconfig.clangd.setup({
-                        keys = { -- TODO: move it to which key
-                            { "<leader>cR", "<cmd>ClangdSwitchSourceHeader<cr>", desc = "Switch Source/Header (C/C++)" },
-                        },
-                        root_dir = function(fname)
-                            return lsp_util.root_pattern(
-                                "compile_commands.json",
-                                "compile_flags.txt",
-                                "Makefile",
-                                "configure.ac",
-                                "configure.in",
-                                "config.h.in",
-                                "meson.build",
-                                "meson_options.txt",
-                                "build.ninja"
-                            )(fname) or lsp_util.find_git_ancestor(fname)
-                        end,
-                        ft = consts.lsp.clangd_fts,
-                        capabilities = {
-                            offsetEncoding = { "utf-16" },
-                        },
-                        cmd = {
-                            "/home/pyzyryab/code/third_party/llvm-project/clang-tools-extra/clangd",
-                            -- vim.fn.expand("~/Desktop/TODO:/code/own/llvm-project/build/bin/clangd.exe"), -- TODO: win + msys2 specific. Configure it later
-                            -- "C:/msys64/clang64/bin/clangd.exe", -- TODO: win + msys2 specific. Configure it later
-                            -- conf below and above paths to be able to work with Unix based paths
-                            -- or wait for configure it based on some other plugin to handle dynamic config
-                            '--query-driver="C:/msys64/clang64/bin/clang-*"',
-                            '--enable-config',
-                            "--background-index",
-                            "--clang-tidy",
-                            -- "--header-insertion=iwyu",
-                            "--completion-style=detailed",
-                            "--function-arg-placeholders",
-                            "--fallback-style=llvm",
-                            -- "--pch-storage=memory",
-                            -- "--suggest-missing-includes",
-                            -- "--all-scopes-completion",
-                            "--log=verbose",
-                            "--pretty",
-                            -- "--header-insertion=never"
-                        },
-                        init_options = {
-                            usePlaceholders = true,
-                            completeUnimported = true,
-                            clangdFileStatus = true,
-                        },
-                    })
-                end,
             },
         })
 
