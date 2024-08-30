@@ -44,13 +44,17 @@ return {
                 "--all-scopes-completion",
                 "--background-index",
                 "--clang-tidy",
-                "--compile_args_from=filesystem",
+                -- "--compile_args_from=filesystem",
+                "--completion-parse=always",
                 "--completion-style=detailed",
+                -- "--cross-file-rename", -- obsolete
+                "--debug-origin",
                 '--enable-config',
                 "--function-arg-placeholders",
                 "--fallback-style=llvm",
+                -- "--folding-ranges", -- obsolete
                 "--header-insertion=iwyu",
-                "--log=verbose",
+                "--log=error",
                 "--pch-storage=memory",
                 -- "--suggest-missing-includes", -- obsolete from clangd >= 18
                 "--pretty",
@@ -60,6 +64,7 @@ return {
                 completeUnimported = true,
                 clangdFileStatus = true,
                 -- TODO: introduce a cfg file reader that is able to find the compile_commands dynamically (not in the root of the project)
+                --compilationDatabasePath = vim.fn.getcwd() .. "/build",
             },
         })
     end,
