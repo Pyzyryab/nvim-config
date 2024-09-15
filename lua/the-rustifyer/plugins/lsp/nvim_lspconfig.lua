@@ -76,6 +76,7 @@ return {
                     lspconfig.lua_ls.setup(lua_opts)
                 end,
                 jdtls = lsp_zero.noop, -- Exclude jdtls from automatic configuration, we are doing it with the ftplugin way
+                dartls = lsp_zero.noop,
             },
         })
 
