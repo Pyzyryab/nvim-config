@@ -185,6 +185,17 @@ return {
             { "<leader>fp",  "<Cmd>Telescope projections<CR>",                                                  desc = "Search projects" },
             { "<leader>ft",  "<Cmd>TodoTelescope<CR>",                                                          desc = "Open a TODO-'s preview" },
 
+            -- Flutter
+            { "<leader>fl",  group = "flutter" },
+            { "<leader>flr", "<Cmd>FlutterRun<CR>",                                                             desc = "Run the current project. This needs to be run from within a flutter project" },
+            { "<leader>fld", "<Cmd>FlutterDevices<CR>",                                                         desc = "Brings up a list of connected devices to select from" },
+            { "<leader>fle", "<Cmd>FlutterEmulators<CR>",                                                       desc = "Similar to devices but shows a list of emulators to choose from" },
+            { "<leader>flr", "<Cmd>FlutterReload<CR>",                                                          desc = "Reload the current project" },
+            { "<leader>flR", "<Cmd>FlutterRestart<CR>",                                                         desc = "Restart the current project" },
+            { "<leader>flq", "<Cmd>FlutterQuit<CR>",                                                            desc = "Ends a Flutter running session" },
+            { "<leader>flo", "<Cmd>FlutterOutlineToggle<CR>",                                                   desc = "Toggle the outline window showing the widget tree for the given file" },
+            { "<leader>fld", "<Cmd>FlutterDevTools<CR>",                                                        desc = "Start a Dev Tools Server" },
+
             -- git
             { "<leader>g",   group = "git" },
             { "<leader>ga",  "<Cmd>GhActions<CR>",                                                              desc = "Opens GitHub Actions on buffer" },
