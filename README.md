@@ -57,7 +57,9 @@ Mine, for example, is: `C:\msys64\clang64\bin`
 
 And you're ready to go!
 
-### Optional ones
+## Optional ones
+
+### rip-grep
 
 If you'd like to have `live grep`, you'll need to have [`ripgrep`](https://github.com/BurntSushi/ripgrep). The easiest way to install it is via cargo, just by:
 
@@ -70,6 +72,33 @@ Then, go read the book, start to code in `Rust`. Then, gain knowledge about its 
 all this time.
 
 Anyway, you can go to the `ripgrep` link above and install it via any of the other ways listed in their documentation.
+
+### Clipboard tool
+
+In order to allow integration between the system clipboard and some
+vim registers, we need a clipboard provider.
+
+I choose ` win32yank` for such purpose.
+
+On `WSL(2)`:
+
+```bash 
+    -curl -sLo/tmp/win32yank.zip https://github.com/equalsraf/win32yank/releases/download/v0.1.1/win32yank-x64.zip
+    unzip -p /tmp/win32yank.zip win32yank.exe > /tmp/win32yank.exe
+    chmod +x /tmp/win32yank.exe
+    sudo mv /tmp/win32yank.exe /usr/local/bin/
+```
+
+On `msys2` (purple terminal):
+
+```bash
+    pacman -S unzip
+
+    -curl -sLo/tmp/win32yank.zip https://github.com/equalsraf/win32yank/releases/download/v0.1.1/win32yank-x64.zip
+    unzip -p /tmp/win32yank.zip win32yank.exe > /tmp/win32yank.exe
+    chmod +x /tmp/win32yank.exe
+    sudo mv /tmp/win32yank.exe /usr/bin/ (or manually create the /usr/local/bin if doesn't exists)
+```
 
 ## Package manager
 

@@ -29,19 +29,20 @@ if is_windows then
     for option, value in pairs(bash_options) do
         vim.opt[option] = value
     end
-    -- Clipboard (CARE! Don't enable this unless you're using Nvim >= 0.10, current is 0.9.x)
-    --[[vim.g.clipboard = {
-        name = 'OSC 52',
+
+    -- Cliboard cfg.
+    vim.g.clipboard = {
+        name = "win32yank",
         copy = {
-            ['+'] = require('vim.ui.clipboard.osc52').copy('+'),
-            ['*'] = require('vim.ui.clipboard.osc52').copy('*'),
+            ["+"] = "win32yank.exe -i --crlf",
+            ["*"] = "win32yank.exe -i --crlf"
         },
         paste = {
-            ['+'] = require('vim.ui.clipboard.osc52').paste('+'),
-            ['*'] = require('vim.ui.clipboard.osc52').paste('*'),
+            ["+"] = "win32yank.exe -o --lf",
+            ["*"] = "win32yank.exe -o --lf"
         },
+        cache_enabled = false
     }
-    --]]
 end
 
 vim.opt.nu = true
