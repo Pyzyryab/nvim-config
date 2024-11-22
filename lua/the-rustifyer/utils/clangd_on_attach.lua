@@ -1,5 +1,4 @@
 local consts = require('the-rustifyer.core.constants')
-local globals = require('the-rustifyer.core.globals')
 
 return {
     force_setup = true,
@@ -9,13 +8,8 @@ return {
 
         -- Unix-like check using 'test -e' command
         -- I mostly use Neovim from a bash-like shell always, so there's no need for Windows specific code
-        local clangd_exec = globals.sys.is_windows and 'clangd.EXE' or 'clangd'
-        local mbuilt_clangd = vim.fn.expand("~/code/own/llvm-project/build/bin/" .. clangd_exec)
-        local cmd = '[ -e "' .. mbuilt_clangd .. '" ] && echo found'
-        local result = io.popen(cmd):read("*a")
-        local mbuilt_clangd_exists = result:find("found") ~= nil
-
-        local clangd_path = mbuilt_clangd_exists and mbuilt_clangd or clangd_exec
+        local clangd_path = io.popen('which clangd'):read("*a"):match("^[^\n]*")
+        vim.notify('Loading CLANGD from autodiscovered path: ' .. clangd_path, vim.log.levels.INFO, nil)
         lspconfig.clangd.setup({
             keys = {
                 { "<leader>cR", "<cmd>ClangdSwitchSourceHeader<cr>", desc = "Switch Source/Header (C/C++)" },
