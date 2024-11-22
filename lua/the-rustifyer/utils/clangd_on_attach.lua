@@ -45,7 +45,7 @@ return {
                 "--debug-origin",
                 '--enable-config',
                 "--function-arg-placeholders",
-                "--fallback-style=llvm",
+                -- "--fallback-style=llvm",
                 -- "--folding-ranges", -- obsolete
                 "--header-insertion=iwyu",
                 "--log=error",
