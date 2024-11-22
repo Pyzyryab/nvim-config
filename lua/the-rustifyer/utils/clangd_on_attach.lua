@@ -38,20 +38,20 @@ return {
                 "--all-scopes-completion",
                 "--background-index",
                 "--clang-tidy",
+                "--pretty",
                 -- "--compile_args_from=filesystem",
                 "--completion-parse=always",
                 "--completion-style=detailed",
                 -- "--cross-file-rename", -- obsolete
                 "--debug-origin",
                 '--enable-config',
-                "--function-arg-placeholders",
-                -- "--fallback-style=llvm",
+                "--function-arg-placeholders=1",
+                "--fallback-style=llvm",
                 -- "--folding-ranges", -- obsolete
                 "--header-insertion=iwyu",
                 "--log=error",
                 "--pch-storage=memory",
                 -- "--suggest-missing-includes", -- obsolete from clangd >= 18
-                "--pretty",
             },
             init_options = {
                 usePlaceholders = true,
