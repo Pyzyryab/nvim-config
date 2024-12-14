@@ -31,8 +31,6 @@ return {
             -- Integration with navic
             if client.server_capabilities.documentSymbolProvider then
                 require("nvim-navic").attach(client, bufnr)
-            else
-                vim.notify('navic wasn\'t unable to attach to: ' .. vim.inspect(client), vim.log.levels.WARN, nil)
             end
 
             local capabilities = vim.lsp.protocol.make_client_capabilities()
